@@ -1,5 +1,35 @@
 /* ── Global design polish ── */
 
+/* ─── Sidebar nav — ACTIVE STATE: teal indicator bar + teal text ─ */
+/* DS uses .side-nav-group__item-button--active when active:true is set */
+.side-nav-group__item-button--active {
+  background: rgb(39 199 172 / 14%) !important;  /* teal tint — more visible than hover */
+  position: relative !important;
+}
+
+/* Left pill indicator */
+.side-nav-group__item-button--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #27c7ac;
+}
+
+/* Teal icon when active */
+.side-nav-group__item-button--active .side-nav-item__icon {
+  color: #27c7ac !important;
+}
+
+/* Teal + bold text when active */
+.side-nav-group__item-button--active .side-nav-item__text {
+  color: #27c7ac !important;
+  font-weight: 600 !important;
+}
+
 /* ─── Sidebar nav — fix icon/text vertical alignment ─────── */
 .side-nav-item__icon {
   height: 20px !important;
