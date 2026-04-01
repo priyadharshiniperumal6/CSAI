@@ -8,7 +8,6 @@ import {
   DashboardOutlined,
   SafetyCertificateOutlined,
   CloudServerOutlined,
-  ThunderboltOutlined,
 } from '@ant-design/icons';
 import { usePageTabs } from '../../hooks/usePageTabs';
 
@@ -24,10 +23,7 @@ interface Integration {
 }
 
 const allIntegrations: Integration[] = [
-  { id: '1', name: 'U-Assist', description: 'Agent real-time guidance and workflow automation.', status: 'Available', category: 'Agent Tools', icon: <ThunderboltOutlined />, iconBg: '#fce7f3', iconColor: '#db2777' },
   { id: '2', name: 'U-Capture', description: 'Gain access to list, share, and act on voice data.', status: 'Live', category: 'Voice', icon: <ApiOutlined />, iconBg: '#dcfce7', iconColor: '#15803d' },
-  { id: '3', name: 'U-Analyze', description: 'Analyze conversations for actionable insights to drive performance.', status: 'Available', category: 'Analytics', icon: <DashboardOutlined />, iconBg: '#f3e8ff', iconColor: '#7c3aed' },
-  { id: '4', name: 'U-Analyze NG', description: 'Next-gen conversation analytics with advanced insights.', status: 'Live', category: 'Analytics', icon: <DashboardOutlined />, iconBg: '#cffafe', iconColor: '#0e7490' },
   { id: '5', name: 'Salesforce', description: 'CRM integration for customer data sync and enrichment.', status: 'Live', category: 'CRM', icon: <CloudServerOutlined />, iconBg: '#e0f2fe', iconColor: '#0369a1' },
   { id: '6', name: 'Slack', description: 'Real-time notifications and team alerts.', status: 'Live', category: 'Communication', icon: <SlackOutlined />, iconBg: '#fef3c7', iconColor: '#b45309' },
   { id: '7', name: 'Jira', description: 'Issue tracking and project management integration.', status: 'Available', category: 'Project Management', icon: <BugOutlined />, iconBg: '#e0f2fe', iconColor: '#2563eb' },

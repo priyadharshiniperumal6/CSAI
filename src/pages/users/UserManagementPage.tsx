@@ -118,7 +118,7 @@ export function UserManagementPage() {
     switch (activeTab) {
       case 'Users':             return <CreateUsersTab bulkUploadOpen={bulkUploadOpen} onCloseBulkUpload={() => setBulkUploadOpen(false)} showToast={showToast} />;
       case 'SSO':               return <SsoTab />;
-      case 'User Groups':       return <UserGroupsTab drawerOpen={addGroupPopoverOpen} onCloseDrawer={() => setAddGroupPopoverOpen(false)} showToast={showToast} />;
+      case 'User Groups':       return <UserGroupsTab drawerOpen={false} onCloseDrawer={() => {}} showToast={showToast} />;
       case 'Access Management': return <AccessManagementTab />;
       case 'Token Key Mgmt':    return <TokenKeyMgmtTab />;
       default:                  return null;
