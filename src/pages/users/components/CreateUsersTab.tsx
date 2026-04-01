@@ -3,8 +3,8 @@ import { UniTable, UniButton, UniDrawer, UniInput, UniSelect, UniSwitch, UniSide
 import { UniNavButton } from '@ds/UniNavButton';
 import { SidePanelHeader } from '@ds/SidePanelHeader';
 import type { ColDef, GridReadyEvent, GridApi } from '@ag-grid-community/core';
-import { Form, Checkbox } from 'antd';
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
+import { Form, Checkbox, Dropdown } from 'antd';
+import { MailOutlined, PhoneOutlined, DownOutlined } from '@ant-design/icons';
 import { TableToolbar } from '../../../components/TableToolbar';
 import { mockUsers } from '../../../data/mock-users';
 import type { User } from '../../../types/user';
@@ -71,31 +71,39 @@ const DetailRow = ({ label, children }: { label: string; children: React.ReactNo
 // ── Panel Tab: Profile details ─────────────────────────────────────────────
 function UserProfileTab({ user }: { user?: User }) {
   if (!user) return null;
-  const initials = `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
   const status   = STATUS_MAP[user.status] ?? STATUS_MAP.Active;
   const mfaStyle = user.mfaEnabled
     ? { bg: '#dcfce7', color: '#15803d', dot: '#22c55e' }
     : { bg: '#f3f4f6', color: '#6b7280', dot: '#9ca3af' };
 
+  const actionItems = {
+    items: [
+      { key: 'edit',       label: 'Edit User' },
+      { key: 'deactivate', label: 'Deactivate', danger: true },
+    ],
+  };
+
   return (
-    <div style={{ padding: '20px 24px', overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column', gap: 24 }}>
+    <div style={{ padding: '16px 24px 20px', overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
+
+      {/* ── Actions button at top ── */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Dropdown menu={actionItems} trigger={['click']} placement="bottomRight">
+          <button style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            padding: '6px 14px', borderRadius: 6, cursor: 'pointer',
+            fontSize: 13, fontWeight: 500,
+            border: '1px solid #e2e5ea', background: '#ffffff', color: '#1a1d23',
+          }}>
+            Actions <DownOutlined style={{ fontSize: 11 }} />
+          </button>
+        </Dropdown>
+      </div>
 
       {/* ── Details ── */}
       <div>
         <SectionHeading title="Details" />
-        <DetailRow label="Name">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{
-              width: 26, height: 26, borderRadius: '50%',
-              background: user.avatarColor, color: '#fff',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 10, fontWeight: 700, flexShrink: 0,
-            }}>
-              {initials}
-            </div>
-            {user.firstName} {user.lastName}
-          </div>
-        </DetailRow>
+        <DetailRow label="Name">{user.firstName} {user.lastName}</DetailRow>
         <DetailRow label="Email">{user.email}</DetailRow>
         <DetailRow label="Phone">{user.phone || '—'}</DetailRow>
         <DetailRow label="Auth Method">{user.authMethod === 'SSO' ? 'SSO / Okta' : 'Manual'}</DetailRow>
@@ -112,15 +120,6 @@ function UserProfileTab({ user }: { user?: User }) {
           </span>
         </DetailRow>
         <DetailRow label="Last Login">{formatLastLogin(user.lastLogin)}</DetailRow>
-      </div>
-
-      {/* ── Account actions ── */}
-      <div>
-        <SectionHeading title="Actions" />
-        <div style={{ display: 'flex', gap: 8 }}>
-          <UniButton style={{ flex: 1 }}>Edit User</UniButton>
-          <UniButton danger>Deactivate</UniButton>
-        </div>
       </div>
     </div>
   );
@@ -236,18 +235,9 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
       sortable: true,
       filter: true,
       cellRenderer: (params: any) => {
-        const initials = `${params.data.firstName?.[0] ?? ''}${params.data.lastName?.[0] ?? ''}`.toUpperCase();
         const isSelected = selectedUser?.id === params.data.id;
         return (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, height: '100%' }}>
-            <div style={{
-              width: 32, height: 32, borderRadius: '50%',
-              background: params.data.avatarColor || '#e0f2fe', color: '#fff',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 12, fontWeight: 700, flexShrink: 0,
-            }}>
-              {initials}
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
             <div>
               <div style={{ fontWeight: 500, fontSize: 13, color: isSelected ? '#15808C' : '#1a1d23', lineHeight: '18px' }}>
                 {params.data.firstName} {params.data.lastName}
@@ -264,10 +254,9 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
       width: 140,
       sortable: true,
       filter: true,
-      cellRenderer: (params: any) => {
-        const s = ROLE_COLORS[params.value] ?? ROLE_COLORS['Viewer'];
-        return <span className="ds-badge" style={{ background: s.bg, color: s.color }}>{params.value}</span>;
-      },
+      cellRenderer: (params: any) => (
+        <span className="ds-badge" style={{ background: '#f3f4f6', color: '#374151' }}>{params.value}</span>
+      ),
     },
     {
       headerName: 'Status',
@@ -291,10 +280,7 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
       width: 100,
       sortable: true,
       cellRenderer: (params: any) => (
-        <span className="ds-badge" style={{
-          background: params.value === 'SSO' ? '#e0f2fe' : '#f3f4f6',
-          color:      params.value === 'SSO' ? '#0369a1' : '#6b7280',
-        }}>
+        <span className="ds-badge" style={{ background: '#f3f4f6', color: '#374151' }}>
           {params.value}
         </span>
       ),
@@ -354,7 +340,7 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
   );
 
   return (
-    <div style={{ paddingTop: 16 }}>
+    <div>
       <TableToolbar
         searchValue={search}
         onSearch={setSearch}
