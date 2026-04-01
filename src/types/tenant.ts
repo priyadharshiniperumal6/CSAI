@@ -6,7 +6,7 @@ export type DeploymentStatus =
   | 'Failed'
   | 'Trial';
 
-export type DeployedApp = 'SSA' | 'RTGA' | 'CIA' | 'KB' | 'Analytics';
+export type DeployedApp = 'SSA' | 'RTGA' | 'CIA' | 'ProcessDiscovery' | 'DataAgent' | 'FineTuning' | 'BAICPlatform';
 
 export interface Tenant {
   id: string;

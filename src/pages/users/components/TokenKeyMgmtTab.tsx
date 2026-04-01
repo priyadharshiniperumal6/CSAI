@@ -313,29 +313,8 @@ function Section({ title, badge, desc, items }: { title: string; badge: string; 
 
 // ── Main Component ─────────────────────────────────────────────────────────
 export function TokenKeyMgmtTab() {
-  const allKeys = [...csaiKeys, ...llmKeys];
-  const activeCount   = allKeys.filter(k => k.status === 'Active').length;
-  const inactiveCount = allKeys.filter(k => k.status === 'Inactive').length;
-
-  const stats = [
-    { label: 'Total Keys',    value: String(allKeys.length),   color: undefined   },
-    { label: 'Active',        value: String(activeCount),      color: '#15803d'   },
-    { label: 'Expiring Soon', value: '0',                      color: '#b45309'   },
-    { label: 'Revoked',       value: String(inactiveCount),    color: '#dc2626'   },
-  ];
-
   return (
     <div style={{ paddingTop: 16 }}>
-      {/* Stats row */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 16 }}>
-        {stats.map(s => (
-          <div key={s.label} className="section-bordered" style={{ padding: '14px 16px' }}>
-            <div style={{ fontSize: 12, color: '#8b919e', marginBottom: 4 }}>{s.label}</div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: s.color || '#1a1d23' }}>{s.value}</div>
-          </div>
-        ))}
-      </div>
-
       <Section
         title="CS AI"
         badge="2 Public APIs"
