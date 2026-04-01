@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { UniButton, UniDrawer, UniInput } from '@uniphore/ut-design-system';
+import { UniButton, UniInput, UniSelect } from '@uniphore/ut-design-system';
 import { TeamOutlined, CalendarOutlined, PlusOutlined } from '@ant-design/icons';
-import { Form } from 'antd';
-import { mockUserGroups } from '../../../data/mock-users';
+import { Form, Modal } from 'antd';
+import { mockUserGroups, mockUsers } from '../../../data/mock-users';
 import type { UserGroup } from '../../../types/user';
 
 interface Props {
@@ -44,10 +44,56 @@ const AVATAR_COLORS = [
   { bg: '#cffafe', color: '#0e7490' },
 ];
 
+// User options from mockUsers for member selection
+const userOptions = mockUsers.map(u => ({
+  value: u.id,
+  label: `${u.firstName} ${u.lastName} (${u.email})`,
+}));
+
 export function UserGroupsTab({ drawerOpen, onCloseDrawer }: Props) {
   const [selected, setSelected] = useState<UserGroup>(mockUserGroups[0]);
 
+  // Add Group modal state
+  const [newGroupName, setNewGroupName] = useState('');
+  const [newGroupDesc, setNewGroupDesc] = useState('');
+  const [newGroupMembers, setNewGroupMembers] = useState<string[]>([]);
+
+  // Edit Group modal state
+  const [editOpen, setEditOpen] = useState(false);
+  const [editGroup, setEditGroup] = useState<UserGroup | null>(null);
+  const [editGroupName, setEditGroupName] = useState('');
+  const [editGroupDesc, setEditGroupDesc] = useState('');
+  const [editGroupMembers, setEditGroupMembers] = useState<string[]>([]);
+
   const members = GROUP_MEMBERS[selected.id] || [];
+
+  const handleOpenEdit = (group: UserGroup) => {
+    setEditGroup(group);
+    setEditGroupName(group.name);
+    setEditGroupDesc(group.description || '');
+    // Pre-fill members from GROUP_MEMBERS if available
+    const existingMembers = (GROUP_MEMBERS[group.id] || []).map(m => {
+      const found = mockUsers.find(u => u.email === m.email);
+      return found ? found.id : '';
+    }).filter(Boolean);
+    setEditGroupMembers(existingMembers);
+    setEditOpen(true);
+  };
+
+  const handleCloseAdd = () => {
+    onCloseDrawer();
+    setNewGroupName('');
+    setNewGroupDesc('');
+    setNewGroupMembers([]);
+  };
+
+  const handleCloseEdit = () => {
+    setEditOpen(false);
+    setEditGroup(null);
+    setEditGroupName('');
+    setEditGroupDesc('');
+    setEditGroupMembers([]);
+  };
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 16, paddingTop: 16, alignItems: 'start' }}>
@@ -104,7 +150,7 @@ export function UserGroupsTab({ drawerOpen, onCloseDrawer }: Props) {
             <div style={{ fontSize: 16, fontWeight: 700, color: '#1a1d23', marginBottom: 3 }}>{selected.name}</div>
             <div style={{ fontSize: 13, color: '#8b919e' }}>{selected.description}</div>
           </div>
-          <UniButton size="small">Edit Group</UniButton>
+          <UniButton size="small" onClick={() => handleOpenEdit(selected)}>Edit Group</UniButton>
         </div>
 
         {/* Panel body */}
@@ -214,29 +260,95 @@ export function UserGroupsTab({ drawerOpen, onCloseDrawer }: Props) {
         </div>
       </div>
 
-      {/* ── Add Group Drawer ── */}
-      <UniDrawer
+      {/* ── Add Group Modal ── */}
+      <Modal
         open={drawerOpen}
-        onClose={onCloseDrawer}
-        title="Add User Group"
-        styles={{ wrapper: { width: 480 } }}
-        placement="right"
+        onCancel={handleCloseAdd}
+        title="Create User Group"
+        width={520}
         footer={
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-            <UniButton onClick={onCloseDrawer}>Cancel</UniButton>
-            <UniButton type="primary" onClick={onCloseDrawer}>Create Group</UniButton>
+            <UniButton onClick={handleCloseAdd}>Cancel</UniButton>
+            <UniButton type="primary" onClick={handleCloseAdd}>Create Group</UniButton>
           </div>
         }
       >
         <Form layout="vertical">
-          <Form.Item label="Group Name" required>
-            <UniInput placeholder="Enter group name" />
+          <Form.Item label="Group Name" required style={{ marginBottom: 16 }}>
+            <UniInput
+              placeholder="Enter group name"
+              value={newGroupName}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewGroupName(e.target.value)}
+            />
           </Form.Item>
-          <Form.Item label="Description">
-            <UniInput placeholder="Describe this group's purpose" />
+          <Form.Item label="Description" style={{ marginBottom: 16 }}>
+            <UniInput
+              placeholder="Describe this group's purpose"
+              value={newGroupDesc}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewGroupDesc(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item label="Add Members" style={{ marginBottom: 0 }}>
+            <UniSelect
+              mode="multiple"
+              placeholder="Search and select users…"
+              options={userOptions}
+              value={newGroupMembers}
+              onChange={(v: string[]) => setNewGroupMembers(v)}
+              style={{ width: '100%' }}
+              showSearch
+              filterOption={(input: string, option: any) =>
+                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+              }
+            />
           </Form.Item>
         </Form>
-      </UniDrawer>
+      </Modal>
+
+      {/* ── Edit Group Modal ── */}
+      <Modal
+        open={editOpen}
+        onCancel={handleCloseEdit}
+        title="Edit Group"
+        width={520}
+        footer={
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+            <UniButton onClick={handleCloseEdit}>Cancel</UniButton>
+            <UniButton type="primary" onClick={handleCloseEdit}>Save Changes</UniButton>
+          </div>
+        }
+      >
+        <Form layout="vertical">
+          <Form.Item label="Group Name" required style={{ marginBottom: 16 }}>
+            <UniInput
+              placeholder="Enter group name"
+              value={editGroupName}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditGroupName(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item label="Description" style={{ marginBottom: 16 }}>
+            <UniInput
+              placeholder="Describe this group's purpose"
+              value={editGroupDesc}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditGroupDesc(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item label="Members" style={{ marginBottom: 0 }}>
+            <UniSelect
+              mode="multiple"
+              placeholder="Search and select users…"
+              options={userOptions}
+              value={editGroupMembers}
+              onChange={(v: string[]) => setEditGroupMembers(v)}
+              style={{ width: '100%' }}
+              showSearch
+              filterOption={(input: string, option: any) =>
+                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+              }
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 }

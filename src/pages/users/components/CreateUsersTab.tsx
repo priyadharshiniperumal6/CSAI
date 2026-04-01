@@ -1,17 +1,19 @@
 import { useState, useCallback, useMemo } from 'react';
-import { UniTable, UniButton, UniDrawer, UniInput, UniSelect, UniSwitch, UniSidePanel } from '@uniphore/ut-design-system';
+import { UniTable, UniButton, UniInput, UniSelect, UniSwitch, UniSidePanel } from '@uniphore/ut-design-system';
 import { UniNavButton } from '@ds/UniNavButton';
 import { SidePanelHeader } from '@ds/SidePanelHeader';
 import type { ColDef, GridReadyEvent, GridApi } from '@ag-grid-community/core';
-import { Form, Checkbox, Dropdown } from 'antd';
-import { MailOutlined, PhoneOutlined, DownOutlined } from '@ant-design/icons';
+import { Form, Checkbox, Dropdown, Modal } from 'antd';
+import { MailOutlined, PhoneOutlined, DownOutlined, UploadOutlined, CheckCircleFilled, InboxOutlined } from '@ant-design/icons';
 import { TableToolbar } from '../../../components/TableToolbar';
 import { mockUsers } from '../../../data/mock-users';
 import type { User } from '../../../types/user';
 
 interface Props {
-  drawerOpen: boolean;
-  onCloseDrawer: () => void;
+  modalOpen: boolean;
+  onCloseModal: () => void;
+  bulkUploadOpen: boolean;
+  onCloseBulkUpload: () => void;
 }
 
 const ROLE_COLORS: Record<string, { bg: string; color: string }> = {
@@ -161,14 +163,15 @@ function UserRolesTab({ user }: { user?: User }) {
 }
 
 // ── Main Tab Component ─────────────────────────────────────────────────────
-export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
+export function CreateUsersTab({ modalOpen, onCloseModal, bulkUploadOpen, onCloseBulkUpload }: Props) {
   const [search, setSearch]         = useState('');
   const [statusFilter, setStatus]   = useState('');
   const [roleFilter, setRole]       = useState('');
   const [gridApi, setGridApi]       = useState<GridApi | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [authMethod, setAuthMethod] = useState<'Manual' | 'SSO'>('Manual');
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [csvFile, setCsvFile]       = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const onGridReady = useCallback((e: GridReadyEvent) => setGridApi(e.api), []);
 
@@ -339,6 +342,20 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
     </>
   );
 
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file && file.name.endsWith('.csv')) {
+      setCsvFile(file);
+    }
+  };
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setCsvFile(file);
+  };
+
   return (
     <div>
       <TableToolbar
@@ -386,17 +403,16 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
         )}
       </div>
 
-      {/* Add User Drawer */}
-      <UniDrawer
-        open={drawerOpen}
-        onClose={onCloseDrawer}
+      {/* Add User Modal */}
+      <Modal
+        open={modalOpen}
+        onCancel={onCloseModal}
         title="Add New User"
-        styles={{ wrapper: { width: 520 } }}
-        placement="right"
+        width={560}
         footer={
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-            <UniButton onClick={onCloseDrawer}>Cancel</UniButton>
-            <UniButton type="primary" onClick={onCloseDrawer}>Save User</UniButton>
+            <UniButton onClick={onCloseModal}>Cancel</UniButton>
+            <UniButton type="primary" onClick={onCloseModal}>Save User</UniButton>
           </div>
         }
       >
@@ -420,45 +436,6 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
             style={{ marginBottom: 16 }}
           >
             <UniInput placeholder="+1 (555) 000-0000" prefix={<PhoneOutlined style={{ color: '#8b919e' }} />} />
-          </Form.Item>
-
-          {/* Auth method */}
-          <Form.Item label="Authentication Method" style={{ marginBottom: 16 }}>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {(['Manual', 'SSO'] as const).map(m => (
-                <button
-                  key={m} type="button"
-                  onClick={() => setAuthMethod(m)}
-                  style={{
-                    flex: 1, padding: '8px 12px', borderRadius: 8, cursor: 'pointer',
-                    fontSize: 13, fontWeight: 500,
-                    border: `1.5px solid ${authMethod === m ? '#15808C' : '#e2e5ea'}`,
-                    background: authMethod === m ? '#f0fdfa' : '#ffffff',
-                    color: authMethod === m ? '#15808C' : '#6b7280',
-                  }}
-                >
-                  {m === 'Manual' ? '🔒 Manual (Password)' : '🛡️ SSO (via IdP)'}
-                </button>
-              ))}
-            </div>
-            {authMethod === 'Manual' && (
-              <div style={{ marginTop: 10, padding: '10px 14px', background: '#fafbfc', borderRadius: 8, border: '1px solid #eef0f3' }}>
-                <div style={{ fontSize: 12, fontWeight: 500, color: '#374151', marginBottom: 8 }}>Invite via</div>
-                <div style={{ display: 'flex', gap: 16 }}>
-                  {['Email invitation', 'Set password manually'].map(opt => (
-                    <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, cursor: 'pointer', color: '#374151' }}>
-                      <input type="radio" name="invite-via" defaultChecked={opt === 'Email invitation'} style={{ accentColor: '#15808C' }} />
-                      {opt}
-                    </label>
-                  ))}
-                </div>
-              </div>
-            )}
-            {authMethod === 'SSO' && (
-              <div style={{ marginTop: 10, padding: '10px 14px', background: '#f0fdfa', borderRadius: 8, border: '1px solid #a7f3d0', fontSize: 12, color: '#0e7490', lineHeight: 1.5 }}>
-                🛡️ Identity verified by your SSO provider (Okta SAML · connected).
-              </div>
-            )}
           </Form.Item>
 
           <div style={{ borderTop: '1px solid #eef0f3', margin: '4px 0 16px' }} />
@@ -510,7 +487,77 @@ export function CreateUsersTab({ drawerOpen, onCloseDrawer }: Props) {
             </div>
           </Form.Item>
         </Form>
-      </UniDrawer>
+      </Modal>
+
+      {/* Bulk Upload Modal */}
+      <Modal
+        open={bulkUploadOpen}
+        onCancel={() => { onCloseBulkUpload(); setCsvFile(null); }}
+        title="Bulk Upload Users"
+        width={480}
+        footer={
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+            <UniButton onClick={() => { onCloseBulkUpload(); setCsvFile(null); }}>Cancel</UniButton>
+            <UniButton type="primary" icon={<UploadOutlined />} onClick={() => { onCloseBulkUpload(); setCsvFile(null); }}>
+              Upload &amp; Import
+            </UniButton>
+          </div>
+        }
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '8px 0' }}>
+          {/* Drop zone */}
+          <div
+            onDragOver={e => { e.preventDefault(); setIsDragging(true); }}
+            onDragLeave={() => setIsDragging(false)}
+            onDrop={handleDrop}
+            onClick={() => document.getElementById('csv-file-input')?.click()}
+            style={{
+              border: `2px dashed ${isDragging ? '#15808C' : '#d1d5db'}`,
+              borderRadius: 12,
+              padding: '36px 24px',
+              textAlign: 'center',
+              cursor: 'pointer',
+              background: isDragging ? '#f0fdfa' : '#fafbfc',
+              transition: 'all 0.15s',
+            }}
+          >
+            <input
+              id="csv-file-input"
+              type="file"
+              accept=".csv"
+              style={{ display: 'none' }}
+              onChange={handleFileInput}
+            />
+            {csvFile ? (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <CheckCircleFilled style={{ fontSize: 32, color: '#22c55e' }} />
+                <div style={{ fontSize: 14, fontWeight: 600, color: '#1a1d23' }}>{csvFile.name}</div>
+                <div style={{ fontSize: 12, color: '#8b919e' }}>File selected — ready to import</div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <InboxOutlined style={{ fontSize: 36, color: '#9ca3af' }} />
+                <div style={{ fontSize: 14, fontWeight: 600, color: '#374151' }}>Drag CSV file here or click to browse</div>
+                <div style={{ fontSize: 12, color: '#8b919e' }}>Download template to get started</div>
+              </div>
+            )}
+          </div>
+
+          {/* Download template link */}
+          <div style={{ textAlign: 'center' }}>
+            <button
+              type="button"
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: '#15808C', fontSize: 13, fontWeight: 500,
+                textDecoration: 'underline', padding: 0,
+              }}
+            >
+              Download Template
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
