@@ -36,7 +36,10 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        loadPaths: [path.join(DS_CORE, 'src/styles')],
+        loadPaths: [
+          path.join(DS_CORE, 'src/styles'),
+          LOCAL_NODE_MODULES,
+        ],
       },
     },
   },
