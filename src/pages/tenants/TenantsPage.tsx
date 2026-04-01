@@ -4,10 +4,12 @@ import { PlusOutlined } from '@ant-design/icons';
 import { TenantListTable } from './components/TenantListTable';
 import { TenantCreationDrawer } from './components/TenantCreationDrawer';
 import { useTopNav } from '../../context/TopNavContext';
+import { useToast } from '../../context/ToastContext';
 
 export function TenantsPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { clearTopNav } = useTopNav();
+  const { showToast } = useToast();
   useEffect(() => { clearTopNav(); }, [clearTopNav]);
 
   return (
@@ -41,6 +43,7 @@ export function TenantsPage() {
       <TenantCreationDrawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
+        onProvision={() => showToast('Tenant provisioned', 'New tenant has been created and is being set up.')}
       />
     </div>
   );

@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { HostShell, UniConfigProvider } from '@uniphore/ut-design-system';
 import { NAV_ITEMS } from './config/navigation';
 import { TopNavProvider, useTopNav } from './context/TopNavContext';
+import { ToastProvider } from './context/ToastContext';
 import { TenantsPage } from './pages/tenants/TenantsPage';
 import { TenantDetailPage } from './pages/tenants/TenantDetailPage';
 import { UserManagementPage } from './pages/users/UserManagementPage';
@@ -132,11 +133,13 @@ export default function App() {
         },
       }}
     >
-      <HashRouter>
-        <TopNavProvider>
-          <AppShell />
-        </TopNavProvider>
-      </HashRouter>
+      <ToastProvider>
+        <HashRouter>
+          <TopNavProvider>
+            <AppShell />
+          </TopNavProvider>
+        </HashRouter>
+      </ToastProvider>
     </UniConfigProvider>
   );
 }

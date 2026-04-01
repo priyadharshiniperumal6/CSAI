@@ -8,6 +8,7 @@ import { ProvisioningStep } from './ProvisioningStep';
 interface TenantCreationDrawerProps {
   open: boolean;
   onClose: () => void;
+  onProvision?: () => void;
 }
 
 const STEPS = ['Tenant Details', 'Order Details', 'Applications', 'Preview'];
@@ -69,7 +70,7 @@ function WizardStepper({ current }: { current: number }) {
   );
 }
 
-export function TenantCreationDrawer({ open, onClose }: TenantCreationDrawerProps) {
+export function TenantCreationDrawer({ open, onClose, onProvision }: TenantCreationDrawerProps) {
   const { currentStep, formData, next, prev, updateFormData, toggleApp, reset } =
     useTenantWizard();
 
@@ -81,6 +82,7 @@ export function TenantCreationDrawer({ open, onClose }: TenantCreationDrawerProp
   const handleCreate = () => {
     console.log('Creating tenant:', formData);
     handleClose();
+    onProvision?.();
   };
 
   const stepContent = [

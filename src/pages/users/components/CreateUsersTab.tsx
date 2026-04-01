@@ -1,19 +1,18 @@
 import { useState, useCallback, useMemo } from 'react';
-import { UniTable, UniButton, UniInput, UniSelect, UniSwitch, UniSidePanel } from '@uniphore/ut-design-system';
+import { UniTable, UniButton, UniInput, UniSelect, UniSidePanel } from '@uniphore/ut-design-system';
 import { UniNavButton } from '@ds/UniNavButton';
 import { SidePanelHeader } from '@ds/SidePanelHeader';
 import type { ColDef, GridReadyEvent, GridApi } from '@ag-grid-community/core';
-import { Form, Checkbox, Dropdown, Modal } from 'antd';
-import { MailOutlined, PhoneOutlined, DownOutlined, UploadOutlined, CheckCircleFilled, InboxOutlined } from '@ant-design/icons';
+import { Dropdown, Modal } from 'antd';
+import { DownOutlined, UploadOutlined, CheckCircleFilled, InboxOutlined } from '@ant-design/icons';
 import { TableToolbar } from '../../../components/TableToolbar';
 import { mockUsers } from '../../../data/mock-users';
 import type { User } from '../../../types/user';
 
 interface Props {
-  modalOpen: boolean;
-  onCloseModal: () => void;
   bulkUploadOpen: boolean;
   onCloseBulkUpload: () => void;
+  showToast: (title: string, message?: string, type?: 'success' | 'error' | 'info') => void;
 }
 
 const ROLE_COLORS: Record<string, { bg: string; color: string }> = {
@@ -35,16 +34,6 @@ const STATUS_MAP: Record<string, { bg: string; color: string; dot: string }> = {
   Pending:  { bg: '#fef3c7', color: '#b45309', dot: '#f59e0b' },
 };
 
-const ALL_ROLES = [
-  { key: 'Admin',              label: 'Admin',              desc: 'Full platform control' },
-  { key: 'AI Agent Designer',  label: 'AI Agent Designer',  desc: 'Manage AI Agent lifecycle' },
-  { key: 'AI Agent Developer', label: 'AI Agent Developer', desc: 'Manages API & function tools' },
-  { key: 'AI Agent Support',   label: 'AI Agent Support',   desc: 'Edit & Test agents, no Prod access' },
-  { key: 'BI Viewer',          label: 'BI Viewer',          desc: 'View Dashboards & Reports' },
-  { key: 'BI Designer',        label: 'BI Designer',        desc: 'Create custom Dashboards & Reports' },
-];
-
-const GROUP_OPTIONS = ['Platform Admins', 'DevOps', 'Analytics Team', 'Engineering', 'Support Team', 'QA'];
 
 function formatLastLogin(val: string) {
   if (!val) return 'Never';
@@ -163,13 +152,12 @@ function UserRolesTab({ user }: { user?: User }) {
 }
 
 // ── Main Tab Component ─────────────────────────────────────────────────────
-export function CreateUsersTab({ modalOpen, onCloseModal, bulkUploadOpen, onCloseBulkUpload }: Props) {
+export function CreateUsersTab({ bulkUploadOpen, onCloseBulkUpload, showToast }: Props) {
   const [search, setSearch]         = useState('');
   const [statusFilter, setStatus]   = useState('');
   const [roleFilter, setRole]       = useState('');
   const [gridApi, setGridApi]       = useState<GridApi | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [csvFile, setCsvFile]       = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -403,92 +391,6 @@ export function CreateUsersTab({ modalOpen, onCloseModal, bulkUploadOpen, onClos
         )}
       </div>
 
-      {/* Add User Modal */}
-      <Modal
-        open={modalOpen}
-        onCancel={onCloseModal}
-        title="Add New User"
-        width={560}
-        footer={
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-            <UniButton onClick={onCloseModal}>Cancel</UniButton>
-            <UniButton type="primary" onClick={onCloseModal}>Save User</UniButton>
-          </div>
-        }
-      >
-        <Form layout="vertical">
-          {/* Name row */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            <Form.Item label="First Name" required style={{ marginBottom: 16 }}>
-              <UniInput placeholder="e.g. John" />
-            </Form.Item>
-            <Form.Item label="Last Name" required style={{ marginBottom: 16 }}>
-              <UniInput placeholder="e.g. Smith" />
-            </Form.Item>
-          </div>
-
-          <Form.Item label="Email Address" required style={{ marginBottom: 16 }}>
-            <UniInput placeholder="john.smith@company.com" prefix={<MailOutlined style={{ color: '#8b919e' }} />} />
-          </Form.Item>
-
-          <Form.Item
-            label={<span>Phone Number <span style={{ color: '#8b919e', fontWeight: 400 }}>(optional)</span></span>}
-            style={{ marginBottom: 16 }}
-          >
-            <UniInput placeholder="+1 (555) 000-0000" prefix={<PhoneOutlined style={{ color: '#8b919e' }} />} />
-          </Form.Item>
-
-          <div style={{ borderTop: '1px solid #eef0f3', margin: '4px 0 16px' }} />
-
-          {/* Roles */}
-          <Form.Item label={<span>Assign Roles <span style={{ color: '#dc2626' }}>*</span></span>} style={{ marginBottom: 16 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-              {ALL_ROLES.map(r => (
-                <label key={r.key} style={{
-                  display: 'flex', alignItems: 'flex-start', gap: 8, padding: '8px 10px',
-                  borderRadius: 8,
-                  border: `1.5px solid ${selectedRoles.includes(r.key) ? '#15808C' : '#e2e5ea'}`,
-                  background: selectedRoles.includes(r.key) ? '#f0fdfa' : '#ffffff',
-                  cursor: 'pointer',
-                }}>
-                  <Checkbox
-                    checked={selectedRoles.includes(r.key)}
-                    onChange={e => setSelectedRoles(prev =>
-                      e.target.checked ? [...prev, r.key] : prev.filter(x => x !== r.key)
-                    )}
-                    style={{ marginTop: 1 }}
-                  />
-                  <div>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1d23' }}>{r.label}</div>
-                    <div style={{ fontSize: 11, color: '#8b919e', marginTop: 2 }}>{r.desc}</div>
-                  </div>
-                </label>
-              ))}
-            </div>
-          </Form.Item>
-
-          <div style={{ borderTop: '1px solid #eef0f3', margin: '4px 0 16px' }} />
-
-          {/* Groups */}
-          <Form.Item label="Assign User Groups" style={{ marginBottom: 16 }}>
-            <UniSelect
-              mode="multiple"
-              placeholder="Select groups…"
-              options={GROUP_OPTIONS.map(g => ({ value: g, label: g }))}
-              style={{ width: '100%' }}
-            />
-          </Form.Item>
-
-          {/* MFA */}
-          <Form.Item label="Require MFA" style={{ marginBottom: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <UniSwitch defaultChecked />
-              <span style={{ fontSize: 13, color: '#6b7280' }}>Enforce multi-factor authentication for this user</span>
-            </div>
-          </Form.Item>
-        </Form>
-      </Modal>
-
       {/* Bulk Upload Modal */}
       <Modal
         open={bulkUploadOpen}
@@ -498,7 +400,7 @@ export function CreateUsersTab({ modalOpen, onCloseModal, bulkUploadOpen, onClos
         footer={
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
             <UniButton onClick={() => { onCloseBulkUpload(); setCsvFile(null); }}>Cancel</UniButton>
-            <UniButton type="primary" icon={<UploadOutlined />} onClick={() => { onCloseBulkUpload(); setCsvFile(null); }}>
+            <UniButton type="primary" icon={<UploadOutlined />} onClick={() => { onCloseBulkUpload(); setCsvFile(null); showToast('Users imported successfully', 'CSV has been processed and users have been created.'); }}>
               Upload &amp; Import
             </UniButton>
           </div>

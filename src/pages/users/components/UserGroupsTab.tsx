@@ -8,6 +8,7 @@ import type { UserGroup } from '../../../types/user';
 interface Props {
   drawerOpen: boolean;
   onCloseDrawer: () => void;
+  showToast: (title: string, message?: string, type?: 'success' | 'error' | 'info') => void;
 }
 
 // Mock members per group for richer detail panel
@@ -50,7 +51,7 @@ const userOptions = mockUsers.map(u => ({
   label: `${u.firstName} ${u.lastName} (${u.email})`,
 }));
 
-export function UserGroupsTab({ drawerOpen, onCloseDrawer }: Props) {
+export function UserGroupsTab({ drawerOpen, onCloseDrawer, showToast }: Props) {
   const [selected, setSelected] = useState<UserGroup>(mockUserGroups[0]);
 
   // Add Group modal state
@@ -269,7 +270,7 @@ export function UserGroupsTab({ drawerOpen, onCloseDrawer }: Props) {
         footer={
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
             <UniButton onClick={handleCloseAdd}>Cancel</UniButton>
-            <UniButton type="primary" onClick={handleCloseAdd}>Create Group</UniButton>
+            <UniButton type="primary" onClick={() => { handleCloseAdd(); showToast('Group created', 'New user group has been created successfully.'); }}>Create Group</UniButton>
           </div>
         }
       >
@@ -314,7 +315,7 @@ export function UserGroupsTab({ drawerOpen, onCloseDrawer }: Props) {
         footer={
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
             <UniButton onClick={handleCloseEdit}>Cancel</UniButton>
-            <UniButton type="primary" onClick={handleCloseEdit}>Save Changes</UniButton>
+            <UniButton type="primary" onClick={() => { handleCloseEdit(); showToast('Group updated', 'Group changes saved successfully.'); }}>Save Changes</UniButton>
           </div>
         }
       >
