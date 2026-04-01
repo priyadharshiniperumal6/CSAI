@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { UniButton, UniInput, UniSelect } from '@uniphore/ut-design-system';
-import { TeamOutlined, CalendarOutlined, PlusOutlined } from '@ant-design/icons';
+import { TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 import { Form, Modal } from 'antd';
 import { mockUserGroups, mockUsers } from '../../../data/mock-users';
 import type { UserGroup } from '../../../types/user';
@@ -240,10 +240,6 @@ export function UserGroupsTab({ drawerOpen, onCloseDrawer, showToast }: Props) {
                   );
                 })}
 
-                {/* Add member footer */}
-                <div style={{ padding: '10px 16px', borderTop: '1px solid #eef0f3', background: '#fafbfc' }}>
-                  <UniButton size="small" icon={<PlusOutlined />}>Add Member</UniButton>
-                </div>
               </div>
             ) : (
               <div style={{
@@ -252,9 +248,6 @@ export function UserGroupsTab({ drawerOpen, onCloseDrawer, showToast }: Props) {
                 color: '#8b919e', fontSize: 13,
               }}>
                 No members in this group yet.
-                <div style={{ marginTop: 12 }}>
-                  <UniButton size="small" icon={<PlusOutlined />}>Add Member</UniButton>
-                </div>
               </div>
             )}
           </div>
