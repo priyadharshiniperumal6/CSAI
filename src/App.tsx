@@ -1,4 +1,5 @@
-import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { useMemo } from 'react';
 import { HostShell, UniConfigProvider } from '@uniphore/ut-design-system';
 import { NAV_ITEMS } from './config/navigation';
 import { TopNavProvider, useTopNav } from './context/TopNavContext';
@@ -37,14 +38,25 @@ const COPILOT_ITEM = {
 
 function AppShell() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { topMenuItems, selectedKeys, onTabChange } = useTopNav();
 
   // Always prepend Co-Pilot before page-specific tabs
   const allTopItems = [COPILOT_ITEM, ...topMenuItems];
 
+  // Mark the nav item that matches the current route as active
+  const activeNavItems = useMemo(() =>
+    NAV_ITEMS.map(item => ({
+      ...item,
+      active: location.pathname === item.routeName ||
+        (item.routeName !== '/' && location.pathname.startsWith(item.routeName + '/')),
+    })),
+    [location.pathname]
+  );
+
   return (
     <HostShell
-      sideNavData={NAV_ITEMS}
+      sideNavData={activeNavItems}
       topMenuItems={allTopItems}
       selectedMenuItems={selectedKeys}
       appTitle="CSAI Admin"
