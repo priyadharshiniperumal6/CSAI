@@ -208,7 +208,7 @@ function ApiCard({ api, sectionIcon, sectionIconBg, sectionIconColor }: {
 
       {/* Expanded body */}
       {expanded && (
-        <div style={{ padding: '20px', background: '#fafbfc', display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ padding: '20px', background: '#ffffff', display: 'flex', flexDirection: 'column', gap: 20 }}>
 
           {/* API Key row */}
           <div>

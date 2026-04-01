@@ -149,6 +149,8 @@ function AccordionSection({
 export function TenantSecurityTab({ tenant: _tenant }: Props) {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({ users: true });
   const [drawerOpen, setDrawerOpen]     = useState(false);
+  const [editingPolicy, setEditingPolicy] = useState(false);
+  const [policy, setPolicy] = useState({ minLength: '12', expiry: '90', history: '5', uppercase: 'Yes', numbers: 'Yes', special: 'Yes' });
   const [inviteStep, setInviteStep]     = useState(0);
   const [inviteComplete, setInviteComplete] = useState(false);
 
@@ -213,19 +215,59 @@ export function TenantSecurityTab({ tenant: _tenant }: Props) {
         {/* ── Password Policy ── */}
         <AccordionSection
           title="Password Policy"
-          action={<UniButton size="small">Edit Policy</UniButton>}
+          subtitle="Configure password requirements for tenant users"
           isOpen={!!openSections['password']}
           onToggle={() => toggle('password')}
         >
           <div style={{ padding: '20px' }}>
-            <div className="info-grid">
-              <InfoItem label="Minimum Length"             value="12 characters" />
-              <InfoItem label="Require Uppercase"          value="Yes" />
-              <InfoItem label="Require Numbers"            value="Yes" />
-              <InfoItem label="Require Special Characters" value="Yes" />
-              <InfoItem label="Password Expiry"            value="90 days" />
-              <InfoItem label="Password History"           value="Last 5 passwords" />
-            </div>
+            {!editingPolicy ? (
+              <>
+                <div className="info-grid">
+                  <InfoItem label="Minimum Length"             value={`${policy.minLength} characters`} />
+                  <InfoItem label="Require Uppercase"          value={policy.uppercase} />
+                  <InfoItem label="Require Numbers"            value={policy.numbers} />
+                  <InfoItem label="Require Special Characters" value={policy.special} />
+                  <InfoItem label="Password Expiry"            value={`${policy.expiry} days`} />
+                  <InfoItem label="Password History"           value={`Last ${policy.history} passwords`} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 16, paddingTop: 16, borderTop: '1px solid #eef0f3' }}>
+                  <UniButton size="small" onClick={() => setEditingPolicy(true)}>Edit Policy</UniButton>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="info-grid">
+                  <div className="info-grid-item">
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', display: 'block', marginBottom: 6 }}>Minimum Length</span>
+                    <UniInput value={policy.minLength} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPolicy(p => ({ ...p, minLength: e.target.value }))} />
+                  </div>
+                  <div className="info-grid-item">
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', display: 'block', marginBottom: 6 }}>Require Uppercase</span>
+                    <UniSelect value={policy.uppercase} options={[{ value: 'Yes', label: 'Yes' }, { value: 'No', label: 'No' }]} onChange={(v: string) => setPolicy(p => ({ ...p, uppercase: v }))} />
+                  </div>
+                  <div className="info-grid-item">
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', display: 'block', marginBottom: 6 }}>Require Numbers</span>
+                    <UniSelect value={policy.numbers} options={[{ value: 'Yes', label: 'Yes' }, { value: 'No', label: 'No' }]} onChange={(v: string) => setPolicy(p => ({ ...p, numbers: v }))} />
+                  </div>
+                  <div className="info-grid-item">
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', display: 'block', marginBottom: 6 }}>Require Special Characters</span>
+                    <UniSelect value={policy.special} options={[{ value: 'Yes', label: 'Yes' }, { value: 'No', label: 'No' }]} onChange={(v: string) => setPolicy(p => ({ ...p, special: v }))} />
+                  </div>
+                  <div className="info-grid-item">
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', display: 'block', marginBottom: 6 }}>Password Expiry (days)</span>
+                    <UniInput value={policy.expiry} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPolicy(p => ({ ...p, expiry: e.target.value }))} />
+                  </div>
+                  <div className="info-grid-item">
+                    <span style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', display: 'block', marginBottom: 6 }}>Password History (last N)</span>
+                    <UniInput value={policy.history} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPolicy(p => ({ ...p, history: e.target.value }))} />
+                  </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20, paddingTop: 16, borderTop: '1px solid #eef0f3' }}>
+                  <UniButton onClick={() => setEditingPolicy(false)}>Cancel</UniButton>
+                  <UniButton type="primary" onClick={() => setEditingPolicy(false)}>Save Changes</UniButton>
+                </div>
+              </>
+            )}
           </div>
         </AccordionSection>
 

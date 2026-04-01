@@ -1,5 +1,20 @@
 /* ── Global design polish ── */
 
+/* ─── Disabled input accessibility: keep text legible ─ */
+input:disabled,
+.uni-input-affix-wrapper-disabled input,
+.ant-input-disabled,
+.ant-input[disabled] {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  opacity: 1 !important;
+}
+.uni-input-affix-wrapper-disabled,
+.ant-input-affix-wrapper-disabled {
+  background: #f3f4f6 !important;
+  border-color: #e2e5ea !important;
+}
+
 /* ─── Sidebar nav — ACTIVE STATE: teal indicator bar + teal text ─ */
 /* DS uses .side-nav-group__item-button--active when active:true is set */
 .side-nav-group__item-button--active {
