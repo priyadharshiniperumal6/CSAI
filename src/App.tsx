@@ -9,6 +9,8 @@ import { UserManagementPage } from './pages/users/UserManagementPage';
 import { IntegrationsPage } from './pages/integrations/IntegrationsPage';
 import { ApiConsolePage } from './pages/api-console/ApiConsolePage';
 import { BillingPage } from './pages/billing/BillingPage';
+import { AuditLogsPage } from './pages/audit-logs/AuditLogsPage';
+import { KnowledgeBasePage } from './pages/knowledge-base/KnowledgeBasePage';
 import './styles/global.css';
 
 const CopilotLabel = (
@@ -87,6 +89,8 @@ function AppShell() {
         <Route path="/integrations" element={<IntegrationsPage />} />
         <Route path="/api-console" element={<ApiConsolePage />} />
         <Route path="/billing" element={<BillingPage />} />
+        <Route path="/audit-logs" element={<AuditLogsPage />} />
+        <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
         {/* Placeholder routes for other nav items */}
         <Route path="/analytics" element={<PlaceholderPage title="Analytics" />} />
         <Route path="/reports" element={<PlaceholderPage title="Reports" />} />

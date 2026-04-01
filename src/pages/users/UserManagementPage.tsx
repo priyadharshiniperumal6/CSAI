@@ -6,11 +6,7 @@ import { CreateUsersTab } from './components/CreateUsersTab';
 import { UserGroupsTab } from './components/UserGroupsTab';
 import { AccessManagementTab } from './components/AccessManagementTab';
 import { TokenKeyMgmtTab } from './components/TokenKeyMgmtTab';
-import { AuditLogsTab } from './components/AuditLogsTab';
-import { CreditActualsTab } from './components/CreditActualsTab';
-import { VendorServicesTab } from './components/VendorServicesTab';
-
-const TAB_LABELS = ['Users', 'User Groups', 'Access Management', 'Token Key Mgmt', 'Audit Logs', 'Credit Actuals', 'Vendor Services'];
+const TAB_LABELS = ['Users', 'User Groups', 'Access Management', 'Token Key Mgmt'];
 
 export function UserManagementPage() {
   const { activeTab } = usePageTabs(TAB_LABELS, 'Users');
@@ -23,9 +19,6 @@ export function UserManagementPage() {
       case 'User Groups':       return <UserGroupsTab drawerOpen={createGroupOpen} onCloseDrawer={() => setCreateGroupOpen(false)} />;
       case 'Access Management': return <AccessManagementTab />;
       case 'Token Key Mgmt':    return <TokenKeyMgmtTab />;
-      case 'Audit Logs':        return <AuditLogsTab />;
-      case 'Credit Actuals':    return <CreditActualsTab />;
-      case 'Vendor Services':   return <VendorServicesTab />;
       default:                  return null;
     }
   };
@@ -66,7 +59,7 @@ export function UserManagementPage() {
       <div className="page-header-bar">
         <div className="page-header-left">
           <h1 className="page-title">User Management</h1>
-          <span className="page-subtitle">Create and manage users, groups, access, tokens, and service consumption</span>
+          <span className="page-subtitle">Create and manage users, groups, access and tokens</span>
         </div>
         {renderHeaderAction()}
       </div>
