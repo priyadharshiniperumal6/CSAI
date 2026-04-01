@@ -1,0 +1,1061 @@
+.uni-react-flow {
+  min-width: 0;
+  min-height: 480px;
+  overflow: hidden;
+  border: 1px solid var(--ut-color-border-muted);
+  border-radius: var(--uni-radius-200, 4px);
+  background-color: var(--ut-color-bg-surface);
+}
+
+.uni-react-flow__canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.uni-react-flow--aiq-journey {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: #fafafa;
+}
+
+.uni-react-flow--aiq-journey .react-flow__renderer {
+  background: #fafafa;
+}
+
+.uni-react-flow--aiq-journey .react-flow__pane {
+  background-color: #fafafa;
+  background-image: radial-gradient(circle, #e0e0e0 1px, transparent 1px);
+  background-size: 24px 24px;
+  cursor: default;
+}
+
+.uni-react-flow--aiq-journey .react-flow__node {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.uni-react-flow--aiq-journey .react-flow__controls {
+  left: 12px;
+  bottom: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -4px rgb(0 0 0 / 10%);
+  overflow: hidden;
+}
+
+.uni-react-flow--aiq-journey .react-flow__controls-button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: #444344;
+  background: #fff;
+}
+
+.uni-react-flow--aiq-journey .react-flow__controls-button:last-child {
+  border-bottom: 0;
+}
+
+.uni-react-flow--aiq-journey .react-flow__controls-button:hover {
+  background: #f3f3f3;
+}
+
+.uni-react-flow--aiq-journey .react-flow__minimap {
+  right: 12px;
+  bottom: 12px;
+  width: 161px;
+  height: 101px;
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -4px rgb(0 0 0 / 10%);
+  overflow: hidden;
+}
+
+.uni-react-flow--aiq-journey .react-flow__minimap svg {
+  background: #fff;
+}
+
+.uni-react-flow--aiq-journey .react-flow__minimap-mask {
+  fill: rgb(27 158 173 / 7%);
+  stroke: #1b9ead;
+  stroke-width: 0.8;
+  stroke-dasharray: 4 4;
+}
+
+.uni-react-flow-journey-start-node,
+.uni-react-flow-journey-transfer-node {
+  width: 200px;
+  border: 1px solid #e9eaeb;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+}
+
+.uni-react-flow-journey-content-node {
+  width: 260px;
+  border: 1px solid #e9eaeb;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+}
+
+.uni-react-flow-journey-start-node.is-selected,
+.uni-react-flow-journey-transfer-node.is-selected,
+.uni-react-flow-journey-content-node.is-selected {
+  border-width: 2px;
+  border-color: #15808c;
+}
+
+.uni-react-flow-journey-start-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 60px;
+  padding: 8px;
+}
+
+.uni-react-flow-journey-start-node__icon,
+.uni-react-flow-journey-end-node__icon,
+.uni-react-flow-journey-node__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uni-react-flow-journey-start-node__icon,
+.uni-react-flow-journey-node__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+}
+
+.uni-react-flow-journey-start-node__icon {
+  background: #363636;
+  color: #fff;
+}
+
+.uni-react-flow-journey-start-node__label {
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #222;
+}
+
+.uni-react-flow-journey-transfer-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60px;
+  padding: 8px;
+}
+
+.uni-react-flow-journey-transfer-node__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.uni-react-flow-journey-transfer-node__title {
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #222;
+}
+
+.uni-react-flow-journey-add-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  cursor: copy;
+  outline: 0;
+}
+
+.uni-react-flow-journey-add-node__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #78bdc5;
+  border-radius: 999px;
+  background: #d6edf0;
+  color: #15808c;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.uni-react-flow-journey-add-node__button svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.uni-react-flow-journey-add-node.is-drop-active .uni-react-flow-journey-add-node__button,
+.uni-react-flow-journey-add-node:hover .uni-react-flow-journey-add-node__button,
+.uni-react-flow-journey-add-node:focus-visible .uni-react-flow-journey-add-node__button {
+  background: #c8e7eb;
+  box-shadow: 0 0 0 2px rgb(21 128 140 / 28%);
+  transform: scale(1.06);
+}
+
+.uni-react-flow-journey-content-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 147px;
+  box-sizing: border-box;
+  overflow: visible;
+  padding: 8px;
+}
+
+.uni-react-flow-journey-content-node.is-drop-active {
+  border-color: #15808c;
+  box-shadow: 0 0 0 2px rgb(21 128 140 / 22%);
+}
+
+.uni-react-flow-journey-content-node__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.uni-react-flow-journey-content-node__title {
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #222;
+}
+
+.uni-react-flow-journey-content-node__description-shell {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.uni-react-flow-journey-content-node__description {
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  border: 1px solid #f3f3f3;
+  border-radius: 4px;
+  overflow: hidden;
+  display: -webkit-box;
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(0 0 0 / 80%);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.uni-react-flow-journey-content-node__connector-wrap {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.uni-react-flow-journey-content-node--vertical .uni-react-flow-journey-content-node__connector-wrap {
+  left: 27px;
+  bottom: -8px;
+}
+
+.uni-react-flow-journey-content-node--horizontal .uni-react-flow-journey-content-node__connector-wrap {
+  right: -8px;
+  bottom: 14px;
+}
+
+.uni-react-flow-journey-content-node__connector {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  box-sizing: border-box;
+  border: 1.5px solid currentcolor;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.uni-react-flow-journey-content-node__connector-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: currentcolor;
+}
+
+.uni-react-flow-journey-content-node__connector--agent {
+  color: #8c53cf;
+  border-color: #8c53cf;
+}
+
+.uni-react-flow-journey-content-node__connector--subflow {
+  color: #ed4e9a;
+  border-color: #ed4e9a;
+}
+
+.uni-react-flow-journey-content-node__connector--question {
+  color: #20a5c8;
+  border-color: #20a5c8;
+}
+
+.uni-react-flow-journey-content-node__connector--statement {
+  color: #e6a91a;
+  border-color: #e6a91a;
+}
+
+.uni-react-flow-journey-content-node__connector--message {
+  color: #2f8fdd;
+  border-color: #2f8fdd;
+}
+
+.uni-react-flow-journey-content-node__connector--tool {
+  color: #ff7f32;
+  border-color: #ff7f32;
+}
+
+.uni-react-flow-journey-content-node__connector--skillset {
+  color: #5a6ad8;
+  border-color: #5a6ad8;
+}
+
+.uni-react-flow-journey-content-node__connector--authenticate {
+  color: #0f766e;
+  border-color: #0f766e;
+}
+
+.uni-react-flow-journey-content-node__connector--transfer {
+  color: #5f5e5f;
+  border-color: #969498;
+}
+
+.uni-react-flow-journey-node__icon {
+  border: 2px solid #e7e7e7;
+  color: #5f5e5f;
+}
+
+.uni-react-flow-journey-node__icon--agent {
+  color: #8c53cf;
+  background: #ead8f9;
+}
+
+.uni-react-flow-journey-node__icon--subflow {
+  color: #d13d85;
+  background: #ffd6ea;
+}
+
+.uni-react-flow-journey-node__icon--question {
+  color: #20a5c8;
+  background: #d5eff7;
+}
+
+.uni-react-flow-journey-node__icon--statement {
+  color: #d09108;
+  background: #f9e4ae;
+}
+
+.uni-react-flow-journey-node__icon--message {
+  color: #2f8fdd;
+  background: #d9eafe;
+}
+
+.uni-react-flow-journey-node__icon--tool {
+  color: #ff7f32;
+  background: #ffd8b6;
+}
+
+.uni-react-flow-journey-node__icon--skillset {
+  color: #5a6ad8;
+  background: #e3e8ff;
+}
+
+.uni-react-flow-journey-node__icon--authenticate {
+  color: #0f766e;
+  background: #cff2ee;
+}
+
+.uni-react-flow-journey-node__icon--transfer {
+  color: #5f5e5f;
+  background: #dbdbdb;
+  border-color: #cfcfcf;
+}
+
+.uni-react-flow-journey-node__icon--goto {
+  color: #1f6f96;
+  background: #d7edf7;
+  border-color: #b7d8e7;
+}
+
+.uni-react-flow-journey-collapsed-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 200px;
+  min-height: 44px;
+  overflow: visible;
+  color: #222;
+}
+
+.uni-react-flow-journey-collapsed-node--vertical {
+  flex-direction: row;
+  align-items: center;
+}
+
+.uni-react-flow-journey-collapsed-node--horizontal {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 44px;
+  min-height: 68px;
+  gap: 6px;
+}
+
+.uni-react-flow-journey-collapsed-node.is-drop-active .uni-react-flow-journey-collapsed-node__icon {
+  box-shadow: 0 0 0 2px rgb(21 128 140 / 22%);
+}
+
+.uni-react-flow-journey-collapsed-node__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+}
+
+.uni-react-flow-journey-collapsed-node__icon--start {
+  border: 2px solid #363636;
+  background: #363636;
+  color: #fff;
+}
+
+.uni-react-flow-journey-collapsed-node__icon--end-neutral {
+  border: 2px solid #b5b5b5;
+  background: #8f8f8f;
+  color: #fff;
+}
+
+.uni-react-flow-journey-collapsed-node__icon--end-positive {
+  border: 2px solid #1f8f63;
+  background: #27ae60;
+  color: #fff;
+}
+
+.uni-react-flow-journey-collapsed-node__icon--end-negative {
+  border: 2px solid #b42318;
+  background: #d92d20;
+  color: #fff;
+}
+
+.uni-react-flow-journey-collapsed-node.is-selected .uni-react-flow-journey-collapsed-node__icon {
+  box-shadow: 0 0 0 2px #15808c;
+}
+
+.uni-react-flow-journey-collapsed-node__label {
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #222;
+  white-space: nowrap;
+}
+
+.uni-react-flow-journey-collapsed-node--horizontal .uni-react-flow-journey-collapsed-node__label {
+  width: max-content;
+  text-align: center;
+}
+
+.uni-react-flow-journey-goto-node {
+  border-style: dashed;
+}
+
+.uni-react-flow-journey-start-node__icon svg,
+.uni-react-flow-journey-end-node__icon svg,
+.uni-react-flow-journey-collapsed-node__icon svg,
+.uni-react-flow-journey-node__icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.uni-react-flow-journey-end-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: #222;
+}
+
+.uni-react-flow-journey-end-node__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid #b5b5b5;
+  background: #8f8f8f;
+  color: #fff;
+}
+
+.uni-react-flow-journey-end-node--neutral .uni-react-flow-journey-end-node__icon {
+  border-color: #b5b5b5;
+  background: #8f8f8f;
+}
+
+.uni-react-flow-journey-end-node--positive .uni-react-flow-journey-end-node__icon {
+  border-color: #1f8f63;
+  background: #27ae60;
+}
+
+.uni-react-flow-journey-end-node--negative .uni-react-flow-journey-end-node__icon {
+  border-color: #b42318;
+  background: #d92d20;
+}
+
+.uni-react-flow-journey-end-node.is-selected .uni-react-flow-journey-end-node__icon {
+  box-shadow: 0 0 0 2px #15808c;
+}
+
+.uni-react-flow-journey-end-node__label {
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.uni-react-flow-journey-node-shell {
+  position: relative;
+  display: inline-flex;
+  overflow: visible;
+}
+
+.uni-react-flow-journey-node-toolbar {
+  position: absolute;
+  top: 50%;
+  right: -52px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid #d8d8d8;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow:
+    0 10px 16px -6px rgb(0 0 0 / 14%),
+    0 4px 6px -4px rgb(0 0 0 / 8%);
+  transform: translateY(-50%);
+  z-index: 4;
+}
+
+.uni-react-flow-journey-node-toolbar__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #444344;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.uni-react-flow-journey-node-toolbar__button:hover,
+.uni-react-flow-journey-node-toolbar__button.is-active {
+  background: #d6edf0;
+  color: #15808c;
+}
+
+.uni-react-flow-journey-node-toolbar__button:active {
+  transform: scale(0.96);
+}
+
+.uni-react-flow-journey-node-toolbar__button svg,
+.uni-react-flow-journey-branch-action__button svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.uni-react-flow-journey-node-toolbar__button--danger:hover,
+.uni-react-flow-journey-node-toolbar__button--danger.is-active {
+  background: #fbe1e0;
+  color: #b42318;
+}
+
+.uni-react-flow-journey-action-palette {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 168px;
+  padding: 8px;
+  border: 1px solid #d8d8d8;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 12px 20px -8px rgb(0 0 0 / 16%),
+    0 4px 8px -4px rgb(0 0 0 / 10%);
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.uni-react-flow-journey-action-palette__divider {
+  height: 1px;
+  margin: 4px 2px;
+  background: #e8e8e8;
+}
+
+.uni-react-flow-journey-action-palette__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #222;
+  text-align: left;
+  cursor: pointer;
+}
+
+.uni-react-flow-journey-action-palette__item:hover {
+  background: #f6f7f8;
+}
+
+.uni-react-flow-journey-action-palette__item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  background: #efefef;
+  color: #5f5e5f;
+}
+
+.uni-react-flow-journey-action-palette__item-icon svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--agent {
+  color: #8c53cf;
+  background: #ead8f9;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--subflow {
+  color: #d13d85;
+  background: #ffd6ea;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--question {
+  color: #20a5c8;
+  background: #d5eff7;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--statement {
+  color: #d09108;
+  background: #f9e4ae;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--message {
+  color: #2f8fdd;
+  background: #d9eafe;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--tool {
+  color: #ff7f32;
+  background: #ffd8b6;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--skillset {
+  color: #5a6ad8;
+  background: #e3e8ff;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--authenticate {
+  color: #0f766e;
+  background: #cff2ee;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--transfer {
+  color: #5f5e5f;
+  background: #dbdbdb;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--goto {
+  color: #1f6f96;
+  background: #d7edf7;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--neutral {
+  color: #5f5e5f;
+  background: #efefef;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--positive {
+  color: #1f8f63;
+  background: #d6f3e7;
+}
+
+.uni-react-flow-journey-action-palette__item-icon--negative {
+  color: #b42318;
+  background: #fbe1e0;
+}
+
+.uni-react-flow-journey-action-palette__item-label {
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.uni-react-flow-journey-template-palette {
+  width: 64px;
+  border: 1px solid #d8d8d8;
+  border-radius: 20px;
+  background: rgb(255 255 255 / 96%);
+  box-shadow:
+    0 14px 24px -12px rgb(0 0 0 / 18%),
+    0 8px 12px -8px rgb(0 0 0 / 10%);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition:
+    width 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.uni-react-flow-journey-template-palette.is-expanded {
+  width: min(196px, calc(100vw - 48px));
+}
+
+.uni-react-flow-journey-template-palette .ant-card-body {
+  padding: 8px;
+  transition: padding 160ms ease;
+}
+
+.uni-react-flow-journey-template-palette.is-expanded .ant-card-body {
+  padding: 10px;
+}
+
+.uni-react-flow-journey-template-palette__items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uni-react-flow-journey-template-palette__separator {
+  height: 1px;
+  margin: 4px 2px;
+  background: #e8e8e8;
+}
+
+.uni-react-flow-journey-template-palette__item {
+  justify-content: center;
+  gap: 0;
+  padding: 6px;
+  cursor: grab;
+  transition:
+    gap 160ms ease,
+    padding 160ms ease;
+}
+
+.uni-react-flow-journey-template-palette__item:active {
+  cursor: grabbing;
+}
+
+.uni-react-flow-journey-template-palette.is-expanded .uni-react-flow-journey-template-palette__item {
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 6px 8px;
+}
+
+.uni-react-flow-journey-template-palette__item-label {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-4px);
+  white-space: nowrap;
+  transition:
+    max-width 160ms ease,
+    opacity 120ms ease,
+    transform 160ms ease;
+}
+
+.uni-react-flow-journey-template-palette.is-expanded .uni-react-flow-journey-template-palette__item-label {
+  max-width: 120px;
+  opacity: 1;
+  transform: translateX(0);
+  white-space: normal;
+}
+
+.uni-react-flow-journey-template-palette__drag-preview {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.uni-react-flow-journey-template-palette--orchestration {
+  border-color: #e6e8eb;
+}
+
+.uni-react-flow-journey-template-palette--skill {
+  border-color: #dfe6f3;
+}
+
+.uni-react-flow-journey-canvas-control-cluster {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.uni-react-flow-journey-canvas-map-control {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -4px rgb(0 0 0 / 10%);
+}
+
+.uni-react-flow-journey-canvas-map-control__pair {
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.uni-react-flow-journey-canvas-map-control__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: #444344;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.uni-react-flow-journey-canvas-map-control__button:hover {
+  background: #f3f3f3;
+  color: #222;
+}
+
+.uni-react-flow-journey-canvas-map-control__button--top {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.uni-react-flow-journey-canvas-map-control__button--fit {
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+}
+
+.uni-react-flow-journey-canvas-map-control__button svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.uni-react-flow-journey-canvas-map-control__divider {
+  width: 28px;
+  height: 1px;
+  background: #e7e7e7;
+}
+
+.uni-react-flow-journey-canvas-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -4px rgb(0 0 0 / 10%);
+}
+
+.uni-react-flow-journey-canvas-toolbar__group {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #dbdbdb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.uni-react-flow-journey-canvas-toolbar__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: #444344;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.uni-react-flow-journey-canvas-toolbar__button + .uni-react-flow-journey-canvas-toolbar__button {
+  border-left: 1px solid #dbdbdb;
+}
+
+.uni-react-flow-journey-canvas-toolbar__button:hover {
+  background: #f3f3f3;
+  color: #222;
+}
+
+.uni-react-flow-journey-canvas-toolbar__button.is-active {
+  background: #d6edf0;
+  color: #15808c;
+}
+
+.uni-react-flow-journey-canvas-toolbar__button svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.uni-react-flow-journey-branch-action {
+  position: absolute;
+  top: 56px;
+  right: -18px;
+  z-index: 4;
+}
+
+.uni-react-flow-journey-node-shell--collapsed-content .uni-react-flow-journey-branch-action {
+  top: 20px;
+}
+
+.uni-react-flow-journey-branch-action__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #78bdc5;
+  border-radius: 999px;
+  background: #d6edf0;
+  color: #15808c;
+  box-shadow: 0 3px 8px rgb(21 128 140 / 14%);
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.uni-react-flow-journey-branch-action__button:hover,
+.uni-react-flow-journey-branch-action__button.is-active {
+  background: #c8e7eb;
+  box-shadow: 0 0 0 2px rgb(21 128 140 / 18%);
+}
+
+.uni-react-flow-journey-branch-action__button:active {
+  transform: scale(0.96);
+}
+
+.uni-react-flow-journey-edge__action {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #cfcfcf;
+  border-radius: 50%;
+  background: #fff;
+  color: #444344;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.uni-react-flow-journey-edge__action--danger {
+  color: #b42318;
+}
+
+.uni-react-flow-journey-edge__chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
+  padding: 4px 6px;
+  border: 2px solid #c7c7c7;
+  border-radius: 8px;
+  background: #fff;
+  color: #1b1b1b;
+  font-family: var(--btypography-font-family-font-inter, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.uni-react-flow-journey-edge__chip--success,
+.uni-react-flow-journey-edge__chip--alert,
+.uni-react-flow-journey-edge__chip--info,
+.uni-react-flow-journey-edge__chip--neutral {
+  border-color: #c7c7c7;
+  background: #fff;
+  color: #1b1b1b;
+}

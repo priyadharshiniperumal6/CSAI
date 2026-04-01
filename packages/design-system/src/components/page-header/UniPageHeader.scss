@@ -1,0 +1,13 @@
+/* stylelint-disable selector-class-pattern */
+
+.uni-page-header__breadcrumbs {
+  .ant-breadcrumb,
+  .ant-breadcrumb-link,
+  .ant-breadcrumb-separator {
+    font-size: 12px;
+  }
+}
+
+.uni-page-header__toolbar {
+  padding-top: 4px;
+}

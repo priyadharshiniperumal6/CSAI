@@ -1,0 +1,67 @@
+.uni-action-save {
+  align-items: center;
+  gap: var(--uni-size-1);
+}
+
+.uni-radio-group .ant-radio-wrapper {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.uni-icon {
+  color: var(--ut-color-text-brand);
+
+  &:hover {
+    background-color: var(--ut-color-bg-brand-subtle);
+    border-radius: 50px;
+  }
+}
+
+.uni-divider-icon {
+  background: var(--ut-color-bg-brand);
+  height: 12px;
+}
+
+.uni-selected-view,
+.list-view:hover {
+  background: var(--ut-color-bg-brand-subtle);
+  color: var(--ut-color-text-brand);
+}
+
+.uni-action-expand-more {
+  color: var(--ut-color-text-brand);
+}
+
+.uni-icon-delete {
+  color: var(--ut-color-text-secondary);
+
+  &.ant-popover-open,
+  &:hover {
+    color: var(--ut-color-text-brand);
+  }
+}
+
+.warning-message {
+  color: red;
+}
+
+.input-error-wrapper.uni-ant-input.ant-input-affix-wrapper-focused {
+  box-shadow: none !important;
+}
+
+.input-error-wrapper.uni-ant-input {
+  border-color: red !important;
+}
+
+.uni-dropdown-overlay {
+  &.ant-dropdown-show-arrow {
+    &.ant-dropdown-placement-bottomRight {
+      padding-top: 0;
+      margin-top: 10px;
+    }
+
+    .ant-dropdown-arrow {
+      top: 0;
+    }
+  }
+}

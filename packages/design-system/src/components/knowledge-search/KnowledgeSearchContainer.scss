@@ -1,0 +1,21 @@
+.knowledge-search-container {
+  .qna-autocomplete .ant-select-selector {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+
+  .fetching-data::after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    animation: dots steps(4, end) 1500ms infinite;
+    content: '\2026';
+    width: 0;
+  }
+}
+
+@keyframes dots {
+  to {
+    width: 2ch;
+  }
+}

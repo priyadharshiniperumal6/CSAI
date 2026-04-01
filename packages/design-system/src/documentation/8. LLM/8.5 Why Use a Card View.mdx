@@ -1,0 +1,28 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.5 Why Use a Card View" />
+
+# Why Use a Card View
+
+Cards are ideal for **browsing collections of self-contained items**. They provide a
+visual summary and work well when content varies in length, type, or hierarchy.
+
+## Use a Card View When
+
+- Each item represents a **single concept** (record, asset, person, case).
+- Users are **browsing or discovering** rather than comparing exact values.
+- Content includes **mixed media** or variable metadata.
+- You want **strong visual hierarchy** and scannability.
+- The dataset is **small to medium** and not column-comparison heavy.
+
+## Avoid Card Views When
+
+- Users must **compare fields across many items**.
+- Data is **high density** or primarily numeric.
+- You need **bulk operations** across rows.
+
+## Universal Theme Mapping
+
+- Use `CardView` to render collections of cards.
+- Use `UniCard` / `DataCard` for item summaries.
+- Pair cards with filters or search when discovery is the goal.

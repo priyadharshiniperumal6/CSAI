@@ -1,0 +1,9 @@
+export const INLINE_EDIT_EVENT = 'onInlineEdit';
+export const INLINE_DELETE_EVENT = 'onInlineEditDelete';
+export const INLINE_SAVE_EVENT = 'onInlineEditSave';
+export const INLINE_CANCEL_EVENT = 'onInineEditCancel';
+export const POPOVER_SAVE_EVENT = 'onPopoverSave';
+export const POPOVER_CANCEL_EVENT = 'onPopoverCancel';
+export const POPOVER_CLOSE_EVENT = 'onPopoverClose';
+export const CONFIRM_DELETE = 'onConfirmDelete';
+export const CANCEL_DELETE = 'onCancelDelete';

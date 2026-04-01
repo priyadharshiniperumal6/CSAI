@@ -1,0 +1,292 @@
+@use 'variables';
+@use 'mixins';
+
+// This file override styles from the original project, need only for testing and can be removed after the final release
+.ant-checkbox {
+  input[type='checkbox'] + span.ant-checkbox-inner {
+    position: relative;
+
+    &::before {
+      @include mixins.uicon;
+      position: absolute;
+      background-color: var(--ut-color-bg-surface);
+      color: var(--ut-color-text-brand);
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  span.ant-checkbox-inner {
+    &::before {
+      font-size: 16px !important;
+    }
+
+    &::after {
+      display: none !important;
+    }
+
+    border: 0;
+  }
+
+  &.ant-checkbox {
+    input[type='checkbox'] + span.ant-checkbox-inner::before {
+      content: variables.$uni-checkbox-unchecked !important;
+    }
+  }
+
+  &.ant-checkbox-indeterminate {
+    input[type='checkbox'] + span.ant-checkbox-inner::before {
+      content: variables.$uni-checkbox-indeterminate !important;
+    }
+  }
+
+  &.ant-checkbox-checked {
+    input[type='checkbox'] + span.ant-checkbox-inner::before {
+      content: variables.$uni-checkbox-checked !important;
+    }
+  }
+}
+
+.ant-btn-primary.ant-btn-dangerous {
+  background-color: var(--ut-color-bg-danger) !important;
+}
+
+.ant-btn {
+  &:hover {
+    &.ant-btn-primary:not(.ant-button-danger):not([disabled]) {
+      background-color: var(--ut-color-bg-brand-strong) !important;
+      box-shadow: 0 4px 8px rgba(21, 128, 140, 0.2) !important;
+    }
+
+    &.ant-btn-default:not(.ant-button-danger):not([disabled]) {
+      color: var(--ut-color-text-brand-strong) !important;
+      border-color: var(--ut-color-text-brand-strong) !important;
+      background-color: var(--ut-color-bg-brand-muted) !important;
+      box-shadow: 0 2px 4px rgba(21, 128, 140, 0.1) !important;
+    }
+
+    &.ant-btn-text:not(.ant-button-danger):not([disabled]),
+    &.ant-btn-link:not(.ant-button-danger):not([disabled]) {
+      color: var(--ut-color-text-brand-strong) !important;
+      background-color: transparent !important;
+    }
+  }
+}
+
+.ant-btn-primary:not(.ant-btn-background-ghost):not([disabled]) {
+  background-color: var(--ut-color-bg-brand-emphasis);
+}
+
+.ant-btn-default:not(.ant-button-danger):not([disabled]) {
+  color: var(--ut-color-text-brand);
+  border-color: var(--ut-color-border-brand);
+}
+
+.ant-btn-text:not(.ant-button-danger):not([disabled]),
+.ant-btn-link:not(.ant-button-danger):not([disabled]) {
+  color: var(--ut-color-text-brand);
+}
+
+.ant-dropdown {
+  box-shadow: 0 6px 16px 0 #00000014;
+}
+
+.ant-dropdown-menu {
+  border-radius: 0.25rem;
+}
+
+.ant-menu-item:hover,
+.ant-menu-item-active,
+.ant-menu-item-selected,
+.ant-dropdown-menu-item:hover,
+.ant-dropdown-menu-item-active,
+.ant-dropdown-menu-item-selected {
+  background-color: transparent !important;
+}
+
+.ant-form-item .ant-form-item-explain-error {
+  font-size: 0.75rem;
+}
+
+.ant-drawer-title {
+  width: 100% !important;
+}
+
+.right-drawer .ant-drawer-content-wrapper {
+  border: 1px solid var(--ut-color-border-muted);
+}
+
+.policy-crud-panel {
+  .ant-drawer-body {
+    padding: 0;
+  }
+}
+
+.no-padding-drawer {
+  .ant-drawer-body {
+    padding: 0;
+  }
+}
+
+.license-deploy {
+  .ant-steps-item-wait {
+  }
+
+  .ant-steps-item-process {
+    .ant-steps-item-title {
+      font-weight: 600;
+    }
+  }
+
+  .ant-steps-item-title {
+    font-size: 0.875rem;
+  }
+
+  .ant-card {
+    border-radius: 0.25rem;
+  }
+
+  .ant-card-body {
+    padding: 0;
+  }
+}
+
+.ant-divider-horizontal {
+  &.no-margin {
+    margin: 0;
+  }
+}
+
+.ant-popover-inner {
+  font-size: 14px;
+}
+
+.ant-popover-content {
+  color: var(--ut-color-text-primary) !important;
+  line-height: 20px;
+}
+
+.ant-popover-content p {
+  margin: 0;
+}
+
+.ant-popover-title {
+  color: var(--ut-color-text-primary) !important;
+  line-height: 22px;
+}
+
+// [DEAD CODE — safe to delete] These rules targeted antd v5 class selectors
+// (.ant-segmented-item, .ant-segmented-item-selected) which no longer exist in
+// antd v6. They have been non-functional since the v6 upgrade. UniSegmented now
+// sets equivalent values via ConfigProvider component tokens (trackBg,
+// itemColor, itemHoverBg, itemSelectedBg, itemSelectedColor) — the correct v6
+// pattern. Delete this block once the team has verified UniSegmented is in use
+// everywhere .configuration-container previously appeared.
+// .configuration-container {
+//   .ant-segmented {
+//     background-color: var(--ut-color-bg-surface);
+//     color: var(--ut-color-text-brand);
+//   }
+//   .ant-segmented-item {
+//     color: var(--ut-color-text-brand) !important;
+//   }
+//   .ant-segmented-item:hover {
+//     background-color: var(--ut-color-bg-brand-muted);
+//   }
+//   .ant-segmented-item-selected {
+//     background-color: var(--ut-color-bg-brand-muted);
+//   }
+// }
+
+.ant-form-item-explain {
+  font-size: 0.875rem !important;
+}
+
+.ant-input-group-addon {
+  font-size: 0.875rem !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  background-color: var(--ut-color-bg-brand-subtle) !important;
+}
+
+.ant-input-suffix {
+  .ant-form-item-feedback-icon-error,
+  .ant-form-item-feedback-icon-success {
+    display: none;
+  }
+}
+
+.ant-form label,
+.ant-picker-input input {
+  font-size: 0.875rem !important;
+}
+
+.ant-form-item .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+  font-family: inherit !important;
+  color: var(--ut-color-text-danger);
+  transform: translate(0px, 5%);
+}
+
+// .ant-form-item .ant-form-item-label >label::after {
+//   display: none !important
+// }
+
+.level-zero-select.ant-select {
+  .ant-select-selection-item {
+    @apply text-xs;
+  }
+
+  & > .ant-select-selector {
+    @apply bg-neutral10;
+  }
+
+  &:not(.ant-select-open) > * {
+    @apply text-white;
+  }
+
+  &.ant-select-disabled {
+    .ant-select-selection-item,
+    &:not(.ant-select-open) > * {
+      @apply text-neutral8;
+    }
+
+    & > .ant-select-selector {
+      @apply border-neutral8;
+    }
+  }
+
+  &.ant-select-open > .ant-select-selector {
+    @apply bg-white;
+  }
+}
+
+// TODO: temporary — move into UniDatePicker's own SCSS file once it gains a className and SCSS.
+// Mirrors the .ant-select-prefix rule in UniSelect.scss.
+// DatePicker uses prefixCls "ant-picker" (not "ant-select"), so UniSelect.scss cannot reach it.
+.ant-picker-prefix {
+  display: flex;
+  align-items: center;
+  color: var(--ucolor-content-icon-gray-secondary); // #969498 — matches UniSelect prefix icon
+  margin-inline-end: 6px;
+}
+
+.l2-nav {
+  margin-left: -16px;
+}
+
+.uni-ant-input-group-autocomplete {
+  .uni-ant-button {
+    background-color: var(--ut-color-bg-surface-subtle) !important;
+    color: var(--ut-color-text-secondary) !important;
+    box-shadow: none !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: 1px solid var(--ut-color-border-strong) !important;
+  }
+
+  .ant-input-group.ant-input-group-compact > .ant-select > .ant-select-selector {
+    border-end-end-radius: 4px;
+    border-start-end-radius: 4px;
+  }
+}

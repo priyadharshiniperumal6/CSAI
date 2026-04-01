@@ -1,0 +1,500 @@
+// ── UniAIAssistPanel ──────────────────────────────────────────────────────────
+// Token source: packages/tokens/src/uni-token.js
+// CSS vars:     packages/core/src/styles/base.semantic.scss
+//
+// Panel is mounted inside HostShell's .host-shell__ai-assist slot which
+// provides the fixed width (min(400px, 34vw)) and height (100%).
+// The panel itself fills that slot with flex-column layout.
+
+.uni-ai-assist-panel {
+  position: relative; // contains the absolutely-positioned UniChatsPanel overlay
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ut-color-bg-surface); // neutral.0 — #ffffff
+  border-radius: 12px 0 0 12px; // matches HostShell panel shape
+  border: 1px solid var(--ut-color-border-default); // neutral.100 — #e9ecf4
+
+  // Gradient covers the whole panel (header → body → sender) in welcome state
+  &--welcome {
+    background: linear-gradient(
+      180deg,
+      var(--ut-color-bg-surface) 35%,
+      // neutral.0   — #ffffff
+      var(--ut-color-bg-brand-subtle) 100% // primary.100 — #E7F7FB
+    );
+  }
+}
+
+// ── Header ───────────────────────────────────────────────────────────────────
+
+.uni-ai-assist-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  // No border by default — panel blends as one surface
+}
+
+.uni-ai-assist-panel__header-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--ut-color-text-heading); // neutral.900 — #0e0c11
+}
+
+.uni-ai-assist-panel__brand-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--ut-color-text-brand); // primary.600 — #15808C
+}
+
+.uni-ai-assist-panel__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.uni-ai-assist-panel__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ut-color-text-muted); // neutral.600 — #6d6f79
+  padding: 4px;
+  cursor: pointer;
+  line-height: 0;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: var(--ut-color-bg-surface-subtle); // neutral.50 — #f8f9fc
+    color: var(--ut-color-text-heading);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ut-color-border-brand); // primary.600
+    outline-offset: 2px;
+  }
+
+  // !important beats the :hover rule (same specificity, cascade order)
+  &--active,
+  &--active:hover {
+    background: var(--ut-color-bg-brand-subtle) !important; // primary.100
+    color: var(--ut-color-text-brand) !important; // primary.600
+  }
+}
+
+// ── Body ─────────────────────────────────────────────────────────────────────
+
+.uni-ai-assist-panel__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// ── Welcome area ─────────────────────────────────────────────────────────────
+
+.uni-ai-assist-panel__welcome-area {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  // Background is transparent — gradient comes from the panel root (.--welcome)
+}
+
+.uni-ai-assist-panel__welcome {
+  // Fills remaining space and centers the star+greeting vertically
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 24px 16px;
+  text-align: center;
+}
+
+.uni-ai-assist-panel__welcome-star {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto 8px;
+  color: var(--ut-color-text-brand); // primary.600 — #15808C
+}
+
+// ── Use Case tiles ────────────────────────────────────────────────────────────
+// Conflict Zone A resolution: UniPrompts is used as-is.
+// Within this panel context we override the list direction to vertical and
+// force items to full width — achieving the card-row appearance from Figma
+// without modifying UniPrompts itself.
+
+.uni-ai-assist-panel__use-cases {
+  flex-shrink: 0;
+  margin-top: auto; // pushes use cases to bottom of the welcome area
+  padding: 0 16px 16px;
+}
+
+.uni-ai-assist-panel__use-cases-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ut-color-text-brand); // primary.600 — #15808C (teal label)
+  margin-bottom: 12px;
+}
+
+// Force vertical stacking inside this panel only — scoped to avoid
+// affecting UniPrompts used elsewhere (e.g. UniChatUI).
+.uni-ai-assist-panel__prompts {
+  .ant-prompts-list {
+    flex-direction: column !important;
+  }
+
+  .ant-prompts-item {
+    width: 100% !important;
+    border-radius: 8px !important; // borderRadius.300
+    align-items: center !important; // center icon and label vertically
+  }
+}
+
+// ── Chat (messages) area ──────────────────────────────────────────────────────
+
+.uni-ai-assist-panel__messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+// ── Sender ────────────────────────────────────────────────────────────────────
+
+.uni-ai-assist-panel__sender {
+  flex-shrink: 0;
+  padding: 10px 12px 12px;
+  // No border-top — sender floats as part of the same panel surface
+
+  // Explicit surface background so sender box sits cleanly above the gradient
+  .ant-sender-main {
+    background: var(--ut-color-bg-surface) !important;
+  }
+
+  // Focus border: AntX CSS-in-JS doesn't propagate via ConfigProvider here
+  // DS note: box-shadow uses raw rgba — no shadow/glow token exists in the system yet.
+  .ant-sender-main:focus-within {
+    border-color: var(--ut-color-border-brand) !important;
+    box-shadow: 0 0 0 2px rgba(21, 128, 140, 0.12) !important;
+  }
+}
+
+// Attach icon rendered via footer prop when sender is focused
+.uni-ai-assist-panel__attach-icon {
+  font-size: 18px;
+  color: var(--ut-color-text-muted); // neutral.600
+  cursor: pointer;
+  user-select: none;
+  padding: 2px;
+  border-radius: 4px;
+
+  &:hover {
+    color: var(--ut-color-text-heading);
+  }
+}
+
+// ── UniChatsPanel ─────────────────────────────────────────────────────────────
+// Partially overlays UniAIAssistPanel from the right — leaves ~30% of the
+// underlying panel visible on the left (matches Figma UT_Layout_02 where
+// the chats overlay is 240/350px ≈ 69% of the AI Assist panel width).
+
+.uni-chats-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  // DS note: Figma uses #ECF4F7 as gradient start — no exact token match.
+  // Closest is --ut-color-bg-brand-subtle (primary.100 / #E7F7FB). Flagged for DS review.
+  background: linear-gradient(to right, var(--ut-color-bg-brand-subtle), var(--ut-color-bg-surface));
+  border-radius: 12px 0 0 12px; // match parent panel shape
+  z-index: 10;
+}
+
+// ── Chats header ──────────────────────────────────────────────────────────────
+
+.uni-chats-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--ut-color-border-default);
+}
+
+.uni-chats-panel__header-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ut-color-text-heading);
+}
+
+.uni-chats-panel__header-icon {
+  font-size: 18px;
+  color: var(--ut-color-text-brand); // primary.600 — teal, indicates panel is active
+}
+
+.uni-chats-panel__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ut-color-text-muted);
+  padding: 4px;
+  cursor: pointer;
+  line-height: 0;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: var(--ut-color-bg-surface-subtle);
+    color: var(--ut-color-text-heading);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ut-color-border-brand);
+    outline-offset: 2px;
+  }
+}
+
+// ── Nav-item rows (New Chat + Search) ────────────────────────────────────────
+// Pattern: icon + label row, no button chrome. New Chat uses a teal circle icon.
+// Deviation from Figma full-width CTA — suits the narrow overlay context.
+// Full-width CTA is reserved for UniAIAssistHome (full-page view).
+
+.uni-chats-panel__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  flex-shrink: 0;
+  border-radius: 6px;
+
+  &:hover {
+    background: var(--ut-color-bg-surface); // white — matches gradient background
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ut-color-border-brand);
+    outline-offset: 2px;
+  }
+}
+
+// New Chat: teal filled circle icon
+.uni-chats-panel__nav-item--new-chat .uni-chats-panel__nav-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ut-color-bg-brand); // primary.600
+  color: var(--ut-color-text-inverse); // white
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+.uni-chats-panel__nav-item-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ut-color-text-brand); // primary.600 — teal for New Chat
+}
+
+// Search: muted icon + gray label
+.uni-chats-panel__nav-item-icon--muted {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: var(--ut-color-text-muted);
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+}
+
+.uni-chats-panel__nav-item-label--muted {
+  color: var(--ut-color-text-muted);
+  font-weight: 400;
+}
+
+// Active search state: pill input replaces the row, full width within padding
+.uni-chats-panel__nav-item--search-active {
+  cursor: default;
+  padding: 6px 12px;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.uni-chats-panel__nav-search-icon {
+  position: absolute;
+  left: 8px;
+  font-size: 16px;
+  color: var(--ut-color-text-muted);
+  pointer-events: none;
+  line-height: 0;
+}
+
+// Wrapper needed to position the icon absolutely inside the pill
+.uni-chats-panel__search-input-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.uni-chats-panel__search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px 6px 30px;
+  border: 1px solid var(--ut-color-border-default);
+  border-radius: 18px; // pill
+  background: var(--ut-color-bg-surface);
+  color: var(--ut-color-text-heading);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease;
+
+  &::placeholder {
+    color: var(--ut-color-text-muted);
+  }
+
+  &:focus {
+    border-color: var(--ut-color-border-brand);
+  }
+}
+
+// ── Divider ───────────────────────────────────────────────────────────────────
+
+.uni-chats-panel__divider {
+  margin: 4px 0 0;
+  border: 0;
+  border-top: 1px solid var(--ut-color-border-default);
+  flex-shrink: 0;
+}
+
+// ── Recents label ─────────────────────────────────────────────────────────────
+// 20px top padding creates the gap after the divider.
+// Left padding matches the conversation item text indent (list 8px + item ~12px = 20px).
+
+.uni-chats-panel__recents-label {
+  padding: 20px 12px 4px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ut-color-text-tertiary); // uni-black.450 — #969498
+  flex-shrink: 0;
+}
+
+// ── Conversations list ────────────────────────────────────────────────────────
+
+.uni-chats-panel__list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 8px 12px;
+}
+
+// ── Sidebar variant (UniAIAssistHome) ─────────────────────────────────────────
+// Overrides the default overlay (absolute) positioning to make the panel
+// a persistent inline sidebar on the right edge of UniAIAssistHome.
+
+.uni-chats-panel--sidebar {
+  position: relative; // not absolute — flows in the flex layout
+  width: 240px;
+  flex-shrink: 0;
+  height: 100%;
+  border-radius: 0;
+  border-left: 1px solid var(--ut-color-border-default);
+  z-index: auto;
+}
+
+// Collapsed sidebar: icon-only strip (~48px).
+// Transparent background so it blends with the parent content area — no competing gradients.
+// Book icon is muted grey when collapsed; turns teal only when the panel opens.
+.uni-chats-panel--sidebar.uni-chats-panel--collapsed {
+  width: 48px;
+  background: transparent;
+  border-left: none;
+}
+
+.uni-chats-panel--collapsed .uni-chats-panel__header-icon {
+  color: var(--ut-color-text-muted); // grey when collapsed — matches book icon in UniAIAssistPanel header
+}
+
+.uni-chats-panel__collapsed-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  gap: 16px;
+}
+
+// Teal filled circle button used in the collapsed strip for New Chat
+.uni-chats-panel__collapsed-new-chat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--ut-color-bg-brand); // primary.600 — teal
+  color: var(--ut-color-text-inverse);
+  cursor: pointer;
+  line-height: 0;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: var(--ut-color-bg-brand-emphasis);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ut-color-border-brand);
+    outline-offset: 2px;
+  }
+}

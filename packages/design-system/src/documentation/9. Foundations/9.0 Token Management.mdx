@@ -1,0 +1,94 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { TokenReferenceStyles } from './tokenReferenceDocs';
+
+<Meta title="Documentation/9. Tokens & Foundations/9.0 Token Management" />
+
+<TokenReferenceStyles />
+
+# Tokens & Foundations: Token Management
+
+<div className="token-ref-doc">
+  <div className="token-ref-callout">
+    Code is the source of truth. All runtime token outputs and documentation views are generated from one canonical file.
+  </div>
+
+  <dl className="token-ref-summary-grid">
+    <div className="token-ref-summary-item">
+      <dt>Canonical source</dt>
+      <dd><code>packages/tokens/src/uni-token.js</code></dd>
+    </div>
+    <div className="token-ref-summary-item">
+      <dt>Generated runtime object</dt>
+      <dd><code>packages/core/src/generated/uni-token.generated.ts</code></dd>
+    </div>
+    <div className="token-ref-summary-item">
+      <dt>Generated CSS variables</dt>
+      <dd><code>packages/core/src/styles/base.tokens.generated.scss</code></dd>
+    </div>
+    <div className="token-ref-summary-item">
+      <dt>Semantic aliases</dt>
+      <dd><code>packages/core/src/styles/base.semantic.scss</code></dd>
+    </div>
+  </dl>
+
+  <div className="token-ref-section">
+    <h3>Why this model</h3>
+    <p>Token changes are versioned and reviewable, runtime artifacts are deterministic, and docs stay aligned with shipping CSS variables.</p>
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Workflow</h3>
+    <div className="token-ref-scale-list">
+      <div className="token-ref-scale-row">
+        <div className="token-ref-type-token">1. Edit</div>
+        <div><code>packages/tokens/src/uni-token.js</code></div>
+        <div className="token-ref-type-value">Source</div>
+      </div>
+      <div className="token-ref-scale-row">
+        <div className="token-ref-type-token">2. Generate</div>
+        <div><code>pnpm tokens:generate</code></div>
+        <div className="token-ref-type-value">Build</div>
+      </div>
+      <div className="token-ref-scale-row">
+        <div className="token-ref-type-token">3. Validate</div>
+        <div>Review Dev Runtime + Storybook token pages</div>
+        <div className="token-ref-type-value">QA</div>
+      </div>
+      <div className="token-ref-scale-row">
+        <div className="token-ref-type-token">4. Export (optional)</div>
+        <div><code>pnpm tokens:figma:export</code></div>
+        <div className="token-ref-type-value">Sync</div>
+      </div>
+    </div>
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Command Reference</h3>
+    <div className="token-ref-chip-grid">
+      <div className="token-ref-chip">
+        <div>
+          <p className="token-ref-chip-name"><code>pnpm tokens:generate</code></p>
+          <p className="token-ref-chip-value">Rebuilds generated runtime artifacts from canonical token code.</p>
+        </div>
+      </div>
+      <div className="token-ref-chip">
+        <div>
+          <p className="token-ref-chip-name"><code>pnpm tokens:check</code></p>
+          <p className="token-ref-chip-value">Fails if generated artifacts are out of sync with committed files.</p>
+        </div>
+      </div>
+      <div className="token-ref-chip">
+        <div>
+          <p className="token-ref-chip-name"><code>pnpm tokens:figma:export</code></p>
+          <p className="token-ref-chip-value">Exports <code>packages/tokens/dist/uni-token.figma.json</code> for Figma variable workflows.</p>
+        </div>
+      </div>
+      <div className="token-ref-chip">
+        <div>
+          <p className="token-ref-chip-name"><code>pnpm -C packages/core build</code></p>
+          <p className="token-ref-chip-value">Runs package build pipeline and validates distributable runtime outputs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

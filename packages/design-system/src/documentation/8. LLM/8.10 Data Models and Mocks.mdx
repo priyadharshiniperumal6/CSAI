@@ -1,0 +1,104 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.10 Data Models and Mocks" />
+
+# Data Models and Mocks
+
+This page defines typed model contracts and deterministic mock conventions for generated routes and stories.
+
+Source guide: `docs/llm/data-models-and-mocks.md`
+
+## ModelSpec Contract
+
+```ts
+type ModelFieldType = "string" | "number" | "boolean" | "date" | "enum" | "object" | "array";
+
+interface ModelFieldSpec {
+  name: string;
+  type: ModelFieldType;
+  required: boolean;
+  nullable: boolean;
+  description: string;
+}
+
+interface ModelSpec {
+  modelName: string;
+  collectionName: string;
+  primaryKey: string;
+  fields: ModelFieldSpec[];
+}
+```
+
+Conventions:
+
+1. No `any` in model contracts.
+2. Stable primary keys for table rows and route params.
+3. Prefer string IDs unless UXRD requires numbers.
+
+## EndpointSpec Convention
+
+Keep endpoints aligned with `RouteEndpointSpec` in:
+
+- `packages/core/src/dev/router/types.ts`
+- `packages/core/src/dev/router/routeRegistry.ts`
+
+Naming:
+
+- List: `<resource>.list`
+- Read: `<resource>.getById`
+- Create: `<resource>.create`
+- Update: `<resource>.update`
+- Delete: `<resource>.delete`
+
+## Mocking Modes
+
+## Option A: MSW (if available)
+
+Recommended paths:
+
+- `packages/core/src/dev/mocks/handlers.ts`
+- `packages/core/src/dev/mocks/browser.ts`
+- `packages/core/src/dev/mocks/server.ts`
+
+## Option B: Deterministic Fixtures (fallback)
+
+Recommended paths:
+
+- `packages/core/src/dev/fixtures/<resource>.fixtures.ts`
+- `packages/core/src/dev/fixtures/index.ts`
+
+Rules:
+
+1. deterministic IDs and timestamps
+2. promise-based adapters
+3. optional constant latency simulation
+
+## Typed Route Data Wiring
+
+Recommended route file set:
+
+- `packages/core/src/dev/routes/<RouteName>Route.tsx`
+- `packages/core/src/dev/routes/<RouteName>.config.ts`
+- `packages/core/src/dev/routes/<RouteName>.data.ts`
+
+`<RouteName>.data.ts` should:
+
+1. export typed query/mutation functions
+2. align endpoint IDs/paths to `routeRegistry`
+3. normalize payload shape before view rendering
+
+## Storybook Alignment
+
+For each generated view story:
+
+1. use typed fixtures from model contracts
+2. include `Default`, `Loading`, `Empty`, `Error`
+3. avoid inline ad-hoc mock shapes that drift from route data contracts
+
+## Acceptance Checklist
+
+1. every UXRD model maps to a typed `ModelSpec`
+2. endpoints are declared in route registry
+3. mocks are deterministic
+4. views consume typed data adapters
+5. stories reuse typed fixtures from route wiring

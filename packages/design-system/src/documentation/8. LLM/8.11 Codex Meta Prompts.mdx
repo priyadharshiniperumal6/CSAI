@@ -1,0 +1,87 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.11 Codex Meta Prompts" />
+
+# Codex Meta Prompts
+
+This prompt pack provides copy/paste starting points for Codex to generate routes, views, CRUD flows, and stories from UXRD input.
+
+Source guide: `docs/llm/codex-meta-prompts.md`
+
+## Prompt Pack
+
+Use these five prompts:
+
+1. Generate app from UXRD
+2. Add a new route + subroutes
+3. Implement a view pattern route page
+4. Add CRUD flow (create/edit/delete) using DrawerForm
+5. Add Storybook stories for a new view
+
+Each prompt should explicitly include:
+
+- Inputs
+- Outputs
+- Constraints
+- Files to modify
+- Acceptance criteria
+
+## Output Discipline
+
+Codex responses for these prompts should always include:
+
+1. files changed
+2. route diff summary (if route changes)
+3. pattern mapping
+4. endpoint/mock summary
+5. validation results (`pnpm lint`, `pnpm typecheck`, `pnpm test`)
+
+## Worked Example (Reference)
+
+UXRD excerpt:
+
+- routes: `cases.list`, `cases.details`, `cases.flow`
+- models: `Case`, `CaseFlow`
+- CRUD: create/edit via drawer, delete with confirm dialog
+
+Derived route mapping:
+
+- `cases.list` -> `/cases` -> `table`
+- `cases.details` -> `/cases/:caseId` -> `details`
+- `cases.flow` -> `/cases/:caseId/flow` -> `flow`
+
+Mock endpoint set:
+
+- `GET /api/cases`
+- `GET /api/cases/:caseId`
+- `POST /api/cases`
+- `PATCH /api/cases/:caseId`
+- `DELETE /api/cases/:caseId`
+- `GET /api/case-flows/:caseId`
+
+Generated file checklist:
+
+- `packages/core/src/dev/router/routeRegistry.ts`
+- `packages/core/src/dev/routes/CasesListRoute.tsx`
+- `packages/core/src/dev/routes/CaseDetailsRoute.tsx`
+- `packages/core/src/dev/routes/CaseFlowRoute.tsx`
+- `packages/core/src/views/Cases/*.tsx`
+- `packages/core/src/views/Cases/*.stories.tsx`
+
+## Storybook Documentation Expectations
+
+For every new generated view:
+
+1. add a `.stories.tsx` file in the view folder
+2. include `Default`, `Loading`, `Empty`, `Error`
+3. document pattern usage constraints in story metadata
+4. keep mock data deterministic and typed
+
+## Quality Bar (PR Checklist)
+
+1. route registry contract compliance
+2. HostShell-first layout compliance
+3. required pattern states present
+4. CRUD confirmation and permission gating
+5. deterministic typed data + stories
+6. lint/typecheck/test passing

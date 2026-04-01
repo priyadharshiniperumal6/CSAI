@@ -1,0 +1,286 @@
+@use 'variables.scss';
+@use 'uniphore-fonts.scss';
+@use 'ant-override.scss';
+@use 'base.scss';
+@use '../components/host-shell/HostShell';
+@use '../components/side-nav/SideNav';
+@use '../components/notification/UniNotification.scss';
+@use '../components/tabs/UniTabs.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'antd/dist/reset.css';
+@import '@ag-grid-community/styles/ag-grid.min.css';
+@import '@ag-grid-community/styles/ag-theme-alpine.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@100&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+  text-rendering: geometricprecision;
+}
+
+// https://fonts.google.com/icons?icon.style=Outlined
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v164/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2)
+    format('woff2');
+}
+
+.material-symbols-outlined {
+  position: relative;
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-symbols-filled {
+  @extend .material-symbols-outlined;
+  font-variation-settings:
+    'FILL' 100,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  min-height: 100% !important;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: 'slnt' 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #d7dae3 #f5f5f5;
+}
+
+@layer base {
+  :root {
+    --color-purple1: 248 240 254; // #F8F0FE                   used only in tailwind
+    // --color-purple2: 234 216 249;                   // #EAD8F9        Not used
+    --color-purple3: 164 125 219; // #A47DDB              MISSED from token collection
+    --color-purple6: 111 47 194; // #6F2FC2
+    --color-primary1: 231 247 251; // #E7F7FB                   used only in tailwind
+    // --color-primary2: 207 240 247;                   // #CFF0F7        Not used
+    --color-primary3: 114 184 194; // #72B8C2              MISSED from token collection
+    --color-primary6: 21 128 140; // #15808C
+    --color-green1: 233 247 237; // #E9F7ED                   used only in tailwind
+    --color-green6: 33 183 108; // #21B76C                     used only in tailwind
+    --color-green7: 19 145 86; // #139156                     used only in tailwind
+    --color-green8: 9 107 64; // #096B40                       used only in tailwind
+    --color-red1: 255 243 240; // #FFF3F0                     used only in tailwind
+    --color-red8: 138 10 10; // #8A0A0A                       used only in tailwind
+    --color-neutral2: 248 249 252; // #F8F9FC                 used only in tailwind
+    --color-neutral3: 241 242 244; // #F1F2F4                 used only in tailwind
+    --color-neutral4: 233 236 244; // #E9ECF4
+    --color-neutral5: 215 218 227; // #D7DAE3
+    --color-neutral8: 139 139 160; // #8B8BA0                 used only in tailwind
+    --color-neutral9: 109 111 121; // #6D6F79                 used only in tailwind
+    // --color-neutral10: 66 66 66;                    // #424242        Not used
+    --color-neutral11: 51 51 51; // #333333
+    --color-icon: 139 139 160; // #8B8BA0                     used only in tailwind
+    --color-icon-gray-secondary: 150 148 152; // #969498
+    --dropdown-hover: 231 247 251; // #E7F7FB                 used only in tailwind
+    --color-global-background: 241 242 244; // #F1F2F4         used only in tailwind
+    --color-cool-grey: 139 139 160; // #8B8BA0                 used only in tailwind
+    --color-sonic-gray: 109 111 121; // #6D6F79               used only in tailwind
+    --color-text-primary: 66 66 66; // #8B8BA0
+    --color-text-secondary: 139 139 160; // #8B8BA0
+    --color-border-secondary: 215 218 227; // #D7DAE3
+    --color-border-disabled: 215 218 227; // #D7DAE3
+    --color-text-description: 139 139 160; // #8B8BA0         used only in tailwind
+    --color-success-light: 146 222 177; // #92DEB1
+    --color-success-lighter: 233 247 237; // #E9F7ED           used only in tailwind
+    --color-primary-gray: 171 174 188; // #ABAEBC             used only in tailwind
+    --color-primary-dark: 66 66 66; // #424242
+    --color-fill-disabled: 215 218 227; // #D7DAE3             used only in tailwind
+    --color-fill-quaternary: 233 236 244; // #E9ECF4           used only in tailwind
+    --color-fill-content: 215 218 227; // #D7DAE3             used only in tailwind
+    --color-fill-secondary: 248 249 252; // #F8F9FC
+    --color-menu-color-text: 109 111 121; // #6D6F79           used only in tailwind
+    --color-primary: 21 128 140; // #15808C
+    --color-blue4: 115 169 240; // #73A9F0                     used only in tailwind
+    --color-blue1: 240 248 255; // #F0F8FF                     used only in tailwind
+    --color-gold1: 255 251 230; // #FFFBE6                     used only in tailwind
+    --color-border-primary: 66 66 66; // #424242               used only in tailwind
+    --color-border-primary-light: 233 236 244; // #E9ECF4     used only in tailwind
+    --color-info: 34 99 213; // #2263D5                       used only in tailwind
+    --color-info-light: 162 204 252; // #A2CCFC               used only in tailwind
+    --color-info-lighter: 240 248 255; // #F0F8FF             used only in tailwind
+    --color-warning: 204 134 12; // #CC860C
+    --color-warning2: 166 100 2; // #A66402                   used only in tailwind
+    --color-warning-light: 255 231 150; // #FFE796             used only in tailwind
+    --color-warning-lighter: 255 251 232; // #FFFBE8           used only in tailwind
+    --color-tertiary: 191 191 208; // #BFBFD0
+    --color-border-magenta: 255 125 181; // #FF7DB5           used only in tailwind
+    --color-border-info-light: 162 204 252; // #A2CCFC         used only in tailwind
+    --color-error: 176 26 21; // #B01A15
+    --color-error-light: 252 179 164; // #FCB3A4               used only in tailwind
+    --color-error-lighter: 255 243 240; // #FFF3F0             used only in tailwind
+    --color-text-disabled: 139 139 160; // #8B8BA0             used only in tailwind
+    --color-fill-product-link: 231 247 251; // #E7F7FB         used only in tailwind
+    --color-text-success: 9 107 64; // #096B40                 used only in tailwind
+    --color-orange: 253 93 17; // #FD5D11                     used only in tailwind
+
+    --dropdown-height: 16rem;
+
+    // sizes based on tokens
+    --uni-size-0: calc(var(--bsize-0) * 1px); // 0px
+    --uni-size-1: calc(var(--bsize-50) * 1px); // 4px
+    --uni-size-2: calc(var(--bsize-100) * 1px); // 8px
+    --uni-size-3: calc(var(--bsize-200) * 1px); // 12px
+    --uni-size-4: calc(var(--bsize-300) * 1px); // 16px
+    --uni-size-5: calc(var(--bsize-400) * 1px); // 24px
+    --uni-size-6: calc(var(--bsize-500) * 1px); // 32px
+
+    // custom sizes
+    --uni-size-10: 10px;
+    --uni-size-14: 14px;
+    --uni-size-16: 16px;
+    --uni-size-18: 18px;
+    --uni-size-20: 20px;
+    --uni-size-22: 22px;
+    --uni-size-28: 28px;
+    --uni-size-40: 40px;
+
+    --uni-radius-0: calc(var(--bradius-0) * 1px); // 0
+    --uni-radius-100: calc(var(--bradius-100) * 1px); // 2
+    --uni-radius-200: calc(var(--bradius-200) * 1px); // 4;
+    --uni-radius-300: calc(var(--bradius-300) * 1px); // 8;
+    --uni-radius-400: calc(var(--bradius-400) * 1px); // 16;
+    --uni-radius-500: calc(var(--bradius-500) * 1px); // 32;
+    --uni-radius-600: calc(var(--bradius-600) * 1px); // 128;
+
+    // OLD v.1 bsed color
+    --color-light-neutral-1: #ffffff;
+    --color-light-neutral-2: #fbfbfd;
+    --color-light-neutral-3: #f8f9fc;
+    --color-light-neutral-4: #f1f2f4;
+    --color-light-neutral-5: #e9ecf4;
+    --color-light-neutral-6: #d7dae3;
+    --color-light-neutral-8: #abaebc;
+    --color-light-neutral-9: #8b8ba0;
+    --color-light-neutral-10: #6d6f79;
+    --color-light-neutral-11: #424242;
+    --color-light-neutral-13: #000000;
+
+    --color-light-red-7: #e9110a;
+    --color-light-red-8: #8a0a0a;
+    --color-light-red-9: #630205;
+    --color-light-gold-1: #fffbe8;
+    --color-light-gold-7: #cc860c;
+    --color-light-gold-8: #a66402;
+    --color-light-green-1: #e9f7ed;
+    --color-light-green-7: #139156;
+    --color-light-green-8: #096b40;
+    --color-light-blue-1: #f0f8ff;
+    --color-light-blue-2: #cce6ff;
+    --color-light-blue-3: #a2ccfc;
+    --color-light-blue-5: #4986e3;
+    --color-light-blue-6: #2263d5;
+    --color-light-purple-1: #f8f0fe;
+    --color-light-purple-2: #ead8f9;
+    --color-light-purple-3: #caa7eb;
+    --color-light-purple-4: #aa7bdd;
+    --color-light-purple-6: #6f2fc2;
+    --color-light-purple-7: #511e9d;
+    --color-light-purple-8: #371178;
+    --color-light-primary-1: #e7f7fb;
+    --color-light-primary-2: #cff0f7;
+    --color-light-primary-3: #a1d4dd;
+    --color-light-primary-4: #72b8c2;
+    --color-light-primary-6: #15808c;
+    --color-light-primary-7: #127380;
+    --color-light-primary-8: #0e6772;
+    --color-light-magenta-3: #ff7db5;
+    --color-light-magenta-4: #ff7db5;
+    --color-dark-red-1: #ef101e;
+    --linewidth-1: 1;
+    --linewidth-2: 2;
+    --linewidth-3: 3;
+    --linewidth-4: 4;
+    --linewidth-5: 5;
+    --size-0: 0;
+    --size-1: 4;
+    --size-2: 8;
+    --size-3: 12;
+    --size-4: 16;
+    --size-5: 24;
+    --size-6: 32;
+    --size-7: 40;
+    --size-8: 48;
+    --size-9: 56;
+    --size-10: 64;
+    --size-11: 20;
+    --radius-0: 0;
+    --radius-xs: 2;
+    --radius-sm: 4;
+    --radius-md: 8;
+    --radius-lg: 16;
+    --radius-xl: 32;
+    --radius-2xl: 128;
+    --screen-xs: 480;
+    --screen-sm: 576;
+    --screen-md: 768;
+    --screen-lg: 992;
+    --screen-xl: 1280;
+    --screen-2xl: 1440;
+    // OLD v.1 bsed color
+  }
+}
+
+@mixin global {
+  a,
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.host-shell * {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #d7dae3 #f5f5f5;
+}
+
+.uni-mr8 {
+  margin-right: var(--uni-size-2);
+}
+
+.uni-ml8 {
+  margin-left: var(--uni-size-2);
+}
+
+.uni-mr16 {
+  margin-right: var(--uni-size-4);
+}
+
+.uni-ml16 {
+  margin-left: var(--uni-size-4);
+}

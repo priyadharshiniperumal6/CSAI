@@ -1,0 +1,16 @@
+.ant-breadcrumb {
+  .ant-breadcrumb-link {
+    font-size: var(--btypography-font-size-300);
+
+    a:hover,
+    div:hover {
+      color: var(--ut-color-text-brand);
+      background-color: transparent;
+    }
+  }
+
+  .ant-breadcrumb-separator {
+    font-size: var(--btypography-font-size-300);
+    font-weight: bold;
+  }
+}

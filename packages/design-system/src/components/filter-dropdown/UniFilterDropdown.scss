@@ -1,0 +1,22 @@
+/* stylelint-disable selector-class-pattern */
+
+// Primary filters — teal text, neutral border (deviation from DS default button pairing; flag for DS review)
+button.uni-ant-button.uni-global-filter:not(
+    .uni-global-filter--secondary,
+    :disabled,
+    .ant-button-danger
+  ).ant-btn-default {
+  border-color: var(--ucolor-border-gray-tertiary);
+}
+
+// Secondary filters (toolbar) — fully neutral
+button.uni-ant-button.uni-global-filter--secondary:not(:disabled, .ant-button-danger).ant-btn-default {
+  color: var(--ut-color-text-primary);
+  border-color: var(--ucolor-border-gray-tertiary);
+
+  &:hover {
+    color: var(--ut-color-text-primary);
+    border-color: var(--ut-color-border-strong);
+    background-color: var(--ut-color-bg-canvas);
+  }
+}

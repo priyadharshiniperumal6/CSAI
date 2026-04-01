@@ -1,0 +1,259 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/6. Tools & Process/6.3.1 Figma Sync (JS and CSS Converter)" />
+
+# Documentation for Figma Variables Syncing Script
+
+> **Current state (code-first tokens):** The canonical token source is `packages/tokens/src/uni-token.js`.  
+> Runtime token artifacts are generated with `pnpm tokens:generate`.  
+> The scripts below are retained as legacy reference from the prior Figma-first flow.
+
+The following script integrates with the Figma API to extract variable values from a Figma document,
+ process them, and save them locally in the required format. It uses Node.js and several custom functions to manage
+  nested objects, deep merging, and conversion of color values to hex format.
+
+## Key Components:
+
+1. **Environment Variables**:
+   - `FIGMA_TOKEN`: Personal access token used for authenticating with the Figma API.
+   - `FILE_NAME`: The Figma file key to retrieve variables from.
+   - `COLLECTION_NAME`: The collection names for which variables should be retrieved.
+
+2. **Functions**:
+
+
+### `getData()`
+   This function interacts with the Figma API to fetch the local variables from the Figma file.
+
+```js
+async function getData() {
+  try {
+    const { getLocalVariables } = FigmaApi(PERSONAL_ACCESS_TOKEN);
+    return await getLocalVariables(FILE_KEY);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+```
+
+### `init()`
+   This is the main entry point of the script. It:
+   - Fetches data from Figma using `getData()`.
+   - Filters and processes the variables using `prepareVariables()`.
+   - Merges them with old tokens if versioning is required.
+   - Writes the processed variables to a file (`uni-token.js`).
+
+```js
+const init = async () => {
+  console.log("Fetching data from Figma...");
+  const dataFromFigma = await getData();
+
+  if (!dataFromFigma?.meta) {
+    return;
+  }
+
+  const { variables, variableCollections } = dataFromFigma.meta;
+  const collectionsNames = COLLECTION_NAME.split(",");
+
+  console.log("Preparing variables...");
+  const filtered = prepareVariables({
+    variables,
+    collections: variableCollections,
+    collectionsNames,
+  });
+
+  if (VERSION === 1) {
+    deepMerge(filtered, oldTokens);
+  }
+
+  console.log("Generation completed.");
+  fs.writeFile('./public/uni-token.js', 'export default' + JSON.stringify(filtered), 'utf8', (err) => {
+    if (err) {
+      console.log('Error');
+    }
+  });
+};
+```
+
+
+### `prepareVariables(props)`
+   This function filters and prepares the variables from Figma for the specific collection names,
+   ensuring only required variables are processed and merged into the final output.
+
+   **Parameters**:
+   - `props`: Contains the Figma variable collections, variables, and collection names.
+
+   **Logic**:
+   - Filters the variables by matching the collection name and removes any hidden variables.
+   - Uses `createNestedObject` to convert the variable names into a nested format (replacing spaces with `/`).
+   - Merges the nested objects into one using `deepMerge`.
+
+```js
+const prepareVariables = (props) => {
+  const { variables, collections, collectionsNames } = props;
+  const collectionsRequired = [];
+
+  Object.values(collections).forEach((collection) => {
+    if (collectionsNames.includes(collection.name) && !collection.hiddenFromPublishing) {
+      collectionsRequired.push(collection.id);
+    }
+  });
+
+  let filtered = {};
+
+  Object.values(variables).forEach((variable) => {
+    if (!collectionsRequired.includes(variable.variableCollectionId) || variable.hiddenFromPublishing) {
+      return;
+    }
+
+    const variableId = variable.id;
+    const variableName = variables[variableId].name;
+    const value = getVariableValue({ variable, variableCollections: collections, variables });
+
+    const preparedObject = createNestedObject(variableName.trim().replace(" ", "/"), value);
+    deepMerge(filtered, preparedObject);
+  });
+
+  return removeRedundantParentKeys(filtered);
+};
+```
+
+### `getVariableValue(props)`
+   This function processes the variables extracted from Figma and retrieves their respective values.
+   It handles variable aliasing and color conversion.
+
+   **Parameters**:
+   - `props`: Contains the Figma variable object, variable collections, and other related data.
+
+   **Logic**:
+   - If the variable is an alias, it recursively fetches the correct value from the referenced collection.
+   - If the variable is a color, it converts it to a hex format using the `rgbaToHex` utility.
+   - For other types, it simply returns the value if it is a string or number.
+
+```js
+const getVariableValue = (props) => {
+  const { variable, variableCollections, variables } = props;
+
+  const collectionId = variable.variableCollectionId;
+  const collectionModeId = variableCollections[collectionId].defaultModeId;
+  const value = variable.valuesByMode[collectionModeId];
+
+  if (value.type === "VARIABLE_ALIAS") {
+    return getVariableValue({
+      variable: variables[value.id],
+      variableCollections,
+      variables,
+    });
+  }
+
+  if (variable.resolvedType === "COLOR" && value.hasOwnProperty("a")) {
+    return rgbaToHex(value);
+  }
+
+  if ((/string|number/).test(typeof value)) {
+    return value;
+  }
+};
+```
+
+## Utilities:
+
+- **`createNestedObject`**: Converts flat variable names into nested objects using `/` as a delimiter.
+- **`deepMerge`**: Recursively merges two objects.
+- **`rgbaToHex`**: Converts RGBA color values into hexadecimal format.
+- **`removeRedundantParentKeys`**: Cleans up redundant keys from nested objects.
+
+## Conclusion:
+This script automates the extraction and processing of Figma design tokens, converting them into a format
+ that can be used in the project. The process involves fetching data from Figma, filtering relevant variables,
+  processing their values, and saving the output to a local file.
+
+
+# Documentation for Token to CSS Conversion Script
+
+This script is used to convert a set of design tokens into CSS variables and save them in a SCSS file for use in a project. Below is a detailed explanation of the operations.
+
+## Importing Required Modules
+
+```js
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+```
+
+This line imports the `createRequire` method from the `module` package to allow `require` statements in ES modules. The script uses the `fs/promises` module for writing files asynchronously.
+
+```js
+const { writeFile } = require('node:fs/promises');
+import tokenFile from '../../../public/uni-token.js';
+```
+
+Here, the script imports a token file, which contains the design tokens to be converted, and sets up `writeFile` for file operations.
+
+## Utility Functions
+
+### `mergeAndRemoveDuplicates`
+
+```js
+const mergeAndRemoveDuplicates = (str1, str2) => {
+  const segments1 = str1.split('-').filter(Boolean);
+  const segments2 = str2.split('-').filter(Boolean);
+  const uniqueSegments = new Set([...segments1, ...segments2]);
+
+  return `--${Array.from(uniqueSegments).join('-')}`;
+};
+```
+
+This function merges two strings by splitting them into segments, removing duplicates, and then rejoining them with hyphens. It ensures that no duplicate segments exist in the CSS variable names.
+
+### `tokensToCss`
+
+```js
+const tokensToCss = (object = {}, base = `-`) =>
+  Object.entries(object).reduce((css, [key, value]) => {
+    let newBase = mergeAndRemoveDuplicates(base, object instanceof Array ? '' : `-${key}`);
+
+    if (typeof value !== 'object') {
+      return css + `${newBase}: ${value};\n`;
+    }
+    return css + tokensToCss(value, newBase);
+  }, ``);
+```
+
+This function recursively converts the token object into a string of CSS variables. It traverses the token object and constructs valid CSS variables based on key-value pairs, handling nested objects.
+
+## File Writing Logic
+
+### `saveTokens`
+
+```js
+const saveTokens = async (name, tokens) => {
+  try {
+    await writeFile(`src/styles/${name}.scss`, tokens);
+    console.log('Styles updated.');
+  } catch (e) {
+    console.log('There was an error while saving a file.\n', e);
+  }
+};
+```
+
+This function saves the generated CSS string to a SCSS file. It creates or overwrites the file `src/styles/{name}.scss` with the provided tokens.
+
+## Main Script Logic
+
+```js
+try {
+  const cssVariables = tokensToCss(tokenFile);
+  const cssClass = `:root {\n${cssVariables.replace(/--/g, '  --')}}\n`;
+  console.log('--------------- build CSS variables');
+  saveTokens('base', cssClass);
+} catch (e) {
+  console.log('Provide a correct argument - a relative path to design tokens.\n', e);
+}
+```
+
+This block generates CSS variables from the design tokens and writes them into the `:root` CSS class. The final output is saved in a SCSS file named `base.scss`. If an error occurs, a message is logged.
+
+## Summary
+
+This script helps automate the process of converting design tokens into CSS variables and stores them in a SCSS file. It allows for an easy integration of design system tokens into frontend projects, ensuring design consistency.

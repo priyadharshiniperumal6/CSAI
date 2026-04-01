@@ -1,0 +1,13 @@
+.uni-ant-textarea {
+  border-radius: var(--uni-radius-300);
+}
+
+.uni-ant-textarea:hover,
+.uni-ant-textarea .ant-input:hover {
+  border-color: var(--ut-color-border-brand);
+}
+
+.uni-ant-textarea:focus,
+.uni-ant-textarea .ant-input:focus {
+  box-shadow: 0 0 0 2px var(--ut-color-focus-ring);
+}

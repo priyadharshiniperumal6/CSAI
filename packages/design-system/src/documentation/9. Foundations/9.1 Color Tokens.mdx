@@ -1,0 +1,93 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import tokenFile from '../../generated/uni-token.generated';
+import { TokenReferenceStyles } from './tokenReferenceDocs';
+
+<Meta title="Documentation/9. Tokens & Foundations/9.1 Color Tokens" />
+
+export const sortByName = entries => [...entries].sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }));
+export const toPairs = source => sortByName(Object.entries(source || {}).filter(([, value]) => typeof value === 'string'));
+
+export const semanticBrand = toPairs(tokenFile.ucolor?.brand);
+export const semanticBorder = toPairs(Object.fromEntries(toPairs(tokenFile.ucolor).filter(([name]) => name.startsWith('border-'))));
+export const semanticFill = toPairs(Object.fromEntries(toPairs(tokenFile.ucolor).filter(([name]) => name.startsWith('fill-'))));
+export const semanticContentText = toPairs(
+  Object.fromEntries(toPairs(tokenFile.ucolor?.content).filter(([name]) => name.startsWith('text-')))
+);
+export const semanticContentIcon = toPairs(
+  Object.fromEntries(toPairs(tokenFile.ucolor?.content).filter(([name]) => name.startsWith('icon-')))
+);
+export const semanticGroups = [
+  { id: 'border', label: 'Border', tokens: semanticBorder },
+  { id: 'fill', label: 'Fill', tokens: semanticFill },
+  { id: 'text', label: 'Content Text', tokens: semanticContentText },
+  { id: 'icon', label: 'Content Icon', tokens: semanticContentIcon },
+];
+
+export const baseColorGroups = sortByName(
+  Object.entries(tokenFile.bcolor || {}).filter(([, value]) => value && typeof value === 'object')
+).map(([groupName, groupTokens]) => ({ groupName, tokens: toPairs(groupTokens) }));
+
+<TokenReferenceStyles />
+
+# Tokens & Foundations: Color Tokens
+
+<div className="token-ref-doc">
+  <div className="token-ref-callout">
+    Use semantic tokens (<code>ucolor</code>) in UI code. Base palette tokens (<code>bcolor</code>) are for theme construction and token maintenance.
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Semantic Layer (<code>ucolor</code>)</h3>
+    <p>Intent-driven roles mapped from the base palette.</p>
+
+    <h4>Brand</h4>
+    <div className="token-ref-chip-grid">
+      {semanticBrand.map(([name, value]) => (
+        <div key={name} className="token-ref-chip">
+          <span className="token-ref-chip-dot" style={{ backgroundColor: String(value) }} />
+          <div>
+            <p className="token-ref-chip-name">{name}</p>
+            <p className="token-ref-chip-value">{String(value)}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h4>Functional Surfaces and Content</h4>
+    {semanticGroups.map(group => (
+      <section key={group.id}>
+        <h5>{group.label}</h5>
+        <div className="token-ref-chip-grid">
+          {group.tokens.map(([name, value]) => (
+            <div key={`${group.id}-${name}`} className="token-ref-chip">
+              <span className="token-ref-chip-dot" style={{ backgroundColor: String(value) }} />
+              <div>
+                <p className="token-ref-chip-name">{name}</p>
+                <p className="token-ref-chip-value">{String(value)}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Base Palette (<code>bcolor</code>)</h3>
+    <p>Primitive scales ordered by token group.</p>
+    {baseColorGroups.map(({ groupName, tokens }) => (
+      <section key={groupName}>
+        <h4>{`bcolor.${groupName}`}</h4>
+        <div className="token-ref-swatch-grid">
+          {tokens.map(([tokenName, tokenValue]) => (
+            <div key={`${groupName}-${tokenName}`} className="token-ref-swatch">
+              <div className="token-ref-swatch-block" style={{ backgroundColor: String(tokenValue) }} />
+              <div className="token-ref-swatch-token">{tokenName}</div>
+              <div className="token-ref-swatch-value">{String(tokenValue)}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</div>

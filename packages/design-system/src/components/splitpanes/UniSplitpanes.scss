@@ -1,0 +1,58 @@
+.uni-splitpanes {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  &--vertical {
+    flex-direction: row;
+  }
+
+  &--horizontal {
+    flex-direction: column;
+  }
+
+  &__pane {
+    flex: 1 1 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    position: relative;
+  }
+
+  &__splitter {
+    background-color: var(--ut-color-bg-surface-subtle);
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+  }
+
+  &--vertical > &__splitter {
+    width: 6px;
+    cursor: col-resize;
+    margin: 0;
+  }
+
+  &--horizontal > &__splitter {
+    height: 6px;
+    cursor: row-resize;
+    margin: 0;
+  }
+
+  &__splitter::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 24px;
+    background-color: var(--ut-color-border-muted);
+    transform: translate(-50%, -50%);
+  }
+
+  &--horizontal > &__splitter::after {
+    width: 24px;
+    height: 2px;
+  }
+}

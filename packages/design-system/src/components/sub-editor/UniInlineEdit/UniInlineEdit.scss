@@ -1,0 +1,118 @@
+.uni-inline-edit {
+  display: flex;
+  flex-direction: column;
+  padding-left: 4px;
+
+  .panel-row-subtitle {
+    z-index: 1;
+    margin-top: 5px;
+    font-size: 10px;
+    padding-left: 3px;
+    font-weight: 400;
+    font-family: inherit;
+    color: var(--ut-color-text-subtle);
+  }
+
+  .inline-content-edit {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .inline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+
+    .uni-ant-input {
+      background-color: var(--ut-color-bg-surface);
+    }
+
+    .panel-row-title {
+      display: flex;
+      align-items: center;
+      border-radius: var(--uni-radius-200);
+      border: 1px solid transparent;
+      outline: 1px solid transparent;
+      padding: 2px;
+      width: 100%;
+      transition: border-color 0.2s ease;
+
+      &:hover,
+      &:focus,
+      &.panel-row-title-with-border {
+        border: 1px solid var(--ut-color-border-brand);
+
+        .icon-display {
+          display: flex;
+        }
+      }
+    }
+
+    .icons-wrapper {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .icon-init {
+      display: none;
+      cursor: pointer;
+    }
+
+    .panel-row-title-with-border .icon-display {
+      display: flex;
+    }
+
+    .inline-delete-icon {
+      color: var(--ut-color-text-danger);
+    }
+  }
+
+  .panel-row-section {
+    cursor: default;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: flex;
+    z-index: 2;
+    margin-top: 4px;
+
+    .save-inline-edits-Icons-wrap {
+      height: 24px;
+      border-radius: var(--uni-radius-200);
+      padding: 2px;
+      background: var(--ut-color-bg-surface);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+
+      .save-inline-submit-icon {
+        background-color: var(--ut-color-bg-brand-subtle);
+        color: var(--ut-color-text-brand-strong);
+        height: 20px;
+        border-radius: var(--uni-radius-200);
+        margin-right: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+      }
+
+      .cursor-not-allowed {
+        pointer-events: none !important;
+        opacity: 0.5;
+      }
+
+      .save-inline-cancel-icon {
+        color: var(--ut-color-text-subtle);
+      }
+    }
+  }
+}

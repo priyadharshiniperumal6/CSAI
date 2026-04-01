@@ -1,0 +1,221 @@
+@use '../../styles/variables.scss';
+@use '../../styles/mixins.scss';
+
+.uni-audio-player {
+  width: 100%;
+
+  .audio-player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .action-icon {
+      background-color: var(--ut-color-bg-surface);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 0.5rem;
+      outline: 1px solid var(--ut-color-border-subtle);
+      color: var(--ut-color-text-muted);
+      cursor: pointer;
+
+      .controller-icon {
+        font-size: 20px;
+      }
+
+      &:hover {
+        outline-color: var(--ut-color-border-brand);
+        color: var(--ut-color-text-brand);
+        box-shadow: 0 0 10px var(--ut-color-border-soft);
+        transition:
+          background-color 0.3s,
+          box-shadow 0.3s;
+      }
+    }
+  }
+}
+
+.player-drop-shadow {
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wave-container {
+  // min-height: 140px;
+  // position: relative;
+
+  &.no-interaction {
+    cursor: not-allowed;
+  }
+
+  ::part(marker) {
+    width: 16px;
+    top: -100% !important;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    cursor: pointer;
+    border-left: 0 !important;
+    margin-left: -20px;
+  }
+
+  ::part(region-content) {
+    position: absolute;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mixins.uicon;
+
+    &:before {
+      position: absolute;
+      content: variables.$uni-mode_comment;
+      pointer-events: none;
+      bottom: 6px;
+      font-size: 16px;
+      color: var(--ut-color-text-secondary);
+    }
+  }
+
+  &:not(.no-header) {
+    ::part(scroll) {
+      padding: 24px 0 0 0;
+    }
+
+    ::part(cursor) {
+      height: calc(100% + 25px);
+      top: -25px;
+    }
+  }
+
+  &.no-header {
+    margin-top: 16px;
+  }
+
+  ::part(wrapper) {
+    // We handle the middle border with a pseudo-element on the container instead
+    // to avoid double borders between the two channels.
+    border-top: 1px solid var(--ut-color-border-muted);
+    border-bottom: 1px solid var(--ut-color-border-muted);
+  }
+
+  &.no-interaction {
+    ::part(cursor) {
+      // Pin the cursor to the right for streams to create the "moving left" effect
+      left: 100%;
+      margin-left: -3px;
+    }
+  }
+
+  &.wave-container {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      // When header is present (padding-top: 24px), we offset the center by 12px
+      top: calc(50% + 12px);
+      height: 1px;
+      background-color: var(--ut-color-border-subtle);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    &.no-header::after {
+      top: 50%;
+    }
+  }
+
+  .wave-separator {
+    background-color: var(--ut-color-border-muted) !important;
+  }
+
+  .u-slider-overlay {
+    border-radius: 4px;
+    border: 1px solid var(--ut-color-border-brand);
+  }
+}
+
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--ut-color-bg-brand-subtle) !important;
+}
+
+.button-secondary {
+  &.ant-btn-default:not(:disabled) {
+    &:not(.button-secondary-selected) {
+      border: 1px solid var(--ut-color-border-emphasis) !important;
+      background-color: var(--ut-color-bg-surface) !important;
+      color: var(--ut-color-text-muted);
+
+      &:focus,
+      &:active {
+        border-color: var(--ut-color-border-emphasis) !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+
+      &:hover {
+        border-color: var(--ut-color-border-brand) !important;
+        color: var(--ut-color-text-brand) !important;
+        background-color: var(--ut-color-bg-surface) !important;
+      }
+    }
+
+    &.button-secondary-selected {
+      border-color: var(--ut-color-border-brand) !important;
+      background-color: var(--ut-color-bg-brand-subtle) !important;
+      color: var(--ut-color-text-brand) !important;
+    }
+  }
+
+  &:disabled {
+    padding: 0;
+    height: var(--uni-size-6);
+    width: var(--uni-size-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.ant-btn-circle {
+  &.ant-btn-primary:not(:disabled) {
+    border: 1px solid var(--ut-color-border-brand-selected) !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: var(--ut-color-border-brand-selected) !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.button-secondary-selected {
+  border-color: var(--ut-color-border-brand) !important;
+  background-color: var(--ut-color-bg-brand-subtle) !important;
+  color: var(--ut-color-text-brand) !important;
+}
+
+.audio-player-selector {
+  &.zoom-selector {
+    width: 84px !important;
+  }
+
+  &.speed-selector {
+    width: 80px !important;
+  }
+
+  .ant-select-selector {
+    border-radius: 8px;
+  }
+}
+
+.popover-container {
+  position: absolute;
+  z-index: 1050;
+}

@@ -1,0 +1,54 @@
+import { ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/9. Tokens & Foundations/9.6 Primary Navigation Colors" />
+
+export const navCoreColors = {
+  'nav-bg': '#052F35',
+  'nav-hover-overlay': 'rgba(255, 255, 255, 0.1)',
+  'nav-focus-accent': '#27C7AC',
+  'nav-text-primary': '#FFFFFF',
+  'nav-text-secondary': 'rgba(255, 255, 255, 0.84)',
+  'nav-text-tertiary': 'rgba(255, 255, 255, 0.72)',
+};
+
+export const productBridge = {
+  'brand-primary-500': '#449CA7',
+  'brand-primary-600': '#15808C',
+  'brand-primary-1000': '#052F35',
+  'workspace-neutral-bg': '#F1F2F4',
+};
+
+# Tokens & Foundations: Primary Navigation Colors
+
+This page explains the color strategy used by `HostShell` + `SideNav` and why it works.
+
+## Current Nav Palette
+
+<ColorPalette>
+  <ColorItem title="Primary Navigation Colors" subtitle="HostShell + SideNav" colors={navCoreColors} />
+</ColorPalette>
+
+## Token Bridge Palette
+
+<ColorPalette>
+  <ColorItem title="Related Foundation Tokens" subtitle="Existing token family alignment" colors={productBridge} />
+</ColorPalette>
+
+## Why These Colors Fit Together
+
+1. **Deep anchor background (`#052F35`)** creates a stable left-rail shell and visually separates navigation from work content.
+2. **White text variants** provide clear hierarchy without introducing extra hues.
+3. **Teal focus/accent (`#27C7AC`)** gives strong state visibility against dark background for hover, active icons, and focus rings.
+4. **Bridge to token system**:
+   - `#052F35` aligns with `bcolor.primary.1000`.
+   - `#15808C` and `#449CA7` align with product semantic theme colors used elsewhere.
+5. **Neutral workspace handoff** (`#F1F2F4`) keeps content surfaces readable while nav remains distinct.
+
+## Implementation Reference
+
+- `packages/core/src/components/side-nav/SideNav.scss`
+- `packages/core/src/components/host-shell/HostShell.scss`
+
+## Recommendation
+
+Promote nav-specific semantic aliases (for example `ucolor.nav.background`, `ucolor.nav.focus`, `ucolor.nav.text.secondary`) so application shells avoid hardcoded values and stay themeable.

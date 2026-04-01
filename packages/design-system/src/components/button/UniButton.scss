@@ -1,0 +1,261 @@
+button.uni-ant-button:where(.ant-btn) {
+  width: max-content;
+  font-weight: var(--btypography-font-weight-normal-500);
+  line-height: var(--uni-size-22);
+  border-radius: var(--uni-radius-300);
+
+  &.ant-btn-lg {
+    padding: var(--uni-size-0) var(--uni-size-4);
+  }
+
+  &.ant-btn-primary,
+  &.ant-btn-default,
+  &.ant-btn-text,
+  &.ant-btn-link {
+    &.ant-btn-sm {
+      font-size: var(--uni-size-14);
+    }
+  }
+
+  &.ant-btn-with-icon {
+    display: flex;
+    gap: var(--uni-size-2);
+    align-items: center;
+
+    .ant-button-icon {
+      line-height: var(--uni-size-22);
+    }
+  }
+
+  &.ant-popover-open {
+    font-size: var(--uni-size-14);
+  }
+
+  &:not(:disabled):not(.ant-button-danger) {
+    padding: var(--uni-size-0) var(--uni-size-4);
+
+    &.ant-btn-sm {
+      padding: var(--uni-size-0) var(--uni-size-2);
+    }
+
+    &.ant-btn-default {
+      color: var(--ut-color-text-brand-emphasis);
+      border-color: var(--ut-color-border-brand-soft);
+    }
+
+    &.ant-btn-text {
+      color: var(--ut-color-text-brand-emphasis);
+    }
+
+    &.ant-btn-link {
+      color: var(--ut-color-text-brand);
+      padding: 0;
+      height: inherit;
+    }
+
+    &:hover {
+      color: var(--ut-color-text-brand);
+
+      &.ant-btn-default {
+        border-color: var(--ut-color-border-brand-emphasis);
+        background-color: var(--ut-color-bg-brand-subtle);
+      }
+
+      &.ant-btn-primary {
+        color: var(--ut-color-text-inverse);
+        border-color: transparent;
+        background-color: var(--ut-color-bg-brand);
+      }
+
+      &.ant-btn-text {
+        color: var(--ut-color-text-brand-emphasis);
+        border-color: transparent;
+        background-color: var(--ut-color-bg-brand-subtle);
+      }
+    }
+
+    &:focus {
+      &:not(.ant-btn-primary) {
+        color: var(--ut-color-text-brand-selected);
+        border-color: var(--ut-color-border-brand-selected);
+      }
+
+      &.ant-btn-link {
+        border-color: transparent;
+      }
+
+      &.ant-btn-text {
+        color: var(--ut-color-text-brand-strong);
+        border-color: transparent;
+        background-color: var(--ut-color-bg-brand-subtle);
+
+        &.ant-btn-lg {
+          box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+        }
+      }
+
+      &.uni-ant-button-icon {
+        border-color: transparent;
+      }
+    }
+
+    &:active {
+      &.ant-btn-primary {
+        color: var(--ut-color-text-inverse);
+        background-color: var(--ut-color-bg-brand-selected);
+      }
+
+      &.ant-btn-text {
+        background-color: var(--ut-color-bg-brand-muted);
+      }
+    }
+
+    &.uni-table-cell-action {
+      font-size: var(--uni-size-3);
+      padding: 0;
+      height: var(--uni-size-5);
+      width: var(--uni-size-5);
+      justify-content: center;
+    }
+
+    &.uni-ant-button-icon {
+      padding: 0;
+      height: var(--uni-size-6);
+      width: var(--uni-size-6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.ant-btn-lg {
+        height: var(--uni-size-40);
+        width: var(--uni-size-40);
+      }
+
+      &.ant-btn-sm {
+        padding: 0;
+        height: var(--uni-size-5);
+        width: var(--uni-size-5);
+      }
+    }
+  }
+
+  &:disabled {
+    padding: var(--uni-size-0) var(--uni-size-4);
+
+    &.ant-btn-sm {
+      padding: var(--uni-size-0) var(--uni-size-2);
+    }
+
+    &.ant-btn-primary {
+      border-color: var(--ut-color-border-disabled);
+      color: var(--ut-color-text-disabled);
+      background-color: var(--ut-color-bg-disabled);
+    }
+
+    &.ant-btn-default {
+      border-color: var(--ut-color-border-disabled);
+      color: var(--ut-color-text-disabled);
+      background-color: var(--ut-color-bg-disabled);
+    }
+
+    &.ant-btn-link {
+      padding: 0;
+      height: inherit;
+    }
+  }
+
+  &.ant-button-danger {
+    &:not(:disabled) {
+      background-color: var(--ut-color-bg-disabled-strong);
+    }
+
+    &:not(:disabled).ant-btn-primary {
+      background-color: var(--ut-color-bg-danger-emphasis);
+
+      &:hover {
+        background-color: var(--ut-color-bg-danger-strong);
+      }
+
+      &:focus {
+        background-color: var(--ut-color-bg-danger);
+      }
+    }
+
+    &:not(:disabled).ant-btn-default {
+      color: var(--ut-color-text-danger-emphasis);
+      border-color: var(--ut-color-border-danger-subtle);
+      background-color: var(--ut-color-bg-surface);
+
+      &:hover {
+        color: var(--ut-color-text-danger-emphasis);
+        border-color: var(--ut-color-border-danger-subtle);
+        background-color: var(--ut-color-bg-danger-subtle-emphasis);
+      }
+
+      &:focus {
+        color: var(--ut-color-text-danger);
+        border-color: var(--ut-color-border-danger-strong);
+        background-color: var(--ut-color-bg-danger-subtle-emphasis);
+      }
+    }
+
+    &:not(:disabled).ant-btn-text {
+      color: var(--ut-color-text-danger-emphasis);
+      border-color: transparent;
+      background-color: var(--ut-color-bg-surface);
+
+      &:hover {
+        color: var(--ut-color-text-danger-emphasis);
+        background-color: var(--ut-color-bg-danger-subtle-emphasis);
+      }
+
+      &:focus {
+        color: var(--ut-color-text-danger);
+        background-color: var(--ut-color-bg-danger-subtle-emphasis);
+      }
+
+      &:active {
+        background-color: var(--ut-color-bg-brand-muted);
+      }
+    }
+
+    &.uni-ant-button-icon {
+      &:hover {
+        background-color: var(--ut-color-bg-brand-subtle);
+      }
+
+      &:focus {
+        background-color: var(--ut-color-bg-brand-subtle);
+        border-color: transparent;
+      }
+
+      &:active {
+        background-color: var(--ut-color-bg-brand-muted);
+      }
+    }
+
+    &:not(:disabled).ant-btn-link {
+      color: var(--ut-color-text-danger-emphasis);
+      border-color: transparent;
+      padding: 0;
+      height: inherit;
+      background-color: var(--ut-color-bg-surface);
+
+      &:hover {
+        color: var(--ut-color-text-danger);
+        border-color: transparent;
+      }
+
+      &:focus {
+        color: var(--ut-color-text-danger-hover);
+        border-color: transparent;
+      }
+    }
+
+    &:active {
+      &.ant-btn-text {
+        background-color: var(--ut-color-bg-brand-muted);
+      }
+    }
+  }
+}

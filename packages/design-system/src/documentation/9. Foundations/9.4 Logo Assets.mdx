@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import universalThemeLogo from '../../assets/images/universal-theme-logo.svg';
+
+<Meta title="Documentation/9. Tokens & Foundations/9.4 Logo Assets" />
+
+# Tokens & Foundations: Logo Assets
+
+This page defines the canonical logo asset used across Universal Theme DS surfaces.
+
+## Canonical Asset
+
+- File: `packages/core/src/assets/images/universal-theme-logo.svg`
+- Recommended usage: SVG-only for crisp rendering on retina and scale-safe UI contexts.
+- Alt text: `"Uniphore"` when used as a brand identifier.
+
+## Logo Preview
+
+<div style={{ display: 'grid', gap: 16 }}>
+  <div style={{ border: '1px solid #d7dae3', borderRadius: 8, padding: 16, background: '#ffffff' }}>
+    <div style={{ marginBottom: 8, fontSize: 12, color: '#6d6f79' }}>Light surface</div>
+    <img src={universalThemeLogo} alt="Uniphore" style={{ height: 24, width: 'auto' }} />
+  </div>
+  <div style={{ border: '1px solid #0e6772', borderRadius: 8, padding: 16, background: '#052f35' }}>
+    <div style={{ marginBottom: 8, fontSize: 12, color: '#cfeff5' }}>Dark/nav surface</div>
+    <img src={universalThemeLogo} alt="Uniphore" style={{ height: 24, width: 'auto' }} />
+  </div>
+</div>
+
+## Current Product Surface Usage
+
+1. Storybook sidebar brand image (`apps/storybook/.storybook/uni-react-theme.ts`)
+2. HostShell side nav logo (`packages/core/src/components/side-nav/SideNav.tsx`)

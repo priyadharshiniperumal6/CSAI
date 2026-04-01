@@ -1,0 +1,29 @@
+.uni-ant-tab {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .uni-ant-tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--uni-size-16);
+    line-height: 24px;
+    font-weight: 600;
+    color: var(--ut-color-text-secondary);
+    margin-bottom: var(--uni-size-4);
+  }
+
+  .uni-ant-tab-actions {
+    display: flex;
+    gap: var(--uni-size-2);
+  }
+
+  .slot-box {
+    text-align: center;
+    border: 1px dashed var(--ut-color-border-strong);
+    padding: var(--uni-size-4);
+    border-radius: var(--uni-radius-200);
+    color: var(--ut-color-text-heading);
+  }
+}

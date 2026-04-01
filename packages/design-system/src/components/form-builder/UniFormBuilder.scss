@@ -1,0 +1,115 @@
+:where(.uni-form-item-wrapper).ant-form-item .ant-form-item-label > label::after {
+  content: ' ';
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+:where(.ant-form-horizontal .uni-form-item-wrapper.form-secondary-label).ant-form-item
+  .ant-form-item-label
+  .form-label-wrapper {
+  height: 28px;
+}
+
+.uni-form-item-wrapper
+  .ant-form-item
+  .ant-form-item-label
+  > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+  transform: translate(0px, 5%);
+}
+
+.uni-form-element-wrapper .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,
+.uni-form-element-wrapper .ant-select-multiple:not(.ant-select-customize-input) .ant-select-selector {
+  border: 1px solid var(--ut-color-border-strong);
+}
+
+.uni-form-element-wrapper
+  .ant-select-status-error:not(.ant-select-disabled):not(.ant-select-customize-input):hover
+  .ant-select-selector {
+  border-color: var(--ut-color-border-danger-hover) !important;
+}
+
+.uni-form-element-wrapper
+  .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):hover
+  .ant-select-selector {
+  border-color: var(--ut-color-border-brand);
+}
+
+.uni-form-element-wrapper
+  .ant-select-focused:where(
+    .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):hover .ant-select-selector
+  ) {
+  border-color: var(--ut-color-border-brand);
+  box-shadow: 0 0 0 2px var(--ut-color-focus-ring);
+}
+
+.uni-form-element-wrapper .ant-select.ant-select-disabled .ant-select-selector {
+  color: var(--ut-color-text-subtle);
+  background: var(--ut-color-bg-disabled);
+  border: 1px solid var(--ut-color-border-muted);
+}
+
+.uni-form-element-wrapper .ant-select .anticon-down svg {
+  display: none !important;
+}
+
+.uni-form-element-wrapper .ant-select .anticon-down {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url('../../assets/arrow_down.svg') !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.uni-form-element-wrapper .ant-select.ant-select-disabled .anticon-down {
+  background-image: url('../../assets/arrow_down_disabled.svg') !important;
+}
+
+.uni-form-element-wrapper .ant-select-single .ant-select-selector {
+  font-size: var(--uni-size-14);
+  color: var(--ut-color-text-secondary);
+  border-radius: var(--uni-radius-200);
+}
+
+.uni-form-element-wrapper .ant-select-single.ant-select-lg .ant-select-selector {
+  font-size: var(--uni-size-16);
+}
+
+.uni-form-element-wrapper .ant-select-single.ant-select-sm .ant-select-selector {
+  font-size: var(--uni-size-14);
+}
+
+.form-popover-wrapper .ant-popover-content .ant-popover-inner {
+  padding: 0;
+}
+
+.form-title-wrapper {
+  color: var(--ut-color-text-secondary);
+}
+
+.form-sub-title-wrapper {
+  color: var(--ut-color-text-muted);
+}
+
+.footer-wrapper {
+  height: 60px;
+  background: var(--ut-color-bg-surface-subtle);
+  border-top: 1px solid var(--ut-color-border-muted);
+}
+
+.modal-form-wrapper .ant-modal-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.modal-form-wrapper .ant-modal-header {
+  padding: 0 20px;
+}
+
+.modal-form-wrapper .ant-modal-title {
+  color: var(--ut-color-text-secondary);
+  font-size: 16px;
+  font-weight: 600;
+}

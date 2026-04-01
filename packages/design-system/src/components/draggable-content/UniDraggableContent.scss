@@ -1,0 +1,15 @@
+.uni-draggable-content {
+  width: 100%;
+
+  .drag-handle {
+    padding-right: 8px;
+  }
+
+  .item-content {
+    width: 100%;
+  }
+
+  .drag-indicator {
+    color: var(--ut-color-text-subtle);
+  }
+}

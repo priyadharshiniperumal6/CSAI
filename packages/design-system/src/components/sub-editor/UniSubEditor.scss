@@ -1,0 +1,34 @@
+.sub-editor-panel {
+  border: 1px solid var(--ut-color-border-soft);
+  background: var(--ut-color-bg-surface);
+  height: auto;
+
+  .icon-style {
+    cursor: pointer;
+  }
+
+  .sub-editor-panel-header {
+    border-bottom: 1px solid var(--ut-color-border-default);
+    height: 28px;
+    padding: 8px 15px;
+  }
+
+  .sub-editor-panel-right-label {
+    color: var(--ut-color-text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12.1px;
+  }
+
+  .sub-editor-panel-left-label {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12.1px;
+    color: var(--ut-color-text-secondary);
+  }
+}
+
+.inline-content-wrap {
+  height: auto;
+  padding: 8px 0;
+}

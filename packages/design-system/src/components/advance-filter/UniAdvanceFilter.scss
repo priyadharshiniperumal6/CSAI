@@ -1,0 +1,20 @@
+.uni-advance-filter {
+  padding-left: 0;
+  padding-right: 8px;
+
+  .arrow-icon {
+    font-size: 1rem;
+    color: var(--ut-color-text-secondary);
+  }
+
+  .filter-icon {
+    font-size: 1.25rem;
+    color: var(--ut-color-text-secondary);
+    margin-left: 2px;
+  }
+
+  .count-section {
+    font-size: 0.875rem;
+    color: var(--ut-color-text-secondary);
+  }
+}

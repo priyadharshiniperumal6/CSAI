@@ -1,0 +1,84 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.3 Component Selection" />
+
+# Component Selection Heuristics
+
+This guide helps LLMs choose the **right pattern** before picking specific components.
+
+## Decision Ladder
+
+0. **Are you generating an application shell or route-level layout?**
+   - Yes → Start with **`HostShell`** as the top-level layout and render route content inside it.
+   - No → Continue.
+1. **Is the primary task to compare many items across consistent fields?**
+   - Yes → Use a **table** (`UniTable`, `UniTableHeader`).
+   - No → Continue.
+2. **Is the primary task to browse or scan a collection of independent items?**
+   - Yes → Use a **card view** (`CardView`, `UniCard`, `DataCard`).
+   - No → Continue.
+3. **Is the primary task focused on a single item or form?**
+   - Yes → Use **form components** (`UniFormBuilder`, inputs, selectors).
+4. **Is the primary task exploratory or analytic?**
+   - Yes → Consider **table + filters** or **`UniEChart` + table** pairing.
+5. **Is the task a visual workflow, decision graph, or step orchestration tool?**
+   - Yes → Use **`UniReactFlow`**.
+
+## Table vs Card Summary
+
+### Use a Table when:
+- Users must **compare values across rows**.
+- Data has a **fixed schema** (same fields for each record).
+- Users need **sorting, filtering, bulk actions**.
+- The density is high (many rows, many columns).
+
+### Use a Card View when:
+- Each item is a **self-contained summary**.
+- Content is **variable-length** or mixed media.
+- You want **discoverability** and visual hierarchy.
+- A list feels too dense but the dataset is still small/medium.
+
+## Component Mapping
+
+### Table Family
+- `UniTable` for high-density datasets
+- `UniTableHeader` for advanced filter + column control
+- `UniTableCardView` for responsive table-to-card behavior
+
+### Card Family
+- `UniCard` for single-content containers
+- `CardView` for multi-card layouts
+- `DataCard` for data summaries
+
+### Application Layout
+- `HostShell` for top-level app framing and route composition
+- `UniPageHeader` for route-level header framing (title, breadcrumbs, actions, toolbar)
+
+### Charting + Flow
+- `UniEChart` for analytics and KPI visualization
+- `UniReactFlow` for flow-building and editable node-edge canvases
+
+## Page Header Slot Contract (`UniPageHeader`)
+
+Use `UniPageHeader` for view-level heading and high-frequency controls.
+
+Preferred slot props:
+- `breadcrumbsSlot`
+- `metadataSlot`
+- `primaryActionsSlot`
+- `secondaryActionsSlot`
+- `globalFiltersSlot`
+- `toolbarLeftSlot`
+- `toolbarRightSlot`
+
+Behavior:
+- Action row order is `globalFiltersSlot` -> `secondaryActionsSlot` -> `primaryActionsSlot` so the primary action stays far right.
+- Toolbar row is rendered only when at least one toolbar slot is provided and `showToolbar !== false`.
+
+Compatibility note:
+- Refactor aliases (`breadcrumbs`, `metadata`, `primaryAction`, `secondaryAction`, `globalFilters`, `toolbarLeft`, `toolbarRight`) are still supported, but new generation should use `*Slot` names.
+
+## External Pattern References
+
+- **Builder.io**: component registries with explicit inputs and constraints.
+- **Material Design / MUI**: card guidance emphasizes single-subject summaries and entry points.

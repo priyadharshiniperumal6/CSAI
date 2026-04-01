@@ -1,0 +1,10 @@
+.uni-ant-stepper {
+  .ant-steps-item-active .ant-steps-item-title {
+    color: var(--ut-color-text-primary);
+    font-weight: 600;
+  }
+
+  .ant-steps-item-wait .ant-steps-item-icon {
+    background-color: var(--ut-color-bg-disabled-strong);
+  }
+}

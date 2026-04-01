@@ -1,0 +1,13 @@
+.uni-ant-slider {
+  .ant-slider-rail {
+    background-color: var(--ut-color-border-default);
+  }
+
+  .ant-slider-track {
+    background-color: var(--ut-color-bg-brand);
+  }
+
+  .ant-slider-handle::after {
+    box-shadow: 0 0 0 2px rgba(21, 128, 140, 0.15);
+  }
+}

@@ -1,0 +1,112 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.7 Route Registry Contract" />
+
+# Route Registry Contract
+
+This page defines how Codex must create route entries and subroutes in the dev runtime.
+
+Source of truth files:
+
+1. `packages/core/src/dev/router/types.ts`
+2. `packages/core/src/dev/router/routeRegistry.ts`
+
+Source guide: `docs/llm/route-registry.md`
+
+## Allowed RouteSpec Shape
+
+Route objects must conform to `RouteSpec` and only include:
+
+- `routeId`
+- `kind`
+- `path`
+- `title`
+- `componentKey`
+- `nav`
+- `viewPatternId` (optional)
+- `params` (optional)
+- `endpoints` (optional)
+- `mock` (optional)
+
+Do not add non-contract keys.
+
+## Field Rules
+
+### `routeId`
+
+- Use dot notation: `domain.action` or `domain.child.action`.
+- Must be unique across registry.
+
+### `path`
+
+- Must start with `/`.
+- Use React Router params (`:paramName`) when needed.
+- Must be unique across registry.
+
+### `kind`
+
+- Must be `asset`, `view`, or `example`.
+- UXRD app routes should default to `view` unless specified.
+
+### `nav`
+
+- Visible primary routes: `nav.visible = true`.
+- Deep-link details/edit routes: `nav.visible = false`.
+- `nav.group` must be `Views`, `Assets`, or `Examples`.
+- Set `nav.order` on visible sibling routes.
+
+### `viewPatternId`
+
+For `kind: "view"` routes, set one of:
+
+- `dashboard`
+- `table`
+- `details`
+- `flow`
+- `split`
+- `form`
+
+### `params`
+
+- Every `:param` token in path must be declared in `params`.
+- Param names must match path token names exactly.
+- Param `type` must be `string` or `number`.
+
+### `endpoints`
+
+- Add endpoint specs for data-backed routes.
+- Use stable endpoint IDs: `<resource>.<operation>`.
+
+## Parent + Subroute Example
+
+```ts
+{
+  routeId: "cases.list",
+  kind: "view",
+  path: "/cases",
+  title: "Cases",
+  componentKey: "CasesListRoute",
+  nav: { visible: true, group: "Views", label: "Cases", order: 50 },
+  viewPatternId: "table",
+  endpoints: [{ id: "cases.list", method: "GET", path: "/api/cases" }],
+},
+{
+  routeId: "cases.details",
+  kind: "view",
+  path: "/cases/:caseId",
+  title: "Case Details",
+  componentKey: "CaseDetailsRoute",
+  nav: { visible: false, group: "Views", label: "Case Details" },
+  viewPatternId: "details",
+  params: [{ name: "caseId", type: "string", required: true }],
+  endpoints: [{ id: "cases.getById", method: "GET", path: "/api/cases/:caseId" }],
+},
+```
+
+## Acceptance Checklist
+
+1. `routeId` and `path` are unique.
+2. `kind: "view"` routes have `viewPatternId`.
+3. Params align to path tokens exactly.
+4. Data-backed routes include endpoints.
+5. Subroutes are hidden from nav unless explicitly requested.

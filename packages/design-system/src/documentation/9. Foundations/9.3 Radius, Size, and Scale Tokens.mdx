@@ -1,0 +1,99 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import tokenFile from '../../generated/uni-token.generated';
+import { TokenReferenceStyles } from './tokenReferenceDocs';
+
+<Meta title="Documentation/9. Tokens & Foundations/9.3 Radius, Size, and Scale Tokens" />
+
+export const toEntries = source => Object.entries(source || {});
+
+export const parseTokenOrder = tokenName => {
+  if (tokenName.includes('none')) return -1;
+  const match = tokenName.match(/(\d+)$/);
+  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+};
+
+export const sortScaleEntries = entries =>
+  [...entries].sort(([a], [b]) => parseTokenOrder(a) - parseTokenOrder(b) || a.localeCompare(b));
+
+export const bsize = sortScaleEntries(toEntries(tokenFile.bsize));
+export const usize = sortScaleEntries(toEntries(tokenFile.usize));
+export const uspacing = sortScaleEntries(toEntries(tokenFile.uspacing));
+export const bradius = sortScaleEntries(toEntries(tokenFile.bradius));
+export const uradius = sortScaleEntries(toEntries(tokenFile.uradius));
+export const blinewidth = sortScaleEntries(toEntries(tokenFile.blinewidth));
+export const ulinewidth = sortScaleEntries(toEntries(tokenFile.ulinewidth));
+export const bscreen = sortScaleEntries(toEntries(tokenFile.bscreen));
+export const uscreen = sortScaleEntries(toEntries(tokenFile.uscreen));
+
+export const renderScale = (rows, scale = 1, label = 'px') => (
+  <div className="token-ref-scale-list">
+    {rows.map(([tokenName, tokenValue]) => {
+      const numeric = Number(tokenValue);
+      const width = Math.max(2, Math.min(260, numeric / scale));
+      return (
+        <div key={tokenName} className="token-ref-scale-row">
+          <div className="token-ref-type-token">{tokenName}</div>
+          <div className="token-ref-scale-track">
+            <span className="token-ref-scale-fill" style={{ width }} />
+          </div>
+          <div className="token-ref-type-value">{`${tokenValue}${label}`}</div>
+        </div>
+      );
+    })}
+  </div>
+);
+
+<TokenReferenceStyles />
+
+# Tokens & Foundations: Radius, Size, and Scale Tokens
+
+<div className="token-ref-doc">
+  <div className="token-ref-callout">
+    Use semantic scales (<code>usize</code>, <code>uspacing</code>, <code>uradius</code>, <code>ulinewidth</code>, <code>uscreen</code>) in product UI.
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Radius</h3>
+    {uradius.map(([tokenName, tokenValue]) => (
+      <div key={tokenName} className="token-ref-type-row">
+        <div className="token-ref-type-token">{`uradius.${tokenName}`}</div>
+        <div
+          style={{
+            width: 56,
+            height: 28,
+            border: '1px solid #15808c',
+            borderRadius: Number(tokenValue),
+            background: '#e7f7fb',
+          }}
+        />
+        <div className="token-ref-type-value">{`${tokenValue}px`}</div>
+      </div>
+    ))}
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Size and Spacing</h3>
+    <h4>Semantic Size (<code>usize</code>)</h4>
+    {renderScale(usize)}
+    <h4>Semantic Spacing (<code>uspacing</code>)</h4>
+    {renderScale(uspacing)}
+    <h4>Base Size (<code>bsize</code>)</h4>
+    {renderScale(bsize)}
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Line Width</h3>
+    <h4>Semantic (<code>ulinewidth</code>)</h4>
+    {renderScale(ulinewidth, 1, 'px')}
+    <h4>Base (<code>blinewidth</code>)</h4>
+    {renderScale(blinewidth, 1, 'px')}
+  </div>
+
+  <div className="token-ref-section">
+    <h3>Breakpoints / Screens</h3>
+    <h4>Semantic (<code>uscreen</code>)</h4>
+    {renderScale(uscreen, 6, 'px')}
+    <h4>Base (<code>bscreen</code>)</h4>
+    {renderScale(bscreen, 6, 'px')}
+  </div>
+</div>

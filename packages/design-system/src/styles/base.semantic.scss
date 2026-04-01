@@ -1,0 +1,133 @@
+:root {
+  /* Semantic tokens v1 */
+  --ut-color-bg-canvas: var(--bcolor-neutral-25);
+  --ut-color-bg-surface: var(--bcolor-neutral-0);
+  --ut-color-bg-inverse: var(--bcolor-neutral-900);
+  --ut-color-bg-inverse-muted: var(--bcolor-neutral-800);
+  --ut-color-bg-surface-strong: var(--bcolor-neutral-700);
+  --ut-color-bg-surface-subtle: var(--bcolor-neutral-50);
+  --ut-color-bg-surface-muted: var(--bcolor-neutral-75);
+  --ut-color-bg-brand-subtle: var(--bcolor-primary-100);
+  --ut-color-bg-brand-muted: var(--bcolor-primary-200);
+  --ut-color-bg-brand-soft: var(--bcolor-primary-300);
+  --ut-color-bg-brand: var(--bcolor-primary-600);
+  --ut-color-bg-brand-emphasis: var(--bcolor-primary-500);
+  --ut-color-bg-brand-strong: var(--bcolor-primary-700);
+  --ut-color-bg-brand-selected: var(--bcolor-primary-800);
+  --ut-color-bg-danger: var(--bcolor-red-700);
+  --ut-color-bg-danger-subtle-emphasis: var(--bcolor-red-100);
+  --ut-color-bg-danger-emphasis: var(--bcolor-red-500);
+  --ut-color-bg-danger-strong: var(--bcolor-red-600);
+  --ut-color-bg-danger-subtle: var(--bcolor-red-100);
+  --ut-color-bg-success-subtle: var(--bcolor-green-100);
+  --ut-color-bg-warning-subtle: var(--bcolor-gold-100);
+  --ut-color-bg-info-subtle: var(--bcolor-blue-100);
+  --ut-color-bg-success: var(--bcolor-green-700);
+  --ut-color-bg-info: var(--bcolor-blue-600);
+  --ut-color-bg-warning: var(--bcolor-gold-700);
+  --ut-color-bg-disabled: var(--bcolor-uni-black-100);
+  --ut-color-bg-disabled-strong: var(--bcolor-uni-black-200);
+
+  --ut-color-text-primary: var(--bcolor-neutral-800);
+  --ut-color-text-heading: var(--bcolor-neutral-900);
+  --ut-color-text-secondary: var(--bcolor-neutral-700);
+  --ut-color-text-muted: var(--bcolor-neutral-600);
+  --ut-color-text-subtle: var(--bcolor-neutral-500);
+  --ut-color-text-tertiary: var(--bcolor-uni-black-450);
+  --ut-color-text-faint: var(--bcolor-uni-black-300);
+  --ut-color-text-disabled: var(--bcolor-uni-black-300);
+  --ut-color-text-inverse: var(--bcolor-neutral-0);
+  --ut-color-text-brand-emphasis: var(--bcolor-primary-500);
+  --ut-color-text-brand: var(--bcolor-primary-600);
+  --ut-color-text-brand-strong: var(--bcolor-primary-700);
+  --ut-color-text-brand-selected: var(--bcolor-primary-800);
+  --ut-color-text-brand-accent: var(--bcolor-brand-primary);
+  --ut-color-text-danger-emphasis: var(--bcolor-red-500);
+  --ut-color-text-danger-hover: var(--bcolor-red-800);
+  --ut-color-text-danger: var(--bcolor-red-700);
+  --ut-color-text-success: var(--bcolor-green-700);
+  --ut-color-text-warning: var(--bcolor-gold-700);
+  --ut-color-text-info: var(--bcolor-blue-600);
+
+  --ut-color-border-default: var(--bcolor-neutral-100);
+  --ut-color-border-disabled: var(--bcolor-uni-black-200);
+  --ut-color-border-subtle: var(--bcolor-uni-black-250);
+  --ut-color-border-muted: var(--bcolor-neutral-200);
+  --ut-color-border-emphasis: var(--bcolor-neutral-400);
+  --ut-color-border-soft: var(--bcolor-uni-black-300);
+  --ut-color-border-strong: var(--bcolor-neutral-500);
+  --ut-color-border-brand-soft: var(--bcolor-primary-400);
+  --ut-color-border-brand: var(--bcolor-primary-600);
+  --ut-color-border-brand-emphasis: var(--bcolor-primary-500);
+  --ut-color-border-brand-selected: var(--bcolor-primary-800);
+  --ut-color-border-brand-subtle: var(--bcolor-primary-300);
+  --ut-color-border-danger-subtle: var(--bcolor-red-400);
+  --ut-color-border-danger-strong: var(--bcolor-red-700);
+  --ut-color-border-danger-hover: var(--bcolor-red-800);
+  --ut-color-border-danger: var(--bcolor-red-600);
+
+  --ut-color-focus-ring: var(--bcolor-primary-200);
+  --ut-color-shadow-ambient: rgb(16 24 40 / 8%);
+
+  --ut-space-0: calc(var(--bsize-0) * 1px);
+  --ut-space-1: calc(var(--bsize-50) * 1px);
+  --ut-space-2: calc(var(--bsize-100) * 1px);
+  --ut-space-3: calc(var(--bsize-200) * 1px);
+  --ut-space-4: calc(var(--bsize-300) * 1px);
+  --ut-space-5: calc(var(--bsize-400) * 1px);
+  --ut-space-6: calc(var(--bsize-500) * 1px);
+
+  --ut-radius-none: calc(var(--bradius-0) * 1px);
+  --ut-radius-xs: calc(var(--bradius-100) * 1px);
+  --ut-radius-sm: calc(var(--bradius-200) * 1px);
+  --ut-radius-md: calc(var(--bradius-300) * 1px);
+  --ut-radius-lg: calc(var(--bradius-400) * 1px);
+  --ut-radius-xl: calc(var(--bradius-500) * 1px);
+
+  --ut-font-family-base: var(--btypography-font-family-inter);
+  --ut-font-size-xs: calc(var(--btypography-font-size-200) * 1px);
+  --ut-font-size-sm: calc(var(--btypography-font-size-300) * 1px);
+  --ut-font-size-md: calc(var(--btypography-font-size-400) * 1px);
+  --ut-font-size-lg: calc(var(--btypography-font-size-500) * 1px);
+
+  /* Host shell + navigation semantic tokens */
+  --ut-color-shell-bg: var(--bcolor-primary-1000);
+  --ut-color-shell-surface: var(--ut-color-bg-surface-muted);
+  --ut-color-shell-panel: var(--ut-color-bg-surface);
+  --ut-color-shell-border: var(--ut-color-border-muted);
+  --ut-color-shell-title: var(--ut-color-text-secondary);
+  --ut-color-shell-action: var(--ut-color-text-muted);
+  --ut-color-shell-action-hover: var(--ut-color-text-brand);
+  --ut-color-shell-focus-ring: var(--ut-color-border-brand);
+  --ut-color-shell-alert: var(--ut-color-text-danger);
+  --ut-color-shell-status-idle: var(--bcolor-neutral-300);
+  --ut-color-shell-status-unread: var(--ut-color-text-brand);
+
+  --ut-color-nav-bg: var(--ut-color-shell-bg);
+  --ut-color-nav-text: #fff;
+  --ut-color-nav-text-muted: rgb(255 255 255 / 72%);
+  --ut-color-nav-text-strong: rgb(255 255 255 / 84%);
+  --ut-color-nav-surface-hover: rgb(255 255 255 / 10%);
+  --ut-color-nav-focus-ring: #27c7ac;
+  --ut-color-nav-accent: #27c7ac;
+  --ut-color-nav-avatar-border: rgb(255 255 255 / 20%);
+  --ut-color-nav-avatar-bg: rgb(255 255 255 / 12%);
+
+  /* Legacy aliases to stabilize existing component usage during migration */
+  --bcolor-primary-50: var(--bcolor-primary-100);
+  --bcolor-black: var(--bcolor-neutral-900);
+  --base-colors-neutral-9: var(--bcolor-neutral-500);
+  --ucolor-background-fill-product-light: var(--ut-color-bg-brand-subtle);
+  --ucolor-background-disabled: var(--ut-color-bg-disabled);
+  --bColor-primary-200: var(--bcolor-primary-200);
+
+  --color-fill-product-secondary: 207 240 247;
+  --color-fill-tertiary: 241 242 244;
+  --color-error-secondary: 253 93 17;
+  --color-gray-primary: 66 66 66;
+  --color-neutral6: 191 191 208;
+
+  --uni-size-8: 8px;
+  --uni-size-12: 12px;
+  --uni-size-13: 13px;
+}

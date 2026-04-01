@@ -1,0 +1,688 @@
+/* ── Global design polish ── */
+
+/* ─── Sidebar nav — fix icon/text vertical alignment ─────── */
+.side-nav-item__icon {
+  height: 20px !important;
+  width: 20px !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+}
+
+.side-nav-group__item-button {
+  align-items: center !important;
+  padding: 9px 10px !important;
+}
+
+.side-nav-item__text {
+  line-height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ─── Force pure white content area ─────────────────────── */
+/* Target exact HostShell class names from its SCSS source */
+.host-shell__content,
+.host-shell__main {
+  background-color: #ffffff !important;
+}
+
+/* Override the CSS tokens that drive HostShell backgrounds */
+:root,
+.host-shell {
+  --ut-color-shell-surface: #ffffff !important;
+  --ut-color-shell-panel: #ffffff !important;
+  --ut-color-bg-surface-muted: #ffffff !important;
+  --ut-color-bg-surface: #ffffff !important;
+}
+
+/* ─── Ant Design table wrapper (stops grey bleed) ──────── */
+.ant-table-wrapper {
+  background: #ffffff !important;
+}
+
+/* ─── Ant Design tables ────────────────────────────────── */
+.ant-table {
+  border: 1px solid #e2e5ea !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  background: #ffffff !important;
+}
+
+.ant-table-container {
+  background: #ffffff !important;
+  border-radius: 8px !important;
+}
+
+.ant-table-thead > tr > th {
+  background: #f7f8fa !important;
+  border-bottom: 1px solid #e2e5ea !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: #5a6170 !important;
+  padding: 12px 16px !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #eef0f3 !important;
+  padding: 12px 16px !important;
+  font-size: 13px !important;
+  background: #ffffff !important;
+}
+
+.ant-table-tbody > tr:last-child > td {
+  border-bottom: none !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #f5f7fa !important;
+}
+
+/* ─── Cards ────────────────────────────────────────────── */
+.ant-card,
+.uni-card {
+  border: 1px solid #e2e5ea !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  background: #ffffff !important;
+}
+
+.ant-card-head {
+  border-bottom: 1px solid #eef0f3 !important;
+  padding: 12px 20px !important;
+  min-height: auto !important;
+  background: #ffffff !important;
+}
+
+.ant-card-body {
+  padding: 20px !important;
+  background: #ffffff !important;
+}
+
+/* ─── Section card with border ──────────────────────────── */
+.section-bordered {
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 20px;
+}
+
+/* ─── Page header bar ───────────────────────────────────── */
+.page-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.page-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1d23;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.page-subtitle {
+  font-size: 12px;
+  color: #8b919e;
+}
+
+/* ─── Integration cards grid ─────────────────────────────── */
+.integration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.integration-card {
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  padding: 20px;
+  background: #ffffff;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.integration-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border-color: #c5cad3;
+}
+
+.integration-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.integration-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.integration-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.integration-card-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1d23;
+}
+
+.integration-card-desc {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.integration-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #eef0f3;
+  margin-top: auto;
+}
+
+/* ─── Feature config cards ───────────────────────────────── */
+.feature-card {
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  padding: 18px;
+  background: #ffffff;
+  transition: all 0.2s;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.feature-card.active {
+  border-color: #15808C;
+  background: #f0fdfa;
+  box-shadow: 0 0 0 1px #15808C;
+}
+
+.feature-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.feature-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.feature-card-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1d23;
+  margin-bottom: 4px;
+}
+
+.feature-card-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* ─── Top horizontal tabs bar ────────────────────────────── */
+.detail-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 2px solid #eef0f3;
+  margin-bottom: 24px;
+  padding: 0 24px;
+  background: #ffffff;
+}
+
+.detail-tab-item {
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.detail-tab-item:hover { color: #1a1d23; }
+
+.detail-tab-item.active {
+  color: #15808C;
+  border-bottom-color: #15808C;
+  font-weight: 600;
+}
+
+/* ─── Info grid ──────────────────────────────────────────── */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.info-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-grid-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b919e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-grid-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1d23;
+}
+
+/* ─── Upload area ────────────────────────────────────────── */
+.upload-area {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: #fafbfc;
+}
+
+.upload-area:hover {
+  border-color: #15808C;
+  background: #f0fdfa;
+}
+
+/* ─── Filter bar ─────────────────────────────────────────── */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 0;
+}
+
+/* ─── Drawer ─────────────────────────────────────────────── */
+.ant-drawer-header { border-bottom: 1px solid #eef0f3 !important; }
+.ant-drawer-footer { border-top: 1px solid #eef0f3 !important; }
+.ant-drawer-content { background: #ffffff !important; }
+.ant-drawer-body { background: #ffffff !important; }
+
+/* ─── Primary button — 32px height globally ─────────────── */
+.ant-btn-primary,
+.ant-btn-default,
+.ant-btn {
+  height: 32px !important;
+  min-height: 32px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 0 16px !important;
+  border-radius: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.ant-btn-sm {
+  height: 26px !important;
+  min-height: 26px !important;
+  padding: 0 10px !important;
+  font-size: 12px !important;
+}
+
+/* ─── Co-Pilot top nav — gradient border, rounded rect ────── */
+.host-shell-header__menu .ant-menu-item:first-child {
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, #4DCFEA 0%, #7C5CE8 100%) border-box !important;
+  border: 2px solid transparent !important;
+  border-radius: 12px !important;
+  color: #1a1d23 !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 0 12px !important;
+  margin-right: 6px !important;
+  height: 32px !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  top: 0 !important;
+}
+
+/* Force the inner title-content wrapper to flex-center too */
+.host-shell-header__menu .ant-menu-item:first-child .ant-menu-title-content {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  height: 100% !important;
+  margin-top: 0 !important;
+}
+
+/* Ensure the menu bar itself aligns items on the vertical center */
+.host-shell-header__menu.ant-menu-horizontal,
+.host-shell-header__menu {
+  display: flex !important;
+  align-items: center !important;
+  line-height: normal !important;
+}
+
+/* Remove the bottom underline from Co-Pilot item */
+.host-shell-header__menu .ant-menu-item:first-child::after {
+  display: none !important;
+}
+
+/* Vertical divider between Co-Pilot and first tab */
+.host-shell-header__menu .ant-menu-item:nth-child(2) {
+  border-left: 1px solid #d1d5db !important;
+  padding-left: 20px !important;
+  margin-left: 6px !important;
+}
+
+/* ─── Tags / Pills ───────────────────────────────────────── */
+.ant-tag {
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  padding: 2px 8px !important;
+  line-height: 20px !important;
+}
+
+/* ─── Form items ─────────────────────────────────────────── */
+.ant-form-vertical .ant-form-item { margin-bottom: 18px !important; }
+
+.ant-form-item-label > label {
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  color: #374151 !important;
+}
+
+/* ─── Steps ──────────────────────────────────────────────── */
+.ant-steps-item-title { font-size: 13px !important; }
+
+/* ─── Pagination ─────────────────────────────────────────── */
+.ant-pagination { margin-top: 16px !important; }
+
+/* ─── Breadcrumb ─────────────────────────────────────────── */
+.ant-breadcrumb { font-size: 12px !important; }
+.ant-breadcrumb a { color: #15808C !important; }
+.ant-breadcrumb a:hover { color: #0e6570 !important; }
+
+/* ─── Top nav active tab color → teal (overrides Ant blue) ── */
+.ant-menu-horizontal .ant-menu-item-selected,
+.ant-menu-horizontal .ant-menu-item-selected > a,
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-item-active,
+.ant-menu-item-selected,
+.ant-menu-item-active {
+  color: #15808C !important;
+}
+
+.ant-menu-horizontal .ant-menu-item-selected::after,
+.ant-menu-horizontal > .ant-menu-item-selected::after {
+  border-bottom-color: #15808C !important;
+}
+
+/* Unselected items — no underline */
+.ant-menu-horizontal > .ant-menu-item:not(.ant-menu-item-selected)::after {
+  border-bottom-color: transparent !important;
+}
+
+/* Ant Design 5 uses CSS variable for primary */
+:root {
+  --ant-color-primary: #15808C !important;
+  --ant-color-primary-hover: #0e6570 !important;
+  --ant-color-primary-active: #007d72 !important;
+}
+
+
+/* ─── Modals ─────────────────────────────────────────────── */
+.ant-modal-content {
+  border-radius: 8px !important;
+  overflow: hidden;
+  background: #ffffff !important;
+}
+
+/* ─── Select / Input dropdowns ───────────────────────────── */
+.ant-select-dropdown { border-radius: 8px !important; }
+
+/* ─── Popover / Tooltip ──────────────────────────────────── */
+.ant-popover-inner { border-radius: 8px !important; }
+.ant-tooltip-inner { border-radius: 6px !important; }
+
+/* ─── Page content wrapper ───────────────────────────────── */
+.page-content {
+  padding: 0 24px 24px;
+  background: #ffffff;
+}
+
+/* ─── Tailwind utility fallbacks (needed by UniTable / design-system) ── */
+/* The design system uses Tailwind classes that require PostCSS. Since we  */
+/* process the design-system SCSS directly, @tailwind directives are        */
+/* stripped. We recreate the handful of utilities UniTable depends on.     */
+.flex     { display: flex !important; }
+.flex-col { flex-direction: column !important; }
+.h-full   { height: 100% !important; }
+.grow     { flex-grow: 1 !important; min-height: 0 !important; }
+
+/* ─── Design-system badge / pill primitives ─────────────────────────────── */
+/* Values sourced from design token file (css-vars.scss):                    */
+/*   --uni-radius-300 = 8px  •  --uni-size-2 = 8px  •  small height = 22px  */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 22px;
+  border-radius: 8px;        /* --uni-radius-300 */
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.ds-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: 22px;
+  border-radius: 8px;        /* --uni-radius-300 */
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.ds-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── AG Grid wrapper — matches Ant Design table border/radius ─────────── */
+.ag-root-wrapper.ag-layout-normal {
+  border: 1px solid #e2e5ea !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+/* Vertically center all AG Grid cell content */
+.ag-cell {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ─── Table toolbar ──────────────────────────────────────────────────────── */
+/* Toolbar is a fully independent bar — separated from the table below it    */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  background: #ffffff;
+  margin-bottom: 12px;         /* gap between toolbar and table */
+}
+
+/* Table below a toolbar keeps its own full border and radius */
+.has-toolbar .ag-root-wrapper.ag-layout-normal {
+  border-radius: 8px !important;
+  border-top: 1px solid #e2e5ea !important;
+}
+
+/* When AG Grid is inside a container that already has a border (e.g. with side panel),
+   suppress the inner AG Grid border so there's no double-border */
+.ag-panel-container .ag-root-wrapper.ag-layout-normal {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.toolbar-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e2e5ea;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 14px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.toolbar-icon-btn:hover {
+  border-color: #15808C;
+  color: #15808C;
+  background: #f0fdfa;
+}
+.toolbar-icon-btn.active {
+  border-color: #15808C;
+  color: #15808C;
+  background: #f0fdfa;
+}
+
+/* ─── More Tailwind utility fallbacks used by design system ─────────────── */
+.flex-wrap       { flex-wrap: wrap !important; }
+.flex-1          { flex: 1 1 0% !important; }
+.justify-between { justify-content: space-between !important; }
+.order-1  { order: 1 !important; }
+.order-2  { order: 2 !important; }
+.order-3  { order: 3 !important; }
+.order-4  { order: 4 !important; }
+.order-5  { order: 5 !important; }
+.order-last { order: 9999 !important; }
+.min-w-0  { min-width: 0 !important; }
+.min-h-0  { min-height: 0 !important; }
+.w-full   { width: 100% !important; }
+.items-center   { align-items: center !important; }
+.gap-2          { gap: 8px !important; }
+.gap-4          { gap: 16px !important; }
+.truncate       { overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
+.whitespace-nowrap { white-space: nowrap !important; }
+.font-normal    { font-weight: 400 !important; }
+.font-semibold  { font-weight: 600 !important; }
+.border-b       { border-bottom-width: 1px !important; border-bottom-style: solid !important; }
+.border-neutral-100 { border-color: #f3f4f6 !important; }
+.bg-gray-50     { background-color: #f9fafb !important; }
+.px-5           { padding-left: 20px !important; padding-right: 20px !important; }
+.text-neutral-700 { color: #374151 !important; }
+.text-neutral-500 { color: #6b7280 !important; }
+.text-sm        { font-size: 14px !important; line-height: 20px !important; }
+.leading-\[26px\] { line-height: 26px !important; }
+
+/* ─── UniSidePanel — override Tailwind arbitrary values that can't be generated ── */
+/* SidePanelHeader uses text-[20px] (arbitrary) which won't compile without JIT.  */
+/* We target the h1 inside the header class explicitly to fix the font size.       */
+.uni-side-panel-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 0 20px !important;
+  border-bottom: 1px solid #e9eaec !important;
+  background: #f9fafb !important;
+  height: 44px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+}
+
+.uni-side-panel-header > .min-w-0 {
+  min-width: 0 !important;
+  flex: 1 1 0% !important;
+  overflow: hidden !important;
+}
+
+/* The h1 rendered by SidePanelHeader — keep it compact and on one line */
+.uni-side-panel-header h1 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: #1a1d23 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Subtitle below title */
+.uni-side-panel-subheader {
+  font-size: 11px !important;
+  color: #8b919e !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Close / theatre buttons stay fixed height */
+.uni-side-panel-header button.uni-header-close,
+.uni-side-panel-header button.uni-theatre-open {
+  height: 32px !important;
+  width: 32px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Force the side panel to stretch to its container's full height */
+.uni-ag-side-panel {
+  height: 100% !important;
+}
+

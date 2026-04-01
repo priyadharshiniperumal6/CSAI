@@ -1,0 +1,7 @@
+.uni-ant-switch {
+  background-color: var(--ut-color-bg-disabled-strong);
+
+  &.ant-switch-checked {
+    background-color: var(--ut-color-bg-brand);
+  }
+}

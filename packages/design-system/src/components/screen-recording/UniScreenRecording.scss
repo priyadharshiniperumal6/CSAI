@@ -1,0 +1,36 @@
+.uni-screen-recording {
+  position: relative;
+  
+  video {
+    z-index: 1;
+    position: relative;
+  }
+
+  .uni-screen-recording__overlay {
+    z-index: 100;
+    pointer-events: none;
+    
+    & > * {
+      pointer-events: auto;
+    }
+    
+    &.h-full {
+      height: 100% !important;
+    }
+  }
+
+  .bg-black-gradient {
+    background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.8) 100%);
+  }
+
+  .popover-container {
+    position: absolute;
+    z-index: 1050;
+  }
+
+  button.uni-ant-button:where(.ant-btn):not(:disabled):not(.ant-button-danger),
+  button.uni-ant-button:where(.ant-btn):not(:disabled):not(.ant-button-danger):focus.ant-btn-text {
+    padding: 0;
+    background-color: transparent;
+  }
+}

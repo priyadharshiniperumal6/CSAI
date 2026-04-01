@@ -1,0 +1,128 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.6 UXRD Spec" />
+
+# UXRD Specification Contract
+
+This page defines the required UXRD structure Codex expects when generating a complete app slice in this repo.
+
+Source of truth: `docs/llm/uxrd-spec.md`
+
+## Required Sections
+
+A valid UXRD must include these sections in order:
+
+1. Personas
+2. Jobs-to-be-done
+3. Route Map
+4. Data Models
+5. CRUD operations
+6. States
+7. Permissions
+8. Telemetry
+9. Non-functional constraints
+
+If any required section is missing, generation should stop and request the missing data.
+
+## Route Map Contract
+
+Each route entry must include:
+
+- `routeId`
+- `path`
+- `parentRouteId`
+- `kind` (`view`, `asset`, `example`)
+- `title`
+- `nav.visible`
+- `nav.group` (`Views`, `Assets`, `Examples`)
+- `nav.label`
+- `viewPattern` (`dashboard`, `table`, `details`, `flow`, `split`, `form`)
+- `params[]` with `{ name, type, required }`
+
+Route constraints:
+
+1. `routeId` values must be unique.
+2. `path` values must be unique.
+3. Path tokens (for example `:caseId`) must match `params`.
+4. `params` must not contain extra values not used in path.
+
+## Data Model Contract
+
+Each model must include:
+
+- `modelName` (PascalCase singular)
+- `collectionName` (camelCase plural)
+- `primaryKey`
+- `fields[]`
+
+Each field must include:
+
+- `name`
+- `type` (`string`, `number`, `boolean`, `date`, `enum`, `object`, `array`)
+- `required`
+- `nullable`
+- `description`
+
+## CRUD Contract
+
+Each operation must include:
+
+- `operationId`
+- `modelName`
+- `routeId`
+- `operation` (`create`, `read`, `update`, `delete`, `list`)
+- `formShell` (`drawer`, `modal`, `full-page`, `none`)
+- `trigger`
+- `successBehavior`
+- `errorBehavior`
+
+## States Contract
+
+Each route must define:
+
+- `loading`
+- `empty`
+- `error`
+- `success`
+
+Each state entry must include:
+
+- `routeId`
+- `state`
+- `uiExpectation`
+- `recoveryAction`
+
+## Validation Checklist
+
+Before generating code, confirm:
+
+1. All required sections exist.
+2. Every route has a valid `viewPattern`.
+3. Path params and param specs are aligned.
+4. Every data-backed route has model and endpoint intent.
+5. CRUD operations define explicit form shells.
+6. Permission keys gate routes/actions.
+7. Telemetry covers filter/open/create/update/delete/export/share actions.
+
+## Minimal UXRD Example
+
+```md
+## Personas
+- personaId: ops_manager
+  displayName: Ops Manager
+  primaryGoals: [Monitor queue health]
+  defaultPermissions: [cases.read, cases.update]
+
+## Route Map
+- routeId: cases.list
+  path: /cases
+  parentRouteId: null
+  kind: view
+  title: Cases
+  nav:
+    visible: true
+    group: Views
+    label: Cases
+  viewPattern: table
+  params: []
+```

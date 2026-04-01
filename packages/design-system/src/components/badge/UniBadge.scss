@@ -1,0 +1,14 @@
+.uni-ant-badge {
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+  transform: translate(-50%, 50%);
+  color: var(--ut-color-text-inverse);
+  border: 1px solid var(--ut-color-border-disabled);
+  background: var(--ut-color-bg-danger);
+  padding: 0 var(--uni-size-1);
+  font-size: var(--uni-size-3);
+  line-height: var(--uni-size-4);
+  border-radius: var(--uni-size-3);
+  font-family: Inter, system-ui, sans-serif;
+}

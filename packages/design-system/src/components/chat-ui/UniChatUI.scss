@@ -1,0 +1,106 @@
+.uni-chat-ui {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 1px solid var(--ut-color-border-default);
+  border-radius: 8px; /* bradius-300 */
+  background: var(--ut-color-bg-surface);
+  padding: 12px;
+  overflow: hidden;
+}
+
+.uni-chat-ui__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 260px;
+  min-width: 220px;
+  max-width: 320px;
+  min-height: 0;
+  border-right: 1px solid var(--ut-color-border-default);
+  padding-right: 12px;
+}
+
+.uni-chat-ui__sidebar-title {
+  color: var(--ut-color-text-secondary);
+  font-size: 0.75rem; /* fontSizeSM — 12px */
+  font-weight: 600;
+}
+
+.uni-chat-ui__conversation-list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.uni-chat-ui__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  gap: 10px;
+}
+
+.uni-chat-ui__messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.uni-chat-ui__welcome {
+  border-radius: 8px; /* bradius-300 — removed dashed wrapper, Welcome component handles its own visual */
+  min-height: 180px;
+}
+
+.uni-chat-ui__prompts {
+  border-top: 1px solid var(--ut-color-border-default);
+  padding-top: 8px;
+}
+
+.uni-chat-ui__sender {
+  border-top: 1px solid var(--ut-color-border-default);
+  padding-top: 10px;
+}
+
+.uni-chat-ui__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--ut-color-bg-brand-subtle);
+  color: var(--ut-color-text-brand-strong);
+  font-size: 0.75rem; /* fontSizeSM — 12px */
+  font-weight: 700;
+  line-height: 1;
+  padding: 0 8px;
+}
+
+.uni-chat-ui__avatar--user {
+  background: var(--ut-color-bg-neutral-subtle);
+  color: var(--ut-color-text-secondary);
+}
+
+@media (max-width: 960px) {
+  .uni-chat-ui {
+    flex-direction: column;
+    min-height: 540px;
+  }
+
+  .uni-chat-ui__sidebar {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--ut-color-border-default);
+    padding-right: 0;
+    padding-bottom: 12px;
+  }
+}

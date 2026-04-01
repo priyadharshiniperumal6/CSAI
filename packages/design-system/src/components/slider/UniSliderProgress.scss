@@ -1,0 +1,53 @@
+.uni-slider-progress.ant-slider {
+  .ant-slider-handle {
+    background-color: transparent;
+    border-color: transparent;
+    margin-top: 3px;
+
+    &:not(:hover):not(:focus)::after {
+      box-shadow: none;
+      height: 0;
+      width: 0;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--ut-color-border-brand);
+    }
+  }
+
+  &:hover .ant-slider-handle,
+  &:active .ant-slider-handle {
+    display: block;
+
+    &:not(:hover):not(:focus)::after {
+      box-shadow: 0 0 0 2px var(--ut-color-border-brand);
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  .ant-slider-rail {
+    height: 2px;
+    background-color: var(--ut-color-border-default);
+  }
+
+  .ant-slider-track {
+    background-color: var(--ut-color-bg-brand-emphasis);
+    height: 2px;
+  }
+
+  .ant-slider-track-active {
+    background-color: var(--ut-color-bg-brand);
+  }
+
+  &:hover {
+    .ant-slider-track {
+      background-color: var(--ut-color-bg-brand);
+    }
+
+    .ant-slider-rail {
+      background-color: var(--ut-color-border-default);
+    }
+  }
+}

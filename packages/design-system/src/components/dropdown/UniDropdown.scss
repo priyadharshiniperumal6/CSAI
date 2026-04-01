@@ -1,0 +1,51 @@
+.uni-ant-dropdown {
+  &.uni-ant-dropdown-default {
+    button.uni-ant-button {
+      border: 1px solid var(--ucolor-border-gray-tertiary);
+    }
+  }
+}
+
+// Menu popup styling — targets the actual antd Dropdown Menu class names (ant-dropdown-menu-*)
+// NOT ant-menu-* which is the standalone Menu component and uses different class names.
+.uni-ant-dropdown-menu {
+  border-radius: var(--uni-radius-300); // 8px
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  padding: 4px;
+  min-width: 160px;
+
+  &.ant-dropdown-menu {
+    border-inline-end: none;
+  }
+
+  .ant-dropdown-menu-item {
+    border-radius: var(--uni-radius-200); // 4px
+    margin: 0;
+    padding: 6px 12px;
+    height: auto;
+    line-height: 22px;
+    font-size: 14px;
+    color: var(--ut-color-text-primary);
+
+    &:hover,
+    &.ant-dropdown-menu-item-active {
+      background-color: var(--ut-color-bg-brand-subtle) !important; // override ant-override.scss transparent
+      color: var(--ut-color-text-primary);
+    }
+
+    .ant-dropdown-menu-item-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .uni-material-icon,
+      .uni-icon {
+        color: var(--ucolor-content-icon-gray-secondary);
+        flex-shrink: 0;
+        line-height: 1;
+      }
+    }
+  }
+}

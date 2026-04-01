@@ -1,0 +1,32 @@
+.view-switcher {
+  .ant-segmented {
+    background-color: var(--ut-color-bg-canvas);
+  }
+  .ant-segmented-group {
+    gap: var(--uni-size-1);
+  }
+
+  .ant-segmented-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--ut-color-bg-brand-muted);
+    }
+    .ant-segmented-item-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--uni-size-2);
+    }
+  }
+
+  .ant-segmented-item-selected {
+    background-color: var(--ut-color-bg-brand-muted);
+  }
+
+  .material-symbols-outlined {
+    color: var(--ut-color-text-brand);
+  }
+}

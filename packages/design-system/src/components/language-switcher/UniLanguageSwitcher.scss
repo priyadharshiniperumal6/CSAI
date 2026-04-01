@@ -1,0 +1,120 @@
+.uni-language-switcher {
+  .ant-select-selector {
+    font-size: var(--uni-size-14);
+    color: var(--ut-color-text-secondary);
+  }
+
+  &.ant-select-lg .ant-select-selector {
+    font-size: var(--uni-size-16);
+  }
+
+  &.ant-select-sm .ant-select-selector {
+    font-size: var(--uni-size-14);
+  }
+}
+
+.uni-language-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--uni-size-14);
+  color: var(--ut-color-text-secondary);
+
+  .uni-language-flag {
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+
+    &--only {
+      font-size: 20px;
+    }
+  }
+
+  .uni-language-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .uni-language-native {
+      color: var(--ut-color-text-subtle);
+      font-size: var(--uni-size-12);
+    }
+  }
+
+  &--compact {
+    gap: 6px;
+
+    .uni-language-flag {
+      font-size: 16px;
+    }
+
+    .uni-language-label {
+      font-size: var(--uni-size-13);
+      white-space: nowrap;
+    }
+  }
+
+  &--flag-only {
+    justify-content: center;
+    gap: 0;
+
+    .uni-language-flag {
+      font-size: 20px;
+    }
+  }
+
+  &--native-only,
+  &--label-only {
+    .uni-language-label {
+      white-space: nowrap;
+    }
+  }
+}
+
+.uni-language-switcher--compact {
+  min-width: auto !important;
+
+  .ant-select-selector {
+    padding-left: 8px !important;
+    padding-right: 24px !important;
+  }
+
+  .ant-select-selection-item {
+    padding-right: 0 !important;
+  }
+}
+
+.uni-language-arrow {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url('../../assets/arrow_down.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.uni-language-switcher.ant-select-disabled .uni-language-arrow {
+  background-image: url('../../assets/arrow_down_disabled.svg');
+}
+
+.ant-select-dropdown {
+  .uni-language-option {
+    &:hover {
+      background-color: var(--ut-color-bg-brand-subtle);
+    }
+  }
+}
+
+.ant-select-item-option-selected {
+  .uni-language-option {
+    background-color: var(--ut-color-bg-brand-subtle);
+    font-weight: 500;
+  }
+}
+
+.ant-select-item-option-active {
+  .uni-language-option {
+    background-color: var(--ut-color-bg-brand-subtle);
+  }
+}

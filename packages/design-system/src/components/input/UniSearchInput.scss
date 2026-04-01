@@ -1,0 +1,26 @@
+.uni-ant-search {
+  border-color: var(--ut-color-border-strong);
+
+  &.ant-input {
+    &::placeholder {
+      font-weight: 400;
+      font-size: var(--uni-size-4);
+      line-height: 22px;
+    }
+  }
+
+  .ant-input-prefix,
+  .ant-input-suffix {
+    margin: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+  }
+
+  .ant-input-prefix {
+    margin-right: var(--uni-size-1);
+  }
+
+  .material-symbols-outlined {
+    color: var(--ut-color-text-faint);
+  }
+}

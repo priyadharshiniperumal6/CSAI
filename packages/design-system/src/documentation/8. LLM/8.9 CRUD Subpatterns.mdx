@@ -1,0 +1,111 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.9 CRUD Subpatterns" />
+
+# CRUD Subpatterns
+
+Use these patterns for deterministic CRUD behavior across generated views.
+
+Source guide: `docs/llm/crud-subpatterns.md`
+
+## Standard CRUD Surface
+
+For list routes:
+
+1. `ViewHeader`
+2. `ViewToolbar`
+3. `Filter/Search`
+4. Data surface (`UniTable` or equivalent)
+5. Bulk action bar (when rows selected)
+
+## ViewHeader
+
+Required:
+
+- route title
+- context subtitle (or breadcrumb)
+- primary action when create is allowed
+
+Rule: keep destructive actions out of header; use row/bulk actions + confirm dialogs.
+
+Implementation contract:
+- Use `UniPageHeader` for route headers.
+- Prefer slot-style props: `breadcrumbsSlot`, `primaryActionsSlot`, `secondaryActionsSlot`, `globalFiltersSlot`.
+- Keep right-side action order deterministic: global filters -> secondary -> primary (primary remains far right).
+
+## ViewToolbar
+
+Required:
+
+- search input
+- quick filters (or filter trigger)
+- table controls (for table routes)
+
+Rule: toolbar controls should be idempotent and high-frequency.
+
+## Filter/Search
+
+Required behavior:
+
+- typed filter state
+- visible active filter chips
+- reset to defaults
+- query-driven refresh
+
+Rule: treat empty search as a valid state.
+
+## Export/Share
+
+Required behavior:
+
+- export respects active filter/sort scope
+- share copies canonical route URL + query params
+- telemetry is emitted for both
+
+## Bulk Actions
+
+Required behavior:
+
+- only visible when selection count > 0
+- support action constraints (`min`, `max`, predicate)
+- destructive actions require confirm dialog
+
+## Form Shell Selection
+
+### DrawerForm
+
+Use when:
+- create/edit is low-to-medium complexity
+- parent context should remain visible
+
+### ModalForm
+
+Use when:
+- short, focused form with strict temporary focus
+
+### FullPageForm
+
+Use when:
+- long or multi-section flows requiring route-level navigation
+
+## Confirm Dialogs
+
+Use for:
+
+- delete
+- bulk delete
+- irreversible updates
+
+Required content:
+
+- action-specific title
+- consequence summary
+- clear destructive and safe actions
+
+## Acceptance Checklist
+
+1. CRUD actions are permission-aware.
+2. Form shell matches operation complexity.
+3. Filter/search/export/share/bulk are wired where required.
+4. Destructive actions are confirmation-gated.
+5. CRUD feedback and telemetry are implemented.

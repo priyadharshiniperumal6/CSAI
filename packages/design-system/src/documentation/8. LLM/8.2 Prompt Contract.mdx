@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.2 Prompt Contract" />
+
+# LLM Prompt Contract (View Generation)
+
+Use this checklist when requesting UI generation. It improves component selection,
+layout quality, and consistency with the design system.
+
+## Required Inputs
+
+1. **Primary user task**
+   - Examples: scan, compare, edit, create, explore, monitor
+2. **Data shape**
+   - Rows/columns, nested objects, media, or mixed content
+   - For graph tasks: nodes, edges, and edge directionality
+3. **Density target**
+   - High / medium / low
+4. **Key interactions**
+   - Sorting, filtering, bulk actions, inline edit, navigation
+   - For flow tasks: connect, reconnect, drag, zoom, delete
+5. **Device scope**
+   - Desktop-only or responsive (desktop + tablet + mobile)
+
+## Optional Inputs
+
+1. **Role / permissions**
+2. **Empty state behavior**
+3. **Error states**
+4. **Performance constraints**
+
+## Output Expectations
+
+1. Use **Universal Theme components** whenever possible.
+2. Use **`HostShell` as the top-level app layout** unless the prompt explicitly requests a shell-less surface.
+3. Use **`UniEChart`** for analytics visualization and **`UniReactFlow`** for node-edge workflows.
+4. Avoid custom styling unless explicitly required.
+5. Follow **table vs card** selection rules in the component selection guide.

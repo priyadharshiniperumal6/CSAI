@@ -1,0 +1,206 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { version } from '../../package.json';
+
+<Meta title="Documentation/3. Developer Documentation" />
+
+# Developer Documentation
+---
+
+### Getting Started
+
+This section walks you through setting up your development environment to use the Universal Theme Design System Library.
+
+### Generate a GitHub Personal Access Token
+
+1. **Navigate to Developer Settings on GitHub**
+   - Access via [github.com/settings/apps](https://github.com/settings/apps)
+   - Or open **Settings** from your profile and go to **Developer settings**
+2. **Generate a new token (classic)**
+   - Go to **Personal access tokens**
+   - Select **Tokens (classic)**
+   - Click **Generate new token (classic)**
+3. **Configure token**
+   - Set a descriptive name like `Universal Theme Design System`
+   - Set expiration according to your security policy
+   - Select at minimum `read:packages`
+4. **Generate token**
+   - Click **Generate token**
+   - If prompted, authorize SSO for Uniphore
+
+> **IMPORTANT**: Copy and store the token securely. You cannot view it again after leaving the page.
+
+### Configuring Your Local Environment
+
+#### Windows
+
+1. Create or edit global `.npmrc`.
+
+```bash
+npm config edit
+```
+
+2. Add token entry:
+
+```ini
+//npm.pkg.github.com/:_authToken=YOUR_PERSONAL_ACCESS_TOKEN
+```
+
+3. Optional environment variable setup:
+   - Variable name: `UNI_ANT_GITHUB_TOKEN`
+   - Variable value: your token
+
+#### macOS
+
+1. Edit global `.npmrc`:
+
+```bash
+nano ~/.npmrc
+```
+
+2. Add auth + scope registry:
+
+```ini
+//npm.pkg.github.com/:_authToken=YOUR_PERSONAL_ACCESS_TOKEN
+@uniphore:registry=https://npm.pkg.github.com
+```
+
+### Configuring Your React Project
+
+Create a project `.npmrc` at the repo root:
+
+```ini
+@uniphore:registry=https://npm.pkg.github.com
+```
+
+### Project Setup
+
+> IMPORTANT: Ensure GitHub Package Registry access is configured before installation.
+
+#### Create a New React Project
+
+```bash
+pnpm create vite@latest my-universal-theme-project -- --template react-ts
+pnpm install
+```
+
+#### Add Universal Theme Framework
+
+```bash
+pnpm add @uniphore/ut-design-system
+```
+
+#### Integrate in `main.tsx`
+
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import '@uniphore/ut-design-system/styles.css';
+import '@uniphore/ut-design-system/tokens.css';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+### Start Using Components
+
+```tsx
+import { UniButton } from '@uniphore/ut-design-system';
+
+export default function Example() {
+  return <UniButton type="primary">Hello Universal Theme</UniButton>;
+}
+```
+
+If styling looks incorrect, wrap app/components in `ConfigProvider` with theme token:
+
+```tsx
+import { ConfigProvider } from 'antd';
+import { UniButton } from '@uniphore/ut-design-system';
+import { ANT_THEME_TOKEN } from '@uniphore/ut-design-system/theme';
+
+export default function Example() {
+  return (
+    <ConfigProvider theme={ANT_THEME_TOKEN}>
+      <UniButton type="primary">Hello Universal Theme</UniButton>
+    </ConfigProvider>
+  );
+}
+```
+
+### Running Your Project
+
+```bash
+pnpm run dev
+```
+
+### Contributing to the Framework
+
+```bash
+git clone https://github.com/uniphore/ut-design-system.git
+cd ut-design-system
+pnpm install
+pnpm run storybook
+```
+
+### Publishing Update to the Universal Theme Framework
+
+1. Update version in `package.json` using semantic versioning.
+2. Build package.
+3. Publish to GitHub Package Registry.
+
+```bash
+pnpm run build
+pnpm publish
+```
+
+### Best Practices
+
+1. Always import framework styles in your app entry file.
+2. Use Tailwind utilities for spacing and layout adjustments only.
+3. Use AG Grid features for complex data workflows.
+4. Keep components focused and composable.
+
+### Troubleshooting
+
+1. Verify `.npmrc` scope and auth token if install fails.
+2. Verify AG Grid modules are initialized when using grid features.
+3. Verify stylesheet imports in `main.tsx` if visuals are broken.
+
+### Reporting Issues
+
+1. Implementation issues: open an issue in the repository.
+2. Design requests: use the team request intake process.
+
+---
+
+## Universal Theme Framework
+
+The Universal Theme Framework contains Uniphore UI components built with Ant Design, AG Grid, and Tailwind CSS.
+
+- [Ant Design - React](https://ant.design/)
+- [AG Grid - React](https://www.ag-grid.com/react-data-grid/getting-started/)
+- [Tailwind CSS](https://tailwindcss.com/docs/installation)
+- [Apache ECharts](https://echarts.apache.org/handbook/en/get-started/)
+- [React Flow](https://reactflow.dev/)
+
+## Version
+
+Latest `{version}`
+
+## Installation
+
+Use `pnpm`:
+
+```bash
+pnpm add @uniphore/ut-design-system
+```
+
+Update to latest:
+
+```bash
+pnpm update @uniphore/ut-design-system
+```

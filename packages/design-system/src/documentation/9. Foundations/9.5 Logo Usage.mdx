@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import universalThemeLogo from '../../assets/images/universal-theme-logo.svg';
+
+<Meta title="Documentation/9. Tokens & Foundations/9.5 Logo Usage" />
+
+# Tokens & Foundations: Logo Usage
+
+This page documents how logo sizing and spacing are applied in current app shell surfaces.
+
+## Storybook Header Brand
+
+- Label: `Universal Theme React`
+- Logo sizing from `apps/storybook/.storybook/manager.css`
+  - max width: `136px`
+  - height: `24px`
+- Layout pattern: vertical stack (logo first, label below)
+
+<div
+  style={{
+    border: '1px solid #d7dae3',
+    borderRadius: 8,
+    padding: 16,
+    width: 240,
+    background: '#ffffff',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: 4,
+  }}
+>
+  <img src={universalThemeLogo} alt="Uniphore" style={{ maxWidth: 136, height: 24, width: 'auto' }} />
+  <div style={{ color: '#2f3742', fontSize: 12, fontWeight: 600 }}>Universal Theme React</div>
+</div>
+
+## HostShell Side Navigation Brand
+
+- Logo sizing from `packages/core/src/components/side-nav/SideNav.scss`
+  - width: `132px`
+  - height: `auto`
+- Container from `.side-nav__brand`
+  - min height: `64px`
+  - padding: `16px 12px 12px 16px`
+
+<div
+  style={{
+    border: '1px solid #0e6772',
+    borderRadius: 8,
+    padding: '16px 12px 12px 16px',
+    width: 240,
+    minHeight: 64,
+    background: '#052f35',
+    display: 'flex',
+    alignItems: 'center',
+  }}
+>
+  <img src={universalThemeLogo} alt="Uniphore" style={{ width: 132, height: 'auto' }} />
+</div>
+
+## Usage Guidance
+
+1. Prefer SVG and keep aspect ratio intact.
+2. Never recolor or stretch the mark.
+3. Keep clear space around the logo (at least 8px on all sides in compact surfaces).
+4. For dark backgrounds, keep a high-contrast logo treatment (current white logotype is valid).

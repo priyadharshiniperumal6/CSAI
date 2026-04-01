@@ -1,0 +1,135 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.8 View Pattern Catalog" />
+
+# View Pattern Catalog
+
+This catalog maps route intent to deterministic view patterns and required slots/states.
+
+Source guide: `docs/llm/view-pattern-catalog.md`
+
+## Pattern Mapping
+
+- `dashboard` -> `DashboardView`
+- `table` -> `TableView`
+- `details` -> `ObjectDetailsView`
+- `flow` -> `FlowView`
+- `split` -> `SplitView` (optional)
+- `form` -> `FormView` (optional)
+
+Each `kind: "view"` route in `routeRegistry` should map to exactly one pattern via `viewPatternId`.
+
+## Shared State Requirement
+
+All patterns must implement:
+
+- `loading`
+- `empty`
+- `error`
+- `success`
+
+## Shared Header Contract
+
+All view patterns should compose route headers with `UniPageHeader` and these slot names:
+- `breadcrumbsSlot`
+- `metadataSlot` (optional)
+- `primaryActionsSlot`
+- `secondaryActionsSlot` (optional)
+- `globalFiltersSlot` (optional)
+- `toolbarLeftSlot` / `toolbarRightSlot` for second-row controls
+
+## Pattern Requirements
+
+## DashboardView
+
+When to use:
+- KPI monitoring, operational summaries, trend visibility.
+
+Required slots:
+- `header`
+- `kpiRow`
+- `primaryChart`
+- `secondarySurface`
+- `actions`
+
+## TableView
+
+When to use:
+- Dense comparable records with sorting/filtering/bulk actions.
+
+Required slots:
+- `header`
+- `toolbar`
+- `filters`
+- `table`
+- `pagination` (if needed)
+
+## ObjectDetailsView
+
+When to use:
+- Single object drill-down and detail inspection.
+
+Required slots:
+- `header`
+- `summary`
+- `detailsSections`
+- `actions`
+
+## FlowView
+
+When to use:
+- Node-edge workflows and visual process authoring.
+
+Required slots:
+- `header`
+- `canvas`
+- `inspectorPanel`
+- `toolbar`
+
+## SplitView (optional)
+
+When to use:
+- Master-detail workflows with concurrent context.
+
+Required slots:
+- `leftPane`
+- `rightPane`
+- `resizer`
+
+## FormView (optional)
+
+When to use:
+- Route-level multi-section create/edit flows.
+
+Required slots:
+- `header`
+- `formBody`
+- `stickyActions`
+- `validationSummary`
+
+## Minimal Config Shape
+
+```ts
+type ViewStateKey = "loading" | "empty" | "error" | "success";
+
+interface BaseViewConfig {
+  routeId: string;
+  title: string;
+  states: Record<ViewStateKey, { testId: string; copy?: string }>;
+  permissions?: string[];
+  telemetry?: string[];
+}
+```
+
+## HostShell Rule
+
+View routes render inside `HostShell`. Do not recreate top-level app chrome in route pages.
+
+Reference: `docs/llm/host-shell-layout.md`
+
+## Acceptance Checklist
+
+1. Every view route has one valid `viewPatternId`.
+2. Required slots for selected pattern are implemented.
+3. All required states are implemented and testable.
+4. Route pages keep app chrome in `HostShell`, not inside the view.

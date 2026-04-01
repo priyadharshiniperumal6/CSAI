@@ -1,0 +1,10 @@
+.uni-radio-group {
+  .ant-radio-button-wrapper-checked {
+    background-color: var(--ut-color-bg-brand-muted);
+    border-color: var(--ut-color-border-brand);
+  }
+
+  .ant-radio-button-wrapper:not(.ant-radio-button-wrapper-checked) {
+    border-color: var(--ut-color-border-strong);
+  }
+}

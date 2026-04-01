@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/2. Design System Principles" />
+
+# Design System Principles:
+---
+<br/>
+
+1. **Promote collaboration.** <br/>
+    a. As a team, we seek to foster seamless engagement between design and engineering. This will be achieved through our shared set of tools and processes.
+
+2. **Ensuring brand integrity.**<br/>
+  a. By creating a robust design system we can help ensure the Uniphore brand is consistently adhered to across the broad product suite.
+3. **Time saving from design to engineering as fast as possible.**<br/>
+  a. The extensive R&D that has gone into the creation of this system has combined known best practices with truly next-gen DesignOps capabilities. The result: a coded artifact that has applications well-beyond a static Figma library.
+<br />
+
+## **Engineering Principles:**
+<br />
+
+1. **Simplify**  - Sticking to one front-end development framework. React with Typescript using functional components and hooks.<br/>
+  a. Why did we choose React? It is the standard for our product ecosystem and has a large, stable ecosystem.<br/>
+  b. It is very approachable for new and experienced developers.<br/>
+  c. The framework is well documented, has a strong community, and makes it highly supported by generative AI technology.
+
+2. **Don’t rebuild the base** - Use the existing component libraries and frameworks, then applying a Uniphore Theme on top to extend out from the base library with uniquely Uniphore composite components.
+
+3. **Base Libraries:**<br/>
+  a. Ant Design System - [Ant Design](https://ant.design/components/overview) (React version)<br/>
+  b. ECharts - [Apache ECharts](https://echarts.apache.org/en/index.html)<br/>
+  c AG-Grid - [AG Grid](https://www.ag-grid.com/)
+4. **Performance-Oriented:** Optimize components and patterns for speed and efficiency across devices and platforms.
+5. **Scalable Architecture:** Build a system that can grow and evolve with the organization’s needs over time.
+6. **Clear Documentation:** Provide comprehensive, easy-to-understand guidelines for using the design system effectively.
+<br />
+## **Design Principles:**
+<br />
+
+1. ##### **Purposeful:**  Every component and pattern should serve a clear purpose and solve specific user needs.
+2. ##### **Clear Documentation:** Provide comprehensive, easy-to-understand guidelines for cross-team collaboration.
+3. ##### **Flexible and Composable:** Design elements should be modular and easily combined to create diverse interfaces.
+4. ##### **Intuitive Interactions:** Design interactions should feel natural and familiar to users to reduce cognitive load.
+5. **Accessibility and Inclusivity by Default:** <br/>
+    a. Ensure that designs are accessible to all users, regardless of their abilities or the devices they use.<br/>
+    b. Follow the accessibility guidelines of [WCAG 2.1](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-21/),
+      and design with inclusivity in mind to accommodate various needs, including visual, motor, and cognitive impairments.<br/>
+        - All text except really large headings / decorative should be at **4.5:1** <br/>
+        - All graphics / visuals should be at **3:1** <br/>
+
+    c. Testing with assistive technologies should be a standard part of the design process.<br/>
+    d. **Accessible by Default:** Ensure all components meet accessibility standards without additional effort from designers or developers.<br/>
+6. **Design for Data First, Action Second:**<br/>
+    a. Make the UX focus on the task of reading and understanding the information.<br/>
+        - Editing is the secondary task.<br/>
+
+    b. Recognize that the first and foremost task for users is often to view and analyze data.<br/>
+    c. Make the data presentation clear, accessible, and interactive, allowing users to explore insights before they take actions.<br/>
+    d. Editing or modifying data should be secondary actions, seamlessly integrated but clearly distinct, ensuring data integrity and user confidence.
+7. **Design for Task-Oriented Workspace:**<br/>
+    a. Create interfaces that support a user’s primary task in an efficient and streamlined manner.<br/>
+    b. Prioritize workflows that enable users to complete their tasks with minimal distractions or unnecessary complexity.<br/>
+    c. Ensure that the design guides users logically through task completion by providing clear navigation, intuitive task flows, and customizable workspace layout.<br/>
+8. **Minimize Cognitive Load with Progressive Disclosure:**<br/>
+    a. Design with the 80 / 20 rule for users. Advanced workflows for 20% of the user based should be progressively available, so they don’t abstraction the primary functionality for the majority of users.<br/>
+    b. Enterprise users often deal with complex systems and vast amounts of information.<br/>
+    c. To reduce cognitive load, adopt a progressive disclosure approach, showing only essential information at first and revealing more details as needed.<br/>
+    d.  This keeps interfaces clean and focused, helping users concentrate on the task at hand while avoiding overwhelm.
+9. **Adapt to Diverse User Roles and Permissions:**<br/>
+    a. Enterprise systems often serve a variety of user roles with different permissions and responsibilities.<br/>
+    b. Design with role-based access in mind, ensuring that interfaces adapt dynamically based on the user’s role within the organization.<br/>
+    c. This keeps the experience relevant, secure, and focused on specific needs of each user without overwhelming them with unnecessary features.

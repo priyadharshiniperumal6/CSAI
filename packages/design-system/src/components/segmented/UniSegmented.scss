@@ -1,0 +1,13 @@
+.uni-segmented {
+  // Border makes the track visible against white toolbar/surface backgrounds.
+  // Color matches UniFilterDropdown secondary + UniSearchInput toolbar border.
+  &.ant-segmented {
+    border: 1px solid var(--ucolor-border-gray-tertiary);
+  }
+
+  .ant-segmented-item-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

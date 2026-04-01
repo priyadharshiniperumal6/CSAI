@@ -1,0 +1,25 @@
+.uni-tag,
+.uni-pill {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  gap: var(--uni-size-1);
+  font-size: var(--uni-size-4);
+  border: 1px solid var(--ut-color-border-strong);
+
+  &.ant-tag-borderless {
+    border-color: transparent;
+  }
+
+  border-radius: var(--uni-radius-300);
+}
+
+.uni-pill {
+  border-radius: var(--uni-radius-300);
+}
+
+.uni-tag-small {
+  padding: var(--uni-size-0) var(--uni-size-2);
+  height: 24px;
+  font-size: var(--uni-size-3);
+}

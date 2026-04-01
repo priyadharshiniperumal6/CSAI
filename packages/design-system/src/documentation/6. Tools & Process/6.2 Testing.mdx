@@ -1,0 +1,92 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/6. Tools & Process/6.2 Testing" />
+
+
+## ViTest: Snapshot Testing for `<UniTabs>` Component using Vitest
+
+This guide will help you create snapshot tests for the `<UniTabs>` React component using **Vitest** and **React Testing Library.** For other components, developers will need to write their own custom test.
+
+### Prerequisites
+Before starting, ensure that **Vitest** and **@testing-library/react** are installed in your project:
+  ```bash
+      pnpm install vitest @testing-library/react --save-dev
+  ```
+
+### Step 1: Create a Test File
+Create a test file in your project’s tests directory to hold the snapshot tests for the `<UniTabs>` component:
+  ```bash
+      ./TabsComponent.test.tsx
+  ```
+
+### Step 2: Import Required Modules
+In your test file, import necessary modules such as describe, it, expect from Vitest,
+ render from React Testing Library, and the component you are testing (Tabs).
+   ```typescript
+     import { describe, it, expect } from 'vitest';
+     import { render } from '@testing-library/react';
+     import { UniTabs } from '@/components';  // Adjust path as needed
+   ```
+### Step 3: Render the Component in a Test
+Write a test that renders the `<UniTabs>` component with necessary props. For snapshot testing,
+ it’s important to provide all essential props and slots used by the component.
+  ```typescript
+    describe('Tabs Component Snapshot', () => {
+      it('renders correctly and matches the snapshot', () => {
+        const { container } = render(
+          <UniTabs
+            styleType="horizontal"
+            tabs={[
+              {
+                id: 1,
+                title: 'Tab 1',
+                component: <div>SomeComponent</div>,
+                tabButton: { title: 'Button 1' }
+              },
+              {
+                id: 2,
+                title: 'Tab 2',
+                component: <div>AnotherComponent</div>,
+                tabButton: { title: 'Button 2' }
+              }
+            ]}
+          />
+        );
+
+        // Create snapshot
+        expect(container).toMatchSnapshot();
+      });
+    });
+
+  ```
+### Step 4: Create Additional Tests for Different States
+You should create more tests to cover different states, such as variations in the styleType,
+ or tests with/without certain props like tabButton.
+  ```typescript
+    it('renders without tab buttons', () => {
+      const { container } = render(
+        <UniTabs
+          styleType="vertical"
+          tabs={[
+            { id: 1, title: 'Tab 1', component: <div>SomeComponent</div> },
+            { id: 2, title: 'Tab 2', component: <div>AnotherComponent</div> }
+          ]}
+        />
+      );
+
+      expect(container).toMatchSnapshot();
+    });
+  ```
+### Step 5: Run the Tests
+To run the tests, use the Vitest command:
+  ```bash
+   pnpm vitest TabsComponent.test
+  ```
+### Step 6: Review the Snapshots
+  After running the tests, Vitest will generate snapshot files in your project.
+   Review them to ensure they match your expected UI structure.<br/>
+  Snapshot files will be generated in the __snapshots__ directory, typically next to your test file. For example:
+  ```bash
+    /tests/__snapshots__/TabsComponent.spec.ts.snap
+
+  ```

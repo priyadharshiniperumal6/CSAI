@@ -1,0 +1,95 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/4. Designer Documentation" />
+
+# Designer Documentation
+---
+<br />
+
+### The Uniphore Design System (File Structure):
+---
+1. **[Foundation](https://www.figma.com/design/mQsFF0L0FB57gTAjg9H5nQ/UniAnt-2.0---Foundation?m=auto&t=pG6xz024XDnC9Hd6-6)**<br/>
+    a. This is the file that contains all the design tokens for the Uniphore Design System, such as colors, spacing, radius, and typography.<br/>
+    b. The file also contains the icon library for designers to utilize in design.
+2. **[UI Components](https://www.figma.com/design/fa0bgIS0cgz365Udj0hS5o/UniAnt-2.0---UI-Library?m=auto&t=pG6xz024XDnC9Hd6-6)**<br/>
+       a. This file contains all the base components that we inherited from the Ant Design System.<br/>
+       b. While the base library is Ant, we have themed it and extended the library to fit with the needs of Uniphore.
+3. **[UniTable](https://www.figma.com/design/lt6F9CAbXVdhHtHRD3cav7/UniAnt-2.0---Table-Component?m=auto&t=pG6xz024XDnC9Hd6-6)**<br/>
+       a. This file contains all the essential components to form a table in the Uniphore product line.<br/>
+       b. It includes components such as table headers, column cells, etc.<br/>
+       c. This is the first big-composite component from Uniphore.
+
+4. **[Documentation](https://www.figma.com/design/ZC9opHXmNGBJhfq5Q5KZEE/UniAnt---Documentation?node-id=23-107354&node-type=canvas&t=yOEKZr6yTikIcrAy-0)**<br/>
+  a. This file contains all documentation from the UI Components file.<br/>
+
+5. **[Governance](https://www.figma.com/design/SbA7EfEPD52ERGTTBZP2Ax/UniAnt---Governance?node-id=0-1&node-type=canvas&t=Pwq9GX0hlr1NWGZJ-0)**<br/>
+    a. This is the file that contains all the presentations regarding structure, workflow, documentation updates.
+
+6. Other Components<br/>
+    a. To optimize the performance of each file, we create new files for larger composite components (ex. UniTable).<br/>
+
+<br/>
+### Setting Up a New Figma File
+---
+
+1. In the **Uniphore Enterprise Workspace** on Figma, find the team or product you’re working on and click into the team’s workspace.
+2. Underneath the team, find the corresponding project and enter.
+3. In the project, you can now create a new design file via the “Create new” dropdown on the top-right.
+4. Once a new file is created and opened, on the left-side navigation, click on the “Assets” tab on the top-left.
+5. Once you are in the “Assets” tab, click on the book icon next to it and make sure to add the following files:<br/>
+    a. **UniAnt 2.0 - Foundation**: Enables you to utilize the design tokens and icon library.<br/>
+    b. **UniAnt 2.0 - UI Library**: Enables you to import and use the Uniphore component library.<br/>
+    c. **UniAnt 2.0 - Table Component**: Enables you to import and use the UniTable components.
+6. Happy designing.
+
+<br/>
+### Design System Usage
+---
+
+#### Utilizing Tokens
+
+1. You **MUST** utilize the design tokens in all of your designs, including: <br/>
+    a. Colors<br/>
+    b. Typography<br/>
+    c. Line width<br/>
+    d. Border Radius<br/>
+    e. Paddings and Gaps for Auto Layout<br/>
+
+2. We have set specific scoping for each token, however, please still use the corresponding token for the various applications.<br/>
+    a. **Fill** for background color<br/>
+    b. **Icon** for icons<br/>
+    c. **Text** for typography<br/>
+    d. **Border** for borders<br/>
+    e. etc.
+
+### Utilizing Components:
+---
+1. Please look into the UI Library file for specific components before creating your own or requesting a new component.
+2. You can import the various components through the “Assets” tab by searching for specific components or navigating through the “UniAnt 2.0 - UI Library” file to drag in the component.
+3. You can also visit the “UniAnt 2.0 - UI Library” file and directly copy the components into your file.
+4. Do not detach the components or update any color on the component.
+    1. If you wish to contribute to the component library, please read the “Contributing to a Component” section.
+
+### Contributing to the Component Library:
+---
+1. To contribute to the library, you’ll need to submit a request ticket through this link (Google Survey?).
+2. There are three different types of request you can submit:<br/>
+    a. **Design Updates:** Updating the styles, adding features, and improving the current design on specific components.<br/>
+    b. **Component Usage:** Report any issue or confusion regarding a specific component.<br/>
+    c. **New Component:** Adding new components to the library to fit the Uniphore needs.
+3. **Design Updates:**<br/>
+    a. You may detach the component from the library and make the update.<br/>
+    b. Capture a screenshot or export it as an image.<br/>
+    c. Enter the request form to provide the design system team with context and references<br/>
+    d. Submit a request ticket.
+4. **Component Usage:**<br/>
+    a. Capture a screenshot of the issue or confusion for specific components.<br/>
+    b. Enter the request form to provide the design system team with context and references<br/>
+    c. Submit a request ticket.
+5. **New Component:**<br/>
+    a. To request a new component, you can either provide an example screenshot from other libraries or a screenshot of the component you’ve built.<br/>
+    b. Enter the request form to provide the design system team with context and references<br/>
+    c. Submit a request ticket.
+### Posting Requests and Issues:
+---
+For any component request, design updates, question, or anything related to the design system, please submit a request through this link (Google Survey?) for the design system team to review.

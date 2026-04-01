@@ -1,0 +1,36 @@
+.uni-page-header-story-frame {
+  min-height: 100vh;
+  background: var(--ut-color-bg-surface-muted);
+  padding: 20px;
+}
+
+.uni-page-header-story__count {
+  color: var(--ut-color-text-secondary);
+  font-size: 14px;
+}
+
+.uni-page-header-story__version-link {
+  color: var(--ut-color-text-link);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.uni-page-header-story__version-link:hover {
+  text-decoration: underline;
+}
+
+.uni-page-header-story__range-picker {
+  min-width: 260px;
+}
+
+.uni-page-header-story__tabs.uni-ant-tabs {
+  min-width: 360px;
+
+  .ant-tabs-nav {
+    margin: 0;
+  }
+
+  .ant-tabs-content-holder {
+    display: none;
+  }
+}

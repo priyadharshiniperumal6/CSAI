@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.1 Overview" />
+
+# LLM UI Generation Guide (Universal Theme DS)
+
+This section provides **LLM-facing context** for view generation. The goal is to make component selection
+**deterministic**, consistent with the design system, and aligned with UX best practices.
+
+## How To Use
+
+Provide these documents as context before generating UI code or layouts. They guide
+component selection and layout decisions at the **view level** (screens, pages, dashboards).
+
+## Primary Rules
+
+1. Prefer **existing Universal Theme components** over custom HTML.
+2. Treat **`HostShell` as the default top-level application layout** for app/page/route generation.
+3. Choose the **lowest-level component** that matches the task, then compose.
+4. Use **`UniEChart`** for analytical charting and **`UniReactFlow`** for flow-building experiences.
+5. Follow **data-display heuristics**: dense/comparative data → tables; summary/variable content → cards.
+6. If a component exists in the library, **use it as-is** and do not re-style it unless instructed.
+7. If unsure, **ask for missing context** (data shape, user task, density, target device).
+
+## Required Inputs For Good Generation
+
+Provide as much of the following as possible:
+- Primary user goal (scan, compare, edit, explore, create)
+- Data shape (rows, columns, nested objects, media)
+- Density requirements (high, medium, low)
+- Interactions required (filter, sort, select, edit, bulk actions)
+- Device constraints (desktop, tablet, mobile)
+
+## Application Generation (UXRD -> App)
+
+Use these pages when generating complete route-based applications from UXRD specifications:
+
+1. `8.6 UXRD Spec`
+2. `8.7 Route Registry Contract`
+3. `8.8 View Pattern Catalog`
+4. `8.9 CRUD Subpatterns`
+5. `8.10 Data Models and Mocks`
+6. `8.11 Codex Meta Prompts`
+
+These Storybook pages mirror the repository guidance in:
+
+- `docs/llm/uxrd-spec.md`
+- `docs/llm/route-registry.md`
+- `docs/llm/view-pattern-catalog.md`
+- `docs/llm/crud-subpatterns.md`
+- `docs/llm/data-models-and-mocks.md`
+- `docs/llm/codex-meta-prompts.md`

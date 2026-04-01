@@ -1,0 +1,59 @@
+.uni-ant-notification {
+  min-width: 400px;
+  color: var(--ut-color-text-secondary);
+
+  .ant-notification-notice-message {
+    font-weight: 700;
+    color: var(--ut-color-text-secondary);
+    font-size: var(--uni-size-16);
+  }
+
+  .ant-notification-notice-icon span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: var(--ut-color-bg-success);
+    color: var(--ut-color-text-inverse);
+    border-radius: 50%;
+  }
+
+  &.uni-cancel-notification {
+    .ant-notification-notice-icon span {
+      background-color: var(--ut-color-bg-danger);
+    }
+  }
+
+  &.uni-info-notification {
+    .ant-notification-notice-icon span {
+      background-color: var(--ut-color-bg-info);
+    }
+  }
+
+  &.uni-warning-notification {
+    .ant-notification-notice-icon span {
+      background-color: var(--ut-color-bg-warning);
+    }
+  }
+
+  .ant-notification-notice-with-icon {
+    .ant-notification-notice-message {
+      margin-inline-start: var(--uni-size-6);
+    }
+  }
+
+  .ant-notification-notice-description {
+    font-size: var(--uni-size-14);
+    margin-inline-start: 0;
+  }
+
+  .ant-notification-notice-close {
+    width: max-content;
+    height: max-content;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

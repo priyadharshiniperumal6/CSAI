@@ -1,0 +1,11 @@
+.volume-control {
+  button {
+    cursor: pointer;
+  }
+
+  .volume-control__slider {
+    :global(.ant-slider) {
+      margin: 5px;
+    }
+  }
+}

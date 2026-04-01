@@ -1,0 +1,65 @@
+.uni-ant-input.color-picker-input {
+  .ant-input {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    background-color: var(--ut-color-bg-surface);
+  }
+
+  .ant-input::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border: 1px solid var(--ut-color-border-muted);
+    border-radius: 0.5rem;
+  }
+
+  .ant-input::-webkit-color-swatch {
+    border-radius: 0.5rem;
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.uni-ant-input.ant-input-affix-wrapper-focused {
+  box-shadow: 0 0 0 2px var(--ut-color-focus-ring);
+}
+
+.uni-ant-input:hover {
+  border-color: var(--ut-color-border-brand);
+}
+
+.uni-ant-input.ant-input-affix-wrapper-borderless:focus {
+  border: none !important;
+}
+
+.prefix_icon_input .ant-input {
+  margin-left: 2px;
+}
+
+.uni-ant-input {
+  line-height: 20px;
+  font-size: 14px;
+  border-radius: var(--uni-radius-300);
+
+  .ant-input {
+    &::placeholder {
+      display: flex;
+      align-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+
+  .ant-input-prefix,
+  .ant-input-suffix {
+    margin: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+  }
+}

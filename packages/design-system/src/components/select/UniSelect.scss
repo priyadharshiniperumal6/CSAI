@@ -1,0 +1,49 @@
+.uni-ant-select {
+  width: 100%;
+
+  &.uni-ant-select--filter {
+    width: auto;
+    min-height: 32px; // defensive — matches controlHeight, prevents visual height mismatch
+
+    // Include .ant-select-outlined for 3-class specificity to beat
+    // Ant v6's .ant-select.ant-select-outlined rules (2 classes).
+    &.ant-select-outlined {
+      --ant-select-border-color: var(--ucolor-border-gray-tertiary);
+      --ant-select-background-color: var(--ut-color-bg-surface);
+      --ant-select-color: var(--ut-color-text-primary);
+      box-shadow: 0 1px 2px var(--ut-color-shadow-ambient);
+
+      &:not(.ant-select-disabled) {
+        &:hover {
+          --ant-select-border-color: var(--ut-color-border-strong);
+          --ant-select-background-color: var(--ut-color-bg-canvas);
+        }
+
+        &.ant-select-focused {
+          --ant-select-border-color: var(--ucolor-border-gray-tertiary);
+          box-shadow: none !important; // remove Ant's focus ring
+        }
+      }
+    }
+
+    // Prefix icon slot (rendered when prefix prop is passed)
+    .ant-select-prefix {
+      display: flex;
+      align-items: center;
+      color: var(--ucolor-content-icon-gray-secondary); // #969498
+      margin-inline-end: 6px;
+    }
+
+    // Arrow icon — .ant-select-suffix in v6 (was .ant-select-arrow in v5)
+    .ant-select-suffix {
+      font-size: 10px;
+      color: var(--ut-color-text-muted);
+      margin-inline-start: 6px;
+    }
+
+    // Placeholder matches UniSearchInput darkness (colorTextPlaceholder override)
+    .ant-select-placeholder {
+      color: var(--ut-color-text-muted);
+    }
+  }
+}

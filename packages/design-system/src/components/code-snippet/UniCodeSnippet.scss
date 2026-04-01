@@ -1,0 +1,28 @@
+.uni-code-snippet {
+  max-width: 56rem;
+  margin: 0 auto;
+  background: #0f172a;
+  border-radius: 0.5rem;
+  overflow: auto;
+  position: relative;
+  color: #fff;
+}
+
+.uni-code-snippet__copy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+}
+
+.uni-code-snippet__copy-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.uni-code-snippet__body {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}

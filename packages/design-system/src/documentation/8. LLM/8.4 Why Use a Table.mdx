@@ -1,0 +1,28 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/8. LLM/8.4 Why Use a Table" />
+
+# Why Use a Table
+
+Tables are the **default pattern for dense, comparable data**. They make it easy to scan,
+sort, filter, and compare values across many records with a consistent schema.
+
+## Use a Table When
+
+- Users need to **compare values across rows or columns**.
+- Data is **tabular** (same fields for each record).
+- Users need **sorting, filtering, grouping, or bulk actions**.
+- The dataset is **large** or high density.
+- Users are likely to export, copy, or operate on **many items at once**.
+
+## Avoid Tables When
+
+- Content is **narrative, variable, or media-heavy**.
+- Each item is **unique** or has many optional fields.
+- The dataset is **small** and can be summarized as cards or lists.
+
+## Universal Theme Mapping
+
+- Use `UniTable` for the primary grid.
+- Use `UniTableHeader` for filters, column controls, and saved views.
+- Use `UniTableCardView` when you need a responsive card layout on smaller screens.
