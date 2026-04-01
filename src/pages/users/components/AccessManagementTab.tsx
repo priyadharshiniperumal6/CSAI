@@ -39,7 +39,7 @@ interface SectionProps {
 function AccessSection({ title, subtitle, emoji, emojibg, items, searchPlaceholder, emptyLabel }: SectionProps & { emojibg: string }) {
   const [open, setOpen] = useState(true);
   const [search, setSearch] = useState('');
-  const [selected, setSelected] = useState<AccessItem | null>(null);
+  const [selected, setSelected] = useState<AccessItem | null>(items[0] ?? null);
   const [groupSearch, setGroupSearch] = useState('');
 
   const filtered = items.filter(i => i.name.toLowerCase().includes(search.toLowerCase()));
@@ -104,9 +104,8 @@ function AccessSection({ title, subtitle, emoji, emojibg, items, searchPlacehold
             {/* Right detail */}
             <div style={{ border: '1px solid #eef0f3', borderRadius: 8, background: 'white', padding: 16 }}>
               {!selected ? (
-                <div style={{ height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8, color: '#8b919e' }}>
-                  <span style={{ fontSize: 36 }}>🔒</span>
-                  <div style={{ fontSize: 13, textAlign: 'center' }}>{emptyLabel}</div>
+                <div style={{ height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8b919e', fontSize: 13 }}>
+                  {emptyLabel}
                 </div>
               ) : (
                 <div>
