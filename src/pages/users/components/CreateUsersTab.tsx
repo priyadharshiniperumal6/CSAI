@@ -48,8 +48,8 @@ function formatLastLogin(val: string) {
 }
 
 // ── Shared row components ──────────────────────────────────────────────────
-const SectionHeading = ({ title }: { title: string }) => (
-  <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1d23', marginBottom: 12 }}>{title}</div>
+const SectionHeading = ({ title, noMargin }: { title: string; noMargin?: boolean }) => (
+  <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1d23', marginBottom: noMargin ? 0 : 12 }}>{title}</div>
 );
 
 const DetailRow = ({ label, children }: { label: string; children: React.ReactNode }) => (
@@ -77,8 +77,9 @@ function UserProfileTab({ user }: { user?: User }) {
   return (
     <div style={{ padding: '16px 24px 20px', overflowY: 'auto', height: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
 
-      {/* ── Actions button at top ── */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      {/* ── Details heading + Actions button ── */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <SectionHeading title="Details" noMargin />
         <Dropdown menu={actionItems} trigger={['click']} placement="bottomRight">
           <button style={{
             display: 'flex', alignItems: 'center', gap: 6,
@@ -93,7 +94,6 @@ function UserProfileTab({ user }: { user?: User }) {
 
       {/* ── Details ── */}
       <div>
-        <SectionHeading title="Details" />
         <DetailRow label="Name">{user.firstName} {user.lastName}</DetailRow>
         <DetailRow label="Email">{user.email}</DetailRow>
         <DetailRow label="Phone">{user.phone || '—'}</DetailRow>
