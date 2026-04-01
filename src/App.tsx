@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { HostShell, UniConfigProvider } from '@uniphore/ut-design-system';
 import { NAV_ITEMS } from './config/navigation';
 import { TopNavProvider, useTopNav } from './context/TopNavContext';
@@ -116,11 +116,11 @@ export default function App() {
         },
       }}
     >
-      <BrowserRouter>
+      <HashRouter>
         <TopNavProvider>
           <AppShell />
         </TopNavProvider>
-      </BrowserRouter>
+      </HashRouter>
     </UniConfigProvider>
   );
 }
