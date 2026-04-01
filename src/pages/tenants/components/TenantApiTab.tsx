@@ -165,7 +165,7 @@ export function TenantApiTab({ tenant: _tenant }: Props) {
                                   {api.key}
                                 </code>
                                 <UniButton size="small" icon={<CopyOutlined />}>Copy</UniButton>
-                                <UniButton size="small" icon={<ReloadOutlined />}>Rotate Key</UniButton>
+                                <UniButton size="small" icon={<ReloadOutlined />}>Regenerate Key</UniButton>
                               </div>
                             </div>
                             {/* Rate limit inputs */}
